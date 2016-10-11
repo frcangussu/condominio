@@ -1,0 +1,3 @@
+Implementar Parametrização do APP para definição dos termos (morador, aluno, proprietário, inquilino, visitante, porteiro, etc.)
+Implementar exclusão/alteração de inquilino e dependentes.
+

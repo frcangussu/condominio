@@ -1,0 +1,20 @@
+Ticket
+======
+
+1) Pré-uso:
+
+	Geral: antes de gerar um novo tícket verificar existência de ticket ativo
+2) Pós-uso:
+	
+	Geral: ticket é invalidado após o uso, ou seja, o mesmo ticket nunca poderá ser usado mais de uma vez
+	Morador: recebe um novo ticket a cada uso
+	Visitante Pessoal: não receberá renovação de ticket
+	Visitante Profissional: receberá renovação de ticket até a data da duração do serviço informada pelo morador
+
+
+	
+Permissão
+=========
+
+Após cadastro de inquilino o proprietário não poderá enviar convite (ticket) enquanto não excluir o inquilino
+
