@@ -1,0 +1,49 @@
+<ion-view title="Alterar meus dados" hide-back-button="true" id="page26" class="pull-left dark">
+    <ion-content padding="true" class="has-header">
+        <div>
+            <style>
+                .margin-zero{
+                    margin:0px !important;
+                }
+                .foto-cadastro{
+                    width: 200px;height: 200px;overflow: hidden;position: relative;left:18%;
+                    top:0px;border-top:none;
+                }
+                .foto-cadastro img {
+                    position: absolute;
+                    margin: auto; 
+                    min-height: 100%;
+                    min-width: 100%;
+                
+                    /* For the following settings we set 100%, but it can be higher if needed 
+                    See the answer's update */
+                    left: -100%;
+                    right: -100%;
+                    top: -72%;
+                    bottom: -100%;
+                }
+            </style>
+        </div>
+        <form id="alterarMeusDados-form16" class="list">
+            <label class="item item-input" id="alterarMeusDados-input21" name="nome">
+                <span class="input-label">Nome</span>
+                <input type="text" placeholder="Fulano de Tal">
+            </label>
+            <label class="item item-input" id="alterarMeusDados-input22" name="telefone">
+                <span class="input-label">Telefone</span>
+                <input type="text" placeholder="(99)99999-9999">
+            </label>
+        </form>
+        <div class="list card" id="alterarMeusDados-card26">
+            <div>
+                <br>
+                <center>
+                    <img src="/img/avatar-img.png" class="radius xpto" style="width:50%;height:auto;">
+                </center>
+                <br>
+            </div>
+            <button id="alterarMeusDados-button52" class="button button-calm  button-block icon-left ion-android-camera margin-zero">Trocar Foto</button>
+        </div>
+        <button id="alterarMeusDados-button53" class="button button-positive button-large button-block button-outline icon-right ion-checkmark-round margin-zero">Confirmar</button>
+    </ion-content>
+</ion-view>
