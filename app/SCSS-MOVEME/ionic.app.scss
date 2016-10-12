@@ -1,0 +1,158 @@
+$positive: #1E95A8;
+$stable: #CEE7EB;
+$assertive: #10D4F4;
+$balanced: #0A5B6E;
+$royal: #87CB32;
+$light: #FDFDFC;
+$energized: #2D7D8B;
+$calm: #81C2D2;
+$dark: #373935;
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+@import "../www/lib/ionic/scss";
+.padding10 {
+	padding: 10px !important;
+}
+
+.padding20 {
+	padding: 20px !important;
+}
+
+.padding30 {
+	padding: 30px !important;
+}
+
+.margin10 {
+	margin-top: 10px;
+	margin-bottom: 10px !important;
+}
+
+.margin20 {
+	margin-top: 20px;
+	margin-bottom: 20px !important;
+}
+
+.margin30 {
+	margin-top: 30px;
+	margin-bottom: 30px !important;
+}
+
+.radius {
+	border-radius: 50% !important;
+}
+
+.radius img {
+	border-radius: 50% !important;
+}
+
+.dark {
+	background-color: #20211E !important;
+	border-color: #333333;
+}
+
+.dark h2,.bg-dark span,.bg-dark input {
+	color: #87CC31}
+.buttonbar {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	border-radius: 0px;
+}
+
+.buttonbar button {
+	border-radius: 0px !important;
+}
+
+.button-small: : before {
+	margin-top: -2px !important;
+}
+
+.align-center {
+	text-align: center;
+}
+
+.tab-title {
+	font-size: 18px !important;
+}
+
+.tab-nav a {
+	font-size: 14px !important;
+}
+
+.tab-item {
+	font-size: 15px !important;
+	color: #566644 !important;
+}
+
+.tab-item-active {
+	font-size: 15px !important;
+	color: #86CA32 !important;
+	font-weight: bold;
+	background-color: #20211E !important;
+	/**0C4854**/
+	    border-bottom: solid 2px #10D4F4 !important;
+}
+
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+
+.w50 {
+	width: 050px !important;
+}
+
+.w100 {
+	width: 100px !important;
+}
+
+.w150 {
+	width: 150px !important;
+}
+
+.w200 {
+	width: 200px !important;
+}
+
+.w250 {
+	width: 250px !important;
+}
+
+.w300 {
+	width: 300px !important;
+}
+
+.w350 {
+	width: 350px !important;
+}
+
+.w400 {
+	width: 400px !important;
+}
+
+.padding-zero {
+	padding: 0px !important;
+}
+
+.margin-zero {
+	margin: 0px !important;
+}
+
+.font-size-14 {
+	font-size: 14px !important}
+;
+.clear {
+	background: rgba(255,255,255, 0.0);
+	border: none !important;
+}
+
+ion-view,.pane,.view {
+	background-color: #F6F6F6;
+}
+
+body {
+	color: #FFA500;
+}
+

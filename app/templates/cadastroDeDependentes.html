@@ -1,0 +1,49 @@
+<ion-view title="Cadastro de Dependentes" hide-back-button="true" id="page25" class="pull-left dark">
+    <ion-content padding="true" class="has-header">
+        <div>
+            <style>
+                .margin-zero{
+                    margin:0px !important;
+                }
+                .foto-cadastro{
+                    width: 200px;height: 200px;overflow: hidden;position: relative;left:18%;
+                    top:0px;border-top:none;
+                }
+                .foto-cadastro img {
+                    position: absolute;
+                    margin: auto; 
+                    min-height: 100%;
+                    min-width: 100%;
+                
+                    /* For the following settings we set 100%, but it can be higher if needed 
+                    See the answer's update */
+                    left: -100%;
+                    right: -100%;
+                    top: -72%;
+                    bottom: -100%;
+                }
+            </style>
+        </div>
+        <div class="list card margin-zero" id="cadastroDeDependentes-card25">
+            <form id="cadastroDeDependentes-form14" class="list">
+                <label class="item item-input" id="cadastroDeDependentes-input18" name="nome">
+                    <span class="input-label">Nome</span>
+                    <input type="text" placeholder="informe seu nome">
+                </label>
+                <label class="item item-input" id="cadastroDeDependentes-input19" name="telefone">
+                    <span class="input-label">Telefone</span>
+                    <input type="text" placeholder="celular">
+                </label>
+            </form>
+            <div>
+                <br>
+                <center>
+                    <img src="/img/avatar-img.png" class="radius" style="width:50%;height:auto;">
+                </center>
+                <br>
+            </div>
+            <button id="cadastroDeDependentes-button46" class="button button-positive  button-block icon ion-android-camera margin-zero"></button>
+        </div>
+        <button id="cadastroDeDependentes-button47" class="button button-positive button-large button-block button-outline icon-right ion-checkmark-round margin10">Confirma</button>
+    </ion-content>
+</ion-view>

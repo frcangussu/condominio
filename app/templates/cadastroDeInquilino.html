@@ -1,0 +1,55 @@
+<ion-view title="Cadastro de Inquilino" hide-back-button="true" id="page11" class="pull-left dark">
+    <ion-content padding="true" class="has-header">
+        <div>
+            <style>
+                .margin-zero{
+                    margin:0px !important;
+                }
+                .foto-cadastro{
+                    width: 200px;height: 200px;overflow: hidden;position: relative;left:18%;
+                    top:0px;border-top:none;
+                }
+                .foto-cadastro img {
+                    position: absolute;
+                    margin: auto; 
+                    min-height: 100%;
+                    min-width: 100%;
+                
+                    /* For the following settings we set 100%, but it can be higher if needed 
+                    See the answer's update */
+                    left: -100%;
+                    right: -100%;
+                    top: -72%;
+                    bottom: -100%;
+                }
+            </style>
+        </div>
+        <div class="list card margin-zero" id="cadastroDeInquilino-card23">
+            <form id="cadastroDeInquilino-form8" class="list">
+                <label class="item item-input" id="cadastroDeInquilino-input13" name="nome">
+                    <span class="input-label">Nome</span>
+                    <input type="text" placeholder="informe o nome">
+                </label>
+                <label class="item item-input" id="cadastroDeInquilino-input15" name="telefone">
+                    <span class="input-label">Telefone</span>
+                    <input type="text" placeholder="celular">
+                </label>
+            </form>
+            <div>
+                <br>
+                <center>
+                    <img src="/img/avatar-img.png" class="radius" style="width:50%;height:auto;">
+                </center>
+                <br>
+            </div>
+            <div style="margin-right:-20px;">
+                <button id="cadastroDeInquilino-button45" style="left:-10px;" class="button button-positive  button-full icon ion-android-camera margin-zero"></button>
+            </div>
+        </div>
+        <div id="cadastroDeInquilino-button-bar10" class="button-bar"></div>
+        <div id="cadastroDeInquilino-button-bar16" class="button-bar">
+            <button id="cadastroDeInquilino-button55" style="text-align:left;" class="button button-positive button-large button-block button-clear icon-left ion-trash-b margin-zero">Remover</button>
+            <button id="cadastroDeInquilino-button56" style="text-align:right;" class="button button-calm button-large button-block button-clear icon-right ion-checkmark-round margin-zero">Savar</button>
+        </div>
+    </ion-content>
+</ion-view>
