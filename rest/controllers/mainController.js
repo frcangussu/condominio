@@ -5,8 +5,7 @@ exports.list = function(params,callback){
 
 	if (params.campo && params.valor){
 		var campo = params.campo;
-		filtro[campo] = { $regex: params.valor, $options: "i" };
-		console.log(filtro);
+		filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
 	}
 
 	model.find(filtro,function(error, dados){
