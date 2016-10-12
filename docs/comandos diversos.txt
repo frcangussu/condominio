@@ -1,8 +1,16 @@
+Ionic
+=====
+
+>> precisa estar na pasta do APP
+	ionic serve 
+	ionic build android
+	ionic run android
+
+
 Mongo DB:
 =========
 
 Select
-======
 
 	// consulta um elemento no array "sindicos"
 	db.condominio.find({},{sindicos:{$elemMatch: {nome:"Reinaldo"}}}).pretty()
@@ -11,7 +19,7 @@ Select
 	db.condominio.find({_id:ObjectId('57f663659d840d2abcd60c3f')}).pretty()
 
 Update
-======
+
 	Ex: http://stackoverflow.com/questions/10432677/update-field-in-exact-element-array-in-mongodb
 
 	// Altera o nome do sindico para "Reinaldo da Silva" cujo nome é "Reinaldo"
