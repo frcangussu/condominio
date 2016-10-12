@@ -1,1 +1,70 @@
+body { color: #FFA500; }
+ion-view, .pane, .view {background-color: #F6F6F6; }
+
 /* Empty. Add your own CSS if you like */
+.padding10 { padding: 10px !important; }
+.padding20 {padding: 20px !important; }
+.padding30 {padding: 30px !important; }
+.radius { border-radius: 50% !important; }
+.radius img { border-radius: 50% !important; }
+.margin10 {margin-top: 10px; margin-bottom: 10px !important; }
+.margin20 {margin-top: 20px; margin-bottom: 20px !important; }
+.margin30 {margin-top: 30px; margin-bottom: 30px !important; }
+.dark {background-color: #20211E !important; border-color: #333333; }
+.dark {h2, .bg-dark span, .bg-dark input {color: #87CC31; }
+
+.buttonbar {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	border-radius: 0px; 
+}
+.buttonbar button {border-radius: 0px !important; }
+
+.button-small::before { margin-top: -2px !important; }
+
+.align-center { text-align: center; }
+.tab-title { font-size: 18px !important; }
+.tab-nav a { font-size: 14px !important; }
+.tab-item { font-size: 15px !important; color: #566644 !important; }
+.tab-item-active {
+	font-size: 15px !important;
+	color: #86CA32 !important;
+	font-weight: bold;
+	background-color: #20211E !important;
+	/**0C4854**/
+	border-bottom: solid 2px #10D4F4 !important; 
+}
+
+.pull-right { float: right; }
+.pull-left { float: left; }
+
+.w50  { width: 050px !important; }
+.w100 { width: 100px !important; }
+.w150 { width: 150px !important; }
+.w200 { width: 200px !important; }
+.w250 { width: 250px !important; }
+.w300 { width: 300px !important; }
+.w350 {width: 350px !important; }
+.w400 {width: 400px !important; }
+.padding-zero {padding: 0px !important; }
+.margin-zero {margin: 0px !important; }
+.font-size-14 {font-size: 14px !important; }
+.clear {background: rgba(255, 255, 255, 0); border: none !important; }
+
+
+
+.foto-cadastro{
+	width: 200px;height: 200px;overflow: hidden;position: relative;left:18%;
+	top:0px;border-top:none;
+}
+.foto-cadastro img {
+	position: absolute;
+	margin: auto; 
+	min-height: 100%;
+	min-width: 100%;
+	left: -100%;
+	right: -100%;
+	top: -72%;
+	bottom: -100%;
+}
