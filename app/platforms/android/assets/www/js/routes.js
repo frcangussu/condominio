@@ -62,12 +62,13 @@ angular.module('app.routes', [])
     controller: 'cadastrarCondominioCtrl'
   })
 
-  .state('tabsController.cDigoDeLiberaO', {
+  //cDigoDeLiberaO
+  .state('tabsController.codigoLiberacao', {
     url: '/qrcode',
     views: {
       'tab2': {
-        templateUrl: 'templates/cDigoDeLiberaO.html',
-        controller: 'cDigoDeLiberaOCtrl'
+        templateUrl: 'templates/codigoLiberacao.html',
+        controller: 'codigoLiberacaoCtrl'
       }
     }
   })
