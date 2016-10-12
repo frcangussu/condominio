@@ -1,0 +1,53 @@
+Mongo DB:
+=========
+
+Select
+======
+
+	// consulta um elemento no array "sindicos"
+	db.condominio.find({},{sindicos:{$elemMatch: {nome:"Reinaldo"}}}).pretty()
+
+	// consulta por ObjectId
+	db.condominio.find({_id:ObjectId('57f663659d840d2abcd60c3f')}).pretty()
+
+Update
+======
+	Ex: http://stackoverflow.com/questions/10432677/update-field-in-exact-element-array-in-mongodb
+
+	// Altera o nome do sindico para "Reinaldo da Silva" cujo nome é "Reinaldo"
+	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.nome":"Reinaldo"}, {$set:{"sindicos.$.nome":"Reinaldo da Silva"}})
+
+	// Altera o nome do sindico que possui id = 1 para "Reinaldo R. da Silva"
+	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.id":1}, {$set:{"sindicos.$.nome":"Reinaldo R. da Silva"}})
+	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.id":1}, {$pull:id})
+
+	// insere um novo síndico
+	db.condominio.update(
+		{_id:ObjectId('57f663659d840d2abcd60c3f')}, 
+		{ 
+			$addToSet: { sindicos: {
+				nome: "José da Silva",
+				endereco: "Rua C, casa 20",
+				telefone: "(61)3434-3434",
+				senha: "********",
+				morador: true,
+				inicio : "08/10/2016",
+				fim: null
+			}} 
+		}
+	)
+
+Node.js
+=======
+
+abrir cmd
+acessar a pasta do projeto (c:/desenv/rest)
+digitar nodemon
+abrir o browser (localhost:3000)
+
+
+Teste API rest 
+==============
+
+testar com o Postman (extensão do chrome)
+
