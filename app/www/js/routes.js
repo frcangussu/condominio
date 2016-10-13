@@ -38,10 +38,10 @@ angular.module('app.routes', [])
     controller: 'cadastroDeDependentesCtrl'
   })
 
-  .state('alteraODeDependentes', {
+  .state('alteraDependentes', {
     url: '/alteraDependente',
-    templateUrl: 'templates/alteraODeDependentes.html',
-    controller: 'alteraODeDependentesCtrl'
+    templateUrl: 'templates/alteraDependentes.html',
+    controller: 'alteraDependentesCtrl'
   })
 
   .state('dependentesCadastrados', {
@@ -62,12 +62,12 @@ angular.module('app.routes', [])
     controller: 'cadastrarCondominioCtrl'
   })
 
-  .state('tabsController.cDigoDeLiberaO', {
+  .state('tabsController.codigoLiberacao', {
     url: '/qrcode',
     views: {
       'tab2': {
-        templateUrl: 'templates/cDigoDeLiberaO.html',
-        controller: 'cDigoDeLiberaOCtrl'
+        templateUrl: 'templates/codigoLiberacao.html',
+        controller: 'codijgoLiberacaoCtrl'
       }
     }
   })

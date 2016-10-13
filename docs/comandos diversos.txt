@@ -1,7 +1,13 @@
+Local de instalação da SDK:
+===========================
+
+C:\Users\olxlg\AppData\Local\Android\sdk
+
 Ionic
 =====
 
->> precisa estar na pasta do APP
+>> precisa estar no diretorio do APP
+	ionic platform add android
 	ionic serve 
 	ionic build android
 	ionic run android
