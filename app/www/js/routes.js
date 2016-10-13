@@ -156,10 +156,10 @@ angular.module('app.routes', [])
     controller: 'validarPorteirosCtrl'
   })
 
-  .state('trocarSNdico', {
+  .state('trocarSindico', {
     url: '/page15',
-    templateUrl: 'templates/trocarSNdico.html',
-    controller: 'trocarSNdicoCtrl'
+    templateUrl: 'templates/trocarSindico.html',
+    controller: 'trocarSindicoCtrl'
   })
 
   .state('tabsController', {
