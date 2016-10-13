@@ -1,3 +1,14 @@
-Implementar Parametrização do APP para definição dos termos (morador, aluno, proprietário, inquilino, visitante, porteiro, etc.)
-Implementar exclusão/alteração de inquilino e dependentes.
+> Implementar Parametrização do APP para definição dos termos (morador, aluno, proprietário, inquilino, visitante, porteiro, etc.)
 
+> Implementar exclusão/alteração de inquilino e dependentes.
+
+> Convite Profissional:
+
+  # O Morador deverá:
+    - informar o tipo do serviço prestado no momento do envio do convite
+    -  informar o período de duração do serviço, permitindo utilização do ticket até esta data
+    - avaliar do serviço no final do período
+
+  # O prestador deverá:
+    - informar se ele deseja divulgar o seu contato a outros usuários do APP, antes que ele visualize o ** QRCODE ** (serviço gratuito num primeiro momento).
+    - se sim, o app irá disponibilizar o contato do Prestador
