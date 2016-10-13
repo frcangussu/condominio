@@ -6,7 +6,7 @@
 
   # O Morador deverá:
     - informar o tipo do serviço prestado no momento do envio do convite
-    -  informar o período de duração do serviço, permitindo utilização do ticket até esta data
+    - informar o período de duração do serviço, permitindo utilização do ticket até esta data
     - avaliar do serviço no final do período
 
   # O prestador deverá:
