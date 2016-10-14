@@ -1,0 +1,73 @@
+git rm [nome do arquivo]
+git add [nome do arquivo]
+
+git add .
+git commit -m "mensagem"
+
+ou
+
+git commit -a -m "mensagem"
+
+git diff - visualiza as diferenças dos arquivos antes de fazer o commit
+
+gitk - visualizador do historico
+
+Alterar um commit já realizado: (Aula 4 - 1:00)
+===============================================
+
+git log --pretty=oneline - visualiza o log
+git commit --amend -m "mensagem editada" -- adiciona uma nova alteração de arquivos ao commit anterior 
+
+
+Desistir de adicionar um arquivo antes do commit: Aula 4 - 3:16
+================================================================
+git reset HEAD [nome do arquivo]
+
+
+Reverter alterações antes do commit - Aula 4 - 4:31
+===================================================
+git checkout -- [nome do arquivo]
+
+
+===========================
+= Aula 5 - Tags e Branchs =
+===========================
+git tag --> visualiza as tags
+
+git tag -a [nome tag] -m "[mensagem]"  --> criar uma tag (ponto e retorno)
+
+git tag -a [nome tag] [id do commit] -m "[mensagem]"  --> criar uma tag usando um commit (ponto e retorno)
+
+git show [nome tag] --> exibe detalhes de uma tag
+
+git checkout [nome tag] --> substitui arquivos atuais por arquivos de uma tag
+
+Deletar uma tag - Aula 5: 5:15
+==============================
+git checkout [nome branch]
+git tag -d [nome tag]
+
+
+Criar Branch - Aula 5: 7:25
+===========================
+git branch [nome branch]
+git checkout [nome branch]
+ou
+git chekcout -b [nome branch]
+
+
+Merge - Aula 5 - 10:47
+======================
+
+entrar no branch "master" (destino): git checkou master
+trazer as alterações de "fernando" para a "master": git merge fernando
+
+
+Apagar uma Branch - Aula 5 - 11:51
+==================================
+git branch -d [nome branch]
+
+
+Conflitos de Branch - Aula 5 - 12:20
+====================================
+
