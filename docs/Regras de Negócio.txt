@@ -29,3 +29,5 @@ Convite Profissional
   # O prestador deverá:
     - informar se ele deseja divulgar o seu contato a outros usuários do APP, antes que ele visualize o ** QRCODE ** (serviço gratuito num primeiro momento).
     - se sim, o app irá disponibilizar o contato do Prestador
+  
+  # Após cadastrar o primeiro prestador o sistema deverá perguntar se deseja cadastrar outro prestador para o mesmo serviço, assim o sistema deverá guardar as informações do primeiro prestador como: nome da empresa (caso exista), duração e serviço prestado.
