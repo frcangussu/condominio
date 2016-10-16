@@ -1,3 +1,4 @@
+angular.module('app.side-menu21Ctrl', [])
    
 .controller('side-menu21Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function

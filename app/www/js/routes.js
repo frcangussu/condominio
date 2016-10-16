@@ -82,12 +82,6 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('criarEvento', {
-    url: '/criar-evento',
-    templateUrl: 'templates/criarEvento.html',
-    controller: 'criarEventoCtrl'
-  })
-
   .state('tabsController.ticketsRecebidos', {
     url: '/visitante',
     views: {
@@ -136,12 +130,6 @@ angular.module('app.routes', [])
         controller: 'profissionalCtrl'
       }
     }
-  })
-
-  .state('page23', {
-    url: '/compartilhar',
-    templateUrl: 'templates/page23.html',
-    controller: 'page23Ctrl'
   })
 
   .state('infoConvite', {
