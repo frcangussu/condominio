@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.ticketsRecebidosCtrl', [])
 
 .controller('ticketsRecebidosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function

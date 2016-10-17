@@ -1,5 +1,3 @@
-console.log(">>> registrarVisitaCtrl");
-
 angular.module('app.registrarVisitaCtrl', [])
 
 .controller('registrarVisitaCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

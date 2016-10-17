@@ -9,13 +9,45 @@ angular.module('app.routes', [])
   $stateProvider
     
   
+  /**
+   * FLUXO INICIAL
+   * @description: cadastro inicial pós instalação 
+   */
 
-      .state('paginaEmBranco', {
-    url: '/branco',
-    templateUrl: 'templates/paginaEmBranco.html',
-    controller: 'paginaEmBrancoCtrl'
+  .state('bemVindoAoAPP', {
+    url: '/home',
+    templateUrl: 'templates/inicio/bemVindoAoAPP.html',
+    controller: 'bemVindoAoAPPCtrl'
   })
 
+  .state('selecioneOSeuPapel', {
+    url: '/selecione',
+    templateUrl: 'templates/inicio/selecioneOSeuPapel.html',
+    controller: 'selecioneOSeuPapelCtrl'
+  })
+
+  .state('cadastroDeSNdico', {
+    url: '/cadSindico',
+    templateUrl: 'templates/inicio/cadastroDeSNdico.html',
+    controller: 'cadastroDeSNdicoCtrl'
+  })
+
+  .state('cadastroPortaria', {
+    url: '/cadPortaria',
+    templateUrl: 'templates/inicio/cadastroPortaria.html',
+    controller: 'cadastroPortariaCtrl'
+  })
+
+  .state('cadastroEfetuadoComSucesso', {
+    url: '/sucessoPortaria',
+    templateUrl: 'templates/inicio/cadastroEfetuadoComSucesso.html',
+    controller: 'cadastroEfetuadoComSucessoCtrl'
+  })
+
+  /**
+   * FLUXO PRINCIPAL
+   * @description: utilização do APP pós cadastro (pós fluxo inicial)
+   */
   .state('tabsController.tipoDeVisita', {
     url: '/tipoVisita',
     views: {

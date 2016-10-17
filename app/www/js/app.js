@@ -7,8 +7,32 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 
 // 'app.controllers', 
-'app.side-menu21Ctrl', 
-'app.registrarVisitaCtrl', 
+// fluxo inicial
+'app.bemVindoAoAPPCtrl',
+'app.cadastroDeSNdicoCtrl',
+'app.cadastroEfetuadoComSucessoCtrl',
+'app.cadastroPortariaCtrl',
+'app.selecioneOSeuPapelCtrl',
+
+// fluxo principal
+'app.registrarVisitaCtrl',
+'app.side-menu21Ctrl',
+'app.alteraDependentesCtrl',
+'app.alterarMeusDadosCtrl',
+'app.cadastrarCondominioCtrl',
+'app.cadastroDeDependentesCtrl',
+'app.cadastroDeInquilinoCtrl',
+'app.cancelarConviteCtrl',
+'app.codigoLiberacaoCtrl',
+'app.dependentesCadastradosCtrl',
+'app.pessoalCtrl',
+'app.profissionalCtrl',
+'app.signupCtrl',
+'app.ticketsRecebidosCtrl',
+'app.tipoDeVisitaCtrl',
+'app.trocarSindicoCtrl',
+'app.validarPorteirosCtrl',
+
 'app.routes', 'app.directives','app.services',])
 
 .run(function($ionicPlatform) {
