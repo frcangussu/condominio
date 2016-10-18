@@ -1,4 +1,4 @@
-Local de instalaÁ„o da SDK:
+Local de instala√ß√£o da SDK:
 ===========================
 
 C:\Users\olxlg\AppData\Local\Android\sdk
@@ -7,6 +7,7 @@ Ionic
 =====
 
 >> precisa estar no diretorio do APP
+	ionic start "myapp" template(blank, tabs, sidemenu)
 	ionic platform add android
 	ionic serve 
 	ionic build android
@@ -28,19 +29,19 @@ Update
 
 	Ex: http://stackoverflow.com/questions/10432677/update-field-in-exact-element-array-in-mongodb
 
-	// Altera o nome do sindico para "Reinaldo da Silva" cujo nome È "Reinaldo"
+	// Altera o nome do sindico para "Reinaldo da Silva" cujo nome √© "Reinaldo"
 	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.nome":"Reinaldo"}, {$set:{"sindicos.$.nome":"Reinaldo da Silva"}})
 
 	// Altera o nome do sindico que possui id = 1 para "Reinaldo R. da Silva"
 	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.id":1}, {$set:{"sindicos.$.nome":"Reinaldo R. da Silva"}})
 	db.condominio.update({_id:ObjectId('57f663659d840d2abcd60c3f'), "sindicos.id":1}, {$pull:id})
 
-	// insere um novo sÌndico
+	// insere um novo s√≠ndico
 	db.condominio.update(
 		{_id:ObjectId('57f663659d840d2abcd60c3f')}, 
 		{ 
 			$addToSet: { sindicos: {
-				nome: "JosÈ da Silva",
+				nome: "Jos√© da Silva",
 				endereco: "Rua C, casa 20",
 				telefone: "(61)3434-3434",
 				senha: "********",
@@ -63,5 +64,5 @@ abrir o browser (localhost:3000)
 Teste API rest 
 ==============
 
-testar com o Postman (extens„o do chrome)
+testar com o Postman (extens√£o do chrome)
 
