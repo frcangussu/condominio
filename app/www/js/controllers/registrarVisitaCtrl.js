@@ -10,7 +10,7 @@ function ($scope, $stateParams) {
   vm.contatos = [];
 
   function convidar(item) {
-
+    
   }
 
 }]);
