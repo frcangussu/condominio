@@ -3,7 +3,9 @@ angular.module('app.controllers', [])
 .controller('controllers', ['$scope', '$stateParams', '$state',  
 function ($scope, $stateParams, $state) {
     var vm = this;
-    vm.showMenu = false;
+
+    vm.showMenu = true;
+
     // $state.go("cadastrarCondominio");
     // $state.go("bemVindoAoAPP");
 }]).run(function($rootScope, $state, $location/*, UserService*/){
