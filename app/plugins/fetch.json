@@ -61,6 +61,8 @@
             "id": "cordova-plugin-contacts"
         },
         "is_top_level": true,
-        "variables": {}
+        "variables": {
+            "CONTACTS_USAGE_DESCRIPTION": " "
+        }
     }
 }
