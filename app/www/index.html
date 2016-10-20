@@ -43,7 +43,8 @@
     </style>
 
     <script src="js/app.js"></script>
-    <!--<script src="js/controllers.js"></script>-->
+    
+    <script src="js/controllers.js"></script>
 
     <!--Controllers: fluxo inicial-->
     <script src="js/controllers/inicio/bemVindoAoAPPCtrl.js"></script>
@@ -82,56 +83,7 @@
     -->
 
   </head>
-  <body ng-app="app" animation="slide-left-right-ios7">
-  <div>
-    <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
-        <ion-side-menu-content>
-            <ion-nav-bar class="bar-dark">
-                <ion-nav-back-button></ion-nav-back-button>
-                <ion-nav-buttons side="left">
-                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-                </ion-nav-buttons>
-            </ion-nav-bar>
-            <ion-nav-view></ion-nav-view>
-        </ion-side-menu-content>
-        <ion-side-menu side="left" id="side-menu21">
-            
-            <a  ui-sref="tabsController.registrarVisita" menu-close="" id="side-menu21-button9" style="color:#FFFFFF;font-size:18px;text-align:left;" 
-                class="button button-balanced button-full icon-right ion-android-home margin-zero" 
-                data-componentid="button9" href="#/page1/registrarVisita">Inicio</a>       
-
-            <ion-content ng-controller="side-menu21Ctrl" padding="false" style="top:0px !important;" class="side-menu-left dark">
-                <a ui-sref="tabsController.registrarVisita" menu-close="" id="side-menu21-button9" style="color:#FFFFFF;font-size:18px;text-align:left;" class="button button-balanced  button-full icon-right ion-android-home margin-zero" data-componentid="button9">Inicio</a>
-                <button id="side-menu21-button9" style="font-weight:600;color:#77C62F;font-size:22px;" class="button button-dark  button-full margin-zero" data-componentid="button9">Meus Dados</button>
-                <ion-list id="side-menu21-list1" data-componentid="list1">
-                    <ion-item class="item-avatar item-icon-right positive  clear" id="side-menu21-list-item1" ui-sref="alterarMeusDados" menu-close="" data-componentid="list-item1">
-                        <h2positive>Fulano te Tal
-                            <p>Alterar perfil</p>
-                            <i class="icon ion-edit icon-accessory"></i>
-                        </h2positive>
-                    </ion-item>
-                </ion-list>
-                <div class="spacer" data-componentid="spacer4" style="width: 268px; height: 22px;"></div>
-                <button id="side-menu21-button49" style="color:#7DD22F;font-size:20px;" class="button button-dark  button-full margin-zero" data-componentid="button49">Quero Cadastrar</button>
-                <ion-list id="side-menu21-list7" data-componentid="list7">
-                    <ion-item class="item-icon-left positive  clear" id="side-menu21-list-item53" ui-sref="cadastroDeDependentes" menu-close="" data-componentid="list-item53">
-                        <i class="icon ion-android-people"></i>Dependentes</ion-item>
-                    <ion-item class="item-icon-left positive  clear" id="side-menu21-list-item59" ui-sref="cadastroDeInquilino" menu-close="" data-componentid="list-item59">
-                        <i class="icon ion-android-person"></i>Inquilino</ion-item>
-                </ion-list>
-                <div class="spacer" data-componentid="spacer5" style="width: 268px; height: 22px;"></div>
-                <button id="side-menu21-button60" style="color:#7DD22F;font-size:20px;" class="button button-dark  button-full margin-zero" data-componentid="button60">Opções do Síndico</button>
-                <ion-list id="side-menu21-list9" data-componentid="list9">
-                    <ion-item class="item-icon-left positive  clear" id="side-menu21-list-item57" ui-sref="validarPorteiros" menu-close="" data-componentid="list-item57">
-                        <i class="icon ion-android-checkmark-circle"></i>Validar Cadastro Porteiro</ion-item>
-                    <ion-item class="item-icon-left positive  clear" id="side-menu21-list-item52" ui-sref="cadastrarCondominio" menu-close="" data-componentid="list-item52">
-                        <i class="icon ion-ios-home"></i>Condomínio</ion-item>
-                    <ion-item class="item-icon-left positive  clear" id="side-menu21-list-item58" ui-sref="trocarSindico" menu-close="" data-componentid="list-item58">
-                        <i class="icon ion-arrow-swap"></i>Trocar Síndico</ion-item>
-                </ion-list>
-            </ion-content>
-        </ion-side-menu>
-    </ion-side-menus>
-</div>
+  <body ng-app="app" animation="slide-left-right-ios7" data-ng-controller="controllers as vm">
+      <div data-ng-include="'templates/inicio.html'"></div>
   </body>
 </html>

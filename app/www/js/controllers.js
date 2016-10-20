@@ -1,5 +1,20 @@
 angular.module('app.controllers', [])
-  
+
+.controller('controllers', ['$scope', '$stateParams', '$state',  
+function ($scope, $stateParams, $state) {
+    var vm = this;
+    vm.showMenu = false;
+    // $state.go("cadastrarCondominio");
+    // $state.go("bemVindoAoAPP");
+}]).run(function($rootScope, $state, $location/*, UserService*/){
+    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    //     let loggedIn = UserService.isLoggedIn();
+    //     if  (toState.name !== 'app.login' && !loggedIn){
+    //         $location.url('/login');
+    //     }
+    // });
+})
+ /* 
 .controller('paginaEmBrancoCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -175,4 +190,4 @@ function ($scope, $stateParams) {
 
 
 }])
- 
+ */

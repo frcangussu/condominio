@@ -48,6 +48,22 @@ angular.module('app.routes', [])
    * FLUXO PRINCIPAL
    * @description: utilização do APP pós cadastro (pós fluxo inicial)
    */
+  .state('tabsController', {
+    url: '/tabs',
+    templateUrl: 'templates/tabsController.html',
+    abstract:true
+  })
+
+  .state('tabsController.registrarVisita', {
+    url: '/registrarVisita',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/registrarVisita.html',
+        controller: 'registrarVisitaCtrl'
+      }
+    }
+  })
+
   .state('tabsController.tipoDeVisita', {
     url: '/tipoVisita',
     views: {
@@ -124,16 +140,6 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsController.registrarVisita', {
-    url: '/registrarVisita',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/registrarVisita.html',
-        controller: 'registrarVisitaCtrl'
-      }
-    }
-  })
-
   .state('tabsController.pessoal', {
     url: '/visitaPessoal',
     views: {
@@ -182,20 +188,15 @@ angular.module('app.routes', [])
     controller: 'trocarSindicoCtrl'
   })
 
-  .state('tabsController', {
-    url: '/page1',
-    templateUrl: 'templates/tabsController.html',
-    abstract:true
-  })
-
   .state('signup', {
     url: '/page20',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'
   })
 
-$urlRouterProvider.otherwise('/page1/registrarVisita')
-
-  
+  // console.log(localStorage.home);
+  // $urlRouterProvider.otherwise('/tabs/registrarVisita')
+  // $urlRouterProvider.otherwise(localStorage.home)
+  $urlRouterProvider.otherwise('/home');
 
 });

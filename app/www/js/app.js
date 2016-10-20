@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 
-// 'app.controllers', 
+'app.controllers', 
 // fluxo inicial
 'app.bemVindoAoAPPCtrl',
 'app.cadastroDeSNdicoCtrl',
@@ -35,8 +35,11 @@ angular.module('app', ['ionic',
 
 'app.routes', 'app.directives','app.services',])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
+
+    localStorage.setItem('home', '/home');
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
