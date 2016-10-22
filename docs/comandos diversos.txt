@@ -1,3 +1,15 @@
+Exibe informções do dispositivo:
+================================
+
+C:\Users\lana\AppData\Local\Android\sdk\platform-tools>adb devices
+
+	Resultado:
+	----------
+	List of devices attached
+	a899ee4c        device   
+	
+	* se aparecer "unauthorized" desabilite o modo desenvolvedor e habilite novamente
+
 Local de instalação da SDK:
 ===========================
 
@@ -5,6 +17,9 @@ C:\Users\olxlg\AppData\Local\Android\sdk
 
 Ionic
 =====
+
+>> gerar apk
+	cordova run android --device --stacktrace
 
 >> precisa estar no diretorio do APP
 	ionic start "myapp" template(blank, tabs, sidemenu)
