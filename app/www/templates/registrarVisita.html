@@ -5,62 +5,12 @@
         <input type="search" placeholder="Localize o Visitante">
       </label>
         <ion-list id="registrarVisita-list13">
-            <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96">
+            <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96" ng-repeat="contato in ctrl.contatos"  ng-click="ctrl.action(contato)">
                 <img src="https://creator.ionic.io/img/avatar-img.png" alt="" />
-                <h2calm>Fulano de Tal
+                <h2calm>{{contato.name.giveName}}
                     <p>Entrada registrada</p>
-                    <i class="icon" ng-class="{'ion-android-done-all':true, 'icon ion-android-done': false, 'ion-android-send': false}"></i>
+                    <i class="icon" ng-class="{'ion-android-done-all':false, 'icon ion-android-done': false, 'ion-android-send': true}"></i>
                 </h2calm>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item98">
-                <h2calm>Fulano de Tal
-                    <p>Entrada registrada</p>
-                    <i class="icon ion-android-done-all"></i>
-                </h2calm>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right positive" id="registrarVisita-list-item81" ui-sref="tabsController.cancelarConvite">
-                <img src="" alt="" />
-                <h2positive>Fulano de Tal
-                    <p>Ticket enviado</p>
-                    <i class=""></i>
-                </h2positive>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right positive" id="registrarVisita-list-item95" ui-sref="tabsController.cancelarConvite">
-                <img src="" alt="" />
-                <h2positive>Fulano de Tal
-                    <p>Ticket enviado</p>
-                    <i class="icon ion-android-done positive"></i>
-                </h2positive>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right positive" id="registrarVisita-list-item97" ui-sref="tabsController.cancelarConvite">
-                <h2positive>Fulano de Tal
-                    <p>Ticket enviado</p>
-                    <i class="icon ion-android-done"></i>
-                </h2positive>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right balanced" id="registrarVisita-list-item89" ui-sref="tabsController.tipoDeVisita">
-                <h2balanced>Fulano de Tal
-                    <p>(61)99999-9999</p>
-                    <i class="icon "></i>
-                </h2balanced>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right balanced" id="registrarVisita-list-item103" ui-sref="tabsController.tipoDeVisita">
-                <h2balanced>Fulano de Tal
-                    <p>(61)99999-9999</p>
-                    <i class="icon ion-android-send"></i>
-                </h2balanced>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right balanced" id="registrarVisita-list-item104" ui-sref="tabsController.tipoDeVisita">
-                <h2balanced>Fulano de Tal
-                    <p>(61)99999-9999</p>
-                    <i class="icon ion-android-send"></i>
-                </h2balanced>
-            </ion-item>
-            <ion-item class="item-avatar item-icon-right balanced" id="registrarVisita-list-item100" ui-sref="tabsController.tipoDeVisita">
-                <h2balanced>Fulano de Tal
-                    <p>(61)99999-9999</p>
-                    <i class="icon ion-android-send"></i>
-                </h2balanced>
             </ion-item>
         </ion-list>
         <div>

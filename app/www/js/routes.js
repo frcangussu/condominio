@@ -7,11 +7,11 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
   /**
    * FLUXO INICIAL
-   * @description: cadastro inicial pós instalação 
+   * @description: cadastro inicial pós instalação
    */
 
   .state('bemVindoAoAPP', {
@@ -59,7 +59,8 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/registrarVisita.html',
-        controller: 'registrarVisitaCtrl'
+        controller: 'registrarVisitaCtrl',
+        controllerAs: 'ctrl'
       }
     }
   })
@@ -141,11 +142,12 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.pessoal', {
-    url: '/visitaPessoal',
+    url: '/visitaPessoal/:contato',
     views: {
       'tab1': {
         templateUrl: 'templates/pessoal.html',
-        controller: 'pessoalCtrl'
+        controller: 'pessoalCtrl',
+        controllerAs: 'ctrl'
       }
     }
   })
