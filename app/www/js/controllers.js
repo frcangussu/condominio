@@ -4,7 +4,7 @@ angular.module('app.controllers', [])
 function ($scope, $stateParams, $state) {
     var vm = this;
 
-    vm.showMenu = true;
+    vm.showMenu = false;
 
     // $state.go("cadastrarCondominio");
     // $state.go("bemVindoAoAPP");

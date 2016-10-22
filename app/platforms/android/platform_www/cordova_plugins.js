@@ -109,6 +109,22 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "id": "cordova-plugin-sim.Sim",
+        "file": "plugins/cordova-plugin-sim/www/sim.js",
+        "pluginId": "cordova-plugin-sim",
+        "merges": [
+            "window.plugins.sim"
+        ]
+    },
+    {
+        "id": "cordova-plugin-sim.SimAndroid",
+        "file": "plugins/cordova-plugin-sim/www/android/sim.js",
+        "pluginId": "cordova-plugin-sim",
+        "merges": [
+            "window.plugins.sim"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -121,7 +137,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.0",
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-contacts": "2.2.0"
+    "cordova-plugin-contacts": "2.2.0",
+    "cordova-plugin-sim": "1.3.0"
 };
 // BOTTOM OF METADATA
 });

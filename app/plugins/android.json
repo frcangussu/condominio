@@ -27,6 +27,9 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "cordova-plugin-sim": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
     "dependent_plugins": {

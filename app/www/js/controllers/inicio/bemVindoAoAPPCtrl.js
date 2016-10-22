@@ -5,6 +5,19 @@ angular.module('app.bemVindoAoAPPCtrl', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    function onDeviceReady() {
+         window.plugins.sim.getSimInfo(successCallback, errorCallback);
+    }
+    
+    function successCallback(result) {
+        console.log(result);
+    }
+    
+    function errorCallback(error) {
+        console.log(error);
+    }
 
 }])
    
