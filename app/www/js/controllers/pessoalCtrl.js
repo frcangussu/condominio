@@ -7,6 +7,6 @@ function ($scope, $stateParams) {
 
 var vm = this;
 vm.contato = JSON.parse($stateParams.contato);
-console.log(vm.contato);
+// console.log(vm.contato);
 
 }]);

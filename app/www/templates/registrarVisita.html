@@ -6,9 +6,10 @@
       </label>
         <ion-list id="registrarVisita-list13">
             <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96" ng-repeat="contato in ctrl.contatos"  ng-click="ctrl.action(contato)">
-                <img src="https://creator.ionic.io/img/avatar-img.png" alt="" />
-                <h2calm>{{contato.name.giveName}}
-                    <p>Entrada registrada</p>
+                <img src="https://creator.ionic.io/img/avatar-img.png" alt="" ng-if="!contato.photos[0]" />
+                <img ng-src="{{contato.photos[0].value}}" alt="" ng-if="contato.photos[0]"/>
+                <h2calm>{{contato.name.givenName}}
+                    <p>{{contato.photos[0]}}</p>
                     <i class="icon" ng-class="{'ion-android-done-all':false, 'icon ion-android-done': false, 'ion-android-send': true}"></i>
                 </h2calm>
             </ion-item>

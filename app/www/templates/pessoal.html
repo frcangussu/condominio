@@ -23,12 +23,13 @@
         </div>
         <div class="spacer" style="width: 300px; height: 35px;"></div>
         <div id="pessoal-markdown12" style="color:#1E95A8;font-size:21px;text-align:center;">
-            <p>{{ctrl.contato.name.giveName}}</p>
+            <p>{{ctrl.contato.name.givenName}}</p>
         </div>
         <div>
             <br>
             <center>
-                <img src="https://creator.ionic.io/img/avatar-img.png" class="radius" style="width:50%;height:auto;">
+                <img src="https://creator.ionic.io/img/avatar-img.png" class="radius" style="width:50%;height:auto;" ng-if="!ctrl.contato.photos[0]">
+                <img ng-src="{{ctrl.contato.photos[0].value}}" class="radius" style="width:50%;height:auto;" ng-if="ctrl.contato.photos[0]">
             </center>
             <br>
         </div>
