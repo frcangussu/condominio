@@ -7,10 +7,19 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "cordova-plugin-sim": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
         "cordova-plugin-splashscreen": {
@@ -24,17 +33,7 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
-        },
-        "cordova-plugin-sim": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
-        }
-    }
+    "dependent_plugins": {}
 }

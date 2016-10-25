@@ -18,15 +18,21 @@ C:\Users\olxlg\AppData\Local\Android\sdk
 Ionic
 =====
 
+>> ionic state restore
+
 >> gerar apk
 	cordova run android --device --stacktrace
 
 >> precisa estar no diretorio do APP
 	ionic start "myapp" template(blank, tabs, sidemenu)
 	ionic platform add android
+	ionic platform remove android
+	ionic platform List
+	ionic plugin list
 	ionic serve 
 	ionic build android
 	ionic run android
+	ionic prepare android
 
 
 Mongo DB:
