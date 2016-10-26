@@ -194,11 +194,11 @@ angular.module('app.routes', [])
     url: '/page20',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'
-  })
+  });
 
   // console.log(localStorage.home);
   // $urlRouterProvider.otherwise('/tabs/registrarVisita')
-  // $urlRouterProvider.otherwise(localStorage.home)
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise(localStorage.home);
+  // $urlRouterProvider.otherwise('/tabsController.profissional');
 
 });

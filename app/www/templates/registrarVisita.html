@@ -9,8 +9,10 @@
                 <img src="https://creator.ionic.io/img/avatar-img.png" alt="" ng-if="!contato.photos[0]" />
                 <img ng-src="{{contato.photos[0].value}}" alt="" ng-if="contato.photos[0]"/>
                 <h2calm>{{contato.name.givenName}}
-                    <p>{{contato.photos[0]}}</p>
-                    <i class="icon" ng-class="{'ion-android-done-all':false, 'icon ion-android-done': false, 'ion-android-send': true}"></i>
+                    <p ng-if="contato.status == 1">Enviar Convite</p>
+                    <p ng-if="contato.status == 2">Convite Enviado</p>
+                    <p ng-if="contato.status == 3">Convite Recebido</p>
+                    <i class="icon" ng-class="{'ion-android-done-all': contato.status == 3, 'icon ion-android-done': contato.status == 2, 'ion-android-send': contato.status == 1}"></i>
                 </h2calm>
             </ion-item>
         </ion-list>
