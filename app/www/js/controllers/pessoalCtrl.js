@@ -5,8 +5,9 @@ angular.module('app.pessoalCtrl', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
-var vm = this;
-vm.contato = JSON.parse($stateParams.contato);
-console.log(vm.contato);
+  var vm = this;
+  vm.contato = JSON.parse($stateParams.contato);
+  // console.log(vm.contato);
+  vm.textoButtonAction = vm.contato.status == 2 ? 'Cancelar' : 'Confirmar';
 
 }]);

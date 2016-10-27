@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ui.mask',
-'app.controllers', 
+
+angular.module('app', ['ionic', 'app.controllers', 
+
 // fluxo inicial
 'app.bemVindoAoAPPCtrl',
 'app.cadastroDeSNdicoCtrl',
@@ -51,4 +52,4 @@ angular.module('app', ['ionic', 'ui.mask',
       StatusBar.styleDefault();
     }
   });
-})
+});
