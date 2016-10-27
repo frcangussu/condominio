@@ -5,11 +5,11 @@
             <div class="spacer" style="width: 300px; height: 18px;"></div>
             <label class="item item-input clear input" id="bemVindoAoAPP-input3">
                 <span class="input-label">Informe o telefone:</span>
-                <input type="text" placeholder="(99)99999-9999">
+                <input type="tel" placeholder="(99)999999999" style="color:white" data-ng-model="vm.telefone">
             </label>
             vm.uid: {{vm.uid}}
+            vm.telefone: {{vm.telefone}}
         </form>
         <hr class="margin-zero">
         <a ui-sref="selecioneOSeuPapel" id="bemVindoAoAPP-button1" style="text-align:right;" class="button button-assertive button-large button-block button-clear icon-right ion-arrow-right-c">Avançar</a>
     </ion-content>
-</ion-view>

@@ -3,12 +3,14 @@ exports.list = function(params,callback){
 	var model = require('../models/'+params.controller);
 	var filtro = {};
 
+
 	if (params.campo && params.valor){
 		var campo = params.campo;
-		filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
+		filtro[campo] = { $regex: params.valor, $options: "i" }; //, $diacriticSensitive: false };
 	}
 
 	model.find(filtro,function(error, dados){
+		console.log("model.find.filtro",filtro);	
 		if (error){
 			callback({error:'Não foi possível encontrar registros'});
 		} else {

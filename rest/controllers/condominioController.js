@@ -14,6 +14,7 @@ exports.list = function(callback){
 }
 
 exports.save = function(params,callback){
+	console.log(params);
 	new Condominio({
 		'nome':params.nome
 	}).save(function(error,condominio){

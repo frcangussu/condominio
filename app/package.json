@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "app: An Ionic project",
   "dependencies": {
+    "angular-ui-mask": "^1.8.7",
     "express": "^4.14.0",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",

@@ -4,8 +4,7 @@ var mainController = require('../controllers/mainController');
 
 
 router.get('/:controller/:campo/:valor',function(req,res){
-	
-	mainController.list(req.params,function(response){
+		mainController.list(req.params,function(response){
 		res.json(response);
 	});
 });

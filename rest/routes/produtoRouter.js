@@ -6,7 +6,7 @@ var mainController = require('../controllers/mainController');
 
 router.get('/',function(req,res){
 	console.log(">>>> aqui");
-	mainController.list("Produto",function(response){
+	produtoController.list({controller:"Produto"},function(response){
 		res.json(response);
 	});
 });

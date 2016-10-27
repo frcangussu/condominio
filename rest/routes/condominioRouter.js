@@ -1,11 +1,12 @@
 var express = require('express');
 var router  = express.Router();
 var condominioController = require('../controllers/condominioController');
-var mainController = require('../controllers/mainController');
+// var mainController = require('../controllers/mainController');
 
 
 router.get('/',function(req,res){
-	mainController.list("Condominio",function(response){
+	// mainController.list("Condominio",function(response){
+	condominioController.list(function(response){
 		res.json(response);
 	});
 });

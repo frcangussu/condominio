@@ -78,6 +78,8 @@ Node.js
 
 abrir cmd
 acessar a pasta do projeto (c:/desenv/rest)
+criar app.js (vazio)
+digitar npm init
 digitar nodemon
 abrir o browser (localhost:3000)
 
