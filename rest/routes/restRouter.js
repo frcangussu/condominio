@@ -28,14 +28,14 @@ router.post('/:controller/cadastra',function(req,res){
  */
 router.get('/:entidade',function(req,res){
 	var entidade = req.params.entidade;
-	mainController.listEntidade(entidade,function(response){
+	mainController.listEntidade(entidade,null,function(response){
 		res.json(response);
 	});
 });
 
 router.get('/:entidade/:campo/:valor',function(req,res){
 	var entidade = req.params.entidade;
-	mainController.listEntidade(entidade,function(response){
+	mainController.listEntidade(entidade,req.params,function(response){
 		res.json(response);
 	});
 });

@@ -4,8 +4,15 @@ angular.module('app.services', [])
 
 }])
 
-.service('testeServico', [function(){
-    this.get = function(){
-        console.log(">>>> teste");
+.service('texto', [function(){
+
+
+    /**
+     * extrair somente os numeros de uma string
+     */
+    this.obterNumeros = function(valor){
+        var numberPattern = /\d+/g;
+        return valor.match( numberPattern ); 
     }
+    
 }]);

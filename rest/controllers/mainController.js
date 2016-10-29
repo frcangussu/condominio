@@ -62,24 +62,19 @@ exports.listEntidade = function(entidade,params,callback){
 
 	var filtro = {};
 
-	// if (params.campo && params.valor){
-	// 	var campo = params.campo;
-	// 	filtro[campo] = { $regex: params.valor, $options: "i" }; //, $diacriticSensitive: false };
-	// }
-
 	var filtro = {};
 	filtro[entidade] = 1;
 
-	// if (params.campo && params.valor){
-	// 	var campo = params.campo;
-	// 	filtro[campo] = params.valor;
-	// 	filtro[entidade] = filtro[campo];
-	// }	
+	if (params.campo && params.valor){
+		var campo = {}
+		campo[params.campo] = params.valor;
+		filtro[entidade] = {$elemMatch: campo};
+	}
 
 	model.find(
 		{_id: mongoose.Types.ObjectId("5813f94f31b3412890527aae")},
 		filtro,
-		// {"titulares":{$elemMatch: {nome: "fernando"}}},
+		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
 		function(error, dados){
 			if (!error){
 				callback({response:dados});
