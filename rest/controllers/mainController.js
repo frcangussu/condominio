@@ -77,7 +77,7 @@ exports.listEntidade = function(entidade,params,callback){
 		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
 		function(error, dados){
 			if (!error){
-				callback({response:dados});
+				callback(dados);
 			} else {
 				callback({erro:"Dados não localizados"});
 			}

@@ -9,7 +9,7 @@
                 <input type="tel" placeholder="(99)999999999" style="color:white" data-ng-model="vm.telefone" mask="(99)999999999">
             </label>
         </form>
-        
+        <!--{{vm.telefone}}-->
         <hr class="margin-zero">
-        <a ui-sref="selecioneOSeuPapel" id="bemVindoAoAPP-button1" style="text-align:right;" class="button button-assertive button-large button-block button-clear icon-right ion-arrow-right-c">Avançar</a>
+        <a data-ng-click="vm.avancar()" id="bemVindoAoAPP-button1" style="text-align:right;" class="button button-assertive button-large button-block button-clear icon-right ion-arrow-right-c">Avançar</a>
     </ion-content>

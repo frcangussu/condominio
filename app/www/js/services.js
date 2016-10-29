@@ -12,7 +12,7 @@ angular.module('app.services', [])
      */
     this.obterNumeros = function(valor){
         var numberPattern = /\d+/g;
-        return valor.match( numberPattern ); 
+        return valor.match( numberPattern ).join(""); 
     }
-    
+
 }]);
