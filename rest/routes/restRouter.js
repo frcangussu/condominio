@@ -2,18 +2,15 @@ var express = require('express');
 var router  = express.Router();
 var mainController = require('../controllers/mainController');
 
-
-router.get('/:controller/:campo/:valor',function(req,res){
-		mainController.list(req.params,function(response){
+/**
+ * Rotas para o documento principal
+ */
+router.get('/condominio/:campo/:valor',function(req,res){
+		mainController.listCondominio(req.params,function(response){
 		res.json(response);
 	});
 });
 
-router.get('/:controller',function(req,res){
-	mainController.list(req.params,function(response){
-		res.json(response);
-	});
-});
 
 router.post('/:controller/cadastra',function(req,res){
 
@@ -25,9 +22,27 @@ router.post('/:controller/cadastra',function(req,res){
 	});
 });
 
-router.post('/cadastra/:controller',function(req,res){
-	var controller   = req.params.controller;
-	mainController.update(controller, req.body, function(response){
+
+/**
+ * Rotas para os elementos do documento principal
+ */
+router.get('/:entidade',function(req,res){
+	var entidade = req.params.entidade;
+	mainController.listEntidade(entidade,function(response){
+		res.json(response);
+	});
+});
+
+router.get('/:entidade/:campo/:valor',function(req,res){
+	var entidade = req.params.entidade;
+	mainController.listEntidade(entidade,function(response){
+		res.json(response);
+	});
+});
+
+router.post('/cadastra/:entidade',function(req,res){
+	var entidade   = req.params.entidade;
+	mainController.insert(entidade, req.body, function(response){
 		res.json(response);
 	});
 });

@@ -1,14 +1,13 @@
 var mongoose = require('mongoose');
+var model    = require('../models/condominio');
 
-exports.list = function(params,callback){
+exports.listCondominio = function(params,callback){
 
-	var model = require('../models/'+params.controller);
 	var filtro = {};
-
 
 	if (params.campo && params.valor){
 		var campo = params.campo;
-		filtro[campo] = { $regex: params.valor, $options: "i" }; //, $diacriticSensitive: false };
+		filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
 	}
 
 	model.find(filtro,function(error, dados){
@@ -30,56 +29,6 @@ exports.save = function(item,callback){
 			callback(registro);
 		}
 	});
-};
-
-exports.update = function(controller,dados,callback){
-
-	var model = require('../models/condominio');
-
-	if (!dados.condominio){
-		callback({required:"ID não localizado"});
-		return;
-	}
-
-	console.log(controller);
-
-	model.findById(dados.condominio,function(error, dados){
-		if (error){
-			callback({error: 'Não foi possível localizar o registro'});
-		} else {
-			model.update(
-				{_id: mongoose.Types.ObjectId("5813f94f31b3412890527aae") },
-				{ $addToSet: { "titulares" : dados} },		
-				function(error){
-					console.log(error);
-					if(!error){
-						callback({resposta:controller+" cadastrado com sucesso"});
-					}
-				}
-			)
-		}
-	})
-
-	// item.update(
-	// 	{_id:ObjectId(idCondominio)},
-	// 	{ 
-	// 		$addToSet: { sindicos: {
-	// 			nome: "José da Silva",
-	// 			endereco: "Rua C, casa 20",
-	// 			telefone: "(61)3434-3434",
-	// 			senha: "********",
-	// 			morador: true,
-	// 			inicio : "08/10/2016",
-	// 			fim: null
-	// 		}} 
-	// 	}		
-	// 	function(error, registro){
-	// 	if (error){
-	// 		callback({error:'Não foi possível salvar'});
-	// 	} else {
-	// 		callback(registro);
-	// 	}
-	// });
 };
 
 
@@ -104,4 +53,67 @@ exports.delete = function(modelName,id,callback){
 		}
 	})
 }
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+exports.listEntidade = function(entidade,params,callback){
+
+	var filtro = {};
+
+	// if (params.campo && params.valor){
+	// 	var campo = params.campo;
+	// 	filtro[campo] = { $regex: params.valor, $options: "i" }; //, $diacriticSensitive: false };
+	// }
+
+	var filtro = {};
+	filtro[entidade] = 1;
+
+	// if (params.campo && params.valor){
+	// 	var campo = params.campo;
+	// 	filtro[campo] = params.valor;
+	// 	filtro[entidade] = filtro[campo];
+	// }	
+
+	model.find(
+		{_id: mongoose.Types.ObjectId("5813f94f31b3412890527aae")},
+		filtro,
+		// {"titulares":{$elemMatch: {nome: "fernando"}}},
+		function(error, dados){
+			if (!error){
+				callback({response:dados});
+			} else {
+				callback({erro:"Dados não localizados"});
+			}
+		}
+	);
+		
+}
+
+exports.insert = function(entidade,dados,callback){
+
+	if (!dados.condominio){
+		callback({required:"Favor informar o condominio"});
+		return;
+	}
+
+	var item = {};
+	item[entidade] = dados;
+	
+	model.update(
+		{_id: mongoose.Types.ObjectId(dados.condominio) },
+		{ $push: item },		
+		function(error,sucesso){
+			if(!error){
+				if (sucesso.nModified)
+					callback({info:entidade+" cadastrado com sucesso"});
+				else
+					callback({warn:"Não foi possível cadastrar "+entidade});
+			} else {
+				callback({erro: "Erro ao tentar inserir "+entidade});
+			}
+		}
+	)
+};
 

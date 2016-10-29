@@ -46,6 +46,14 @@ Select
 	// consulta por ObjectId
 	db.condominio.find({_id:ObjectId('57f663659d840d2abcd60c3f')}).pretty()
 
+	// consultar titulares pelo id do condominio
+	db.condominios.find(
+		{_id: ObjectId("5813f94f31b3412890527aae") },
+		{titulares:{
+			$elemMatch: {nome: "fernando"}
+		}}
+	)
+
 Update
 
 	Ex: http://stackoverflow.com/questions/10432677/update-field-in-exact-element-array-in-mongodb
