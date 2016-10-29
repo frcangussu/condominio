@@ -1,4 +1,4 @@
-angular.module('app.bemVindoAoAPPCtrl', ['ui.mask'])
+angular.module('app.bemVindoAoAPPCtrl', ['ngMask'])
 
 .controller('bemVindoAoAPPCtrl', ['$scope', '$stateParams', '$cordovaDevice',
 // TIP: Access Route Parameters for your page via $stateParams.parameterName

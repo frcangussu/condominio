@@ -1,7 +1,7 @@
 var express = require('express');
 var router  = express.Router();
 var condominioController = require('../controllers/condominioController');
-// var mainController = require('../controllers/mainController');
+var mainController = require('../controllers/mainController');
 
 
 router.get('/',function(req,res){
@@ -25,13 +25,13 @@ router.post('/cadastra',function(req,res){
 	});
 });
 
-// router.delete('/remove/:id',function(req,res){
+router.delete('/remove/:id',function(req,res){
 	
-// 	var id = req.params.id;
+	var id = req.params.id;
 
-// 	mainController.delete("Produto", id, function(response){
-// 		res.json(response);
-// 	})
-// });
+	mainController.delete("Condominio", id, function(response){
+		res.json(response);
+	})
+});
 
 module.exports = router;

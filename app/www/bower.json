@@ -1,0 +1,18 @@
+{
+  "name": "www",
+  "homepage": "https://github.com/frcangussu/condominio",
+  "authors": [
+    "Fernando R. Cangussu <frcangussu@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ]
+}

@@ -10,22 +10,24 @@ router.get('/:controller/:campo/:valor',function(req,res){
 });
 
 router.get('/:controller',function(req,res){
-	
 	mainController.list(req.params,function(response){
 		res.json(response);
 	});
 });
 
-router.post('/cadastra',function(req,res){
-	var params = {};
-	params.nome 		= req.body.nome;
-	params.descricao = req.body.descricao;
-	params.valor 	= req.body.valor;
+router.post('/:controller/cadastra',function(req,res){
 
-	var Produto = require('../models/Produto');
-	var item = new Produto(params);
+	var Model = require('../models/'+req.params.controller);
+	var item = new Model(req.body);
 
 	mainController.save(item,function(response){
+		res.json(response);
+	});
+});
+
+router.post('/cadastra/:controller',function(req,res){
+	var controller   = req.params.controller;
+	mainController.update(controller, req.body, function(response){
 		res.json(response);
 	});
 });

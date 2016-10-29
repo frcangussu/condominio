@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var MoradorSchema = new Schema({
+var TitularSchema = new Schema({
+	condominio:String,
 	id:Number,
 	nome:String,
 	cpf:String,
@@ -11,4 +12,4 @@ var MoradorSchema = new Schema({
 	status:String
 });
 
-module.exports = mongoose.model('Morador',MoradorSchema);
+module.exports = mongoose.model('Titular',TitularSchema);
