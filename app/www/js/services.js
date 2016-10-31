@@ -10,7 +10,7 @@ angular.module('app.services', [])
     /**
      * extrair somente os numeros de uma string
      */
-    this.obterNumeros = function(valor){
+    this.obterNumero = function(valor){
         var numberPattern = /\d+/g;
         return valor.match( numberPattern ).join(""); 
     }

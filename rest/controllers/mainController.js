@@ -20,6 +20,7 @@ exports.listCondominio = function(params,callback){
 	});
 }
 
+
 exports.save = function(item,callback){
 
 	item.save(function(error, registro){
@@ -54,36 +55,75 @@ exports.delete = function(modelName,id,callback){
 	})
 }
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+var util = {
+	obterFiltro: function(params){
+		
+		var filtro = {};
+		
+		filtro[params.entidade] = 1;
 
-exports.listEntidade = function(entidade,params,callback){
-
-	var filtro = {};
-
-	var filtro = {};
-	filtro[entidade] = 1;
-
-	if (params.campo && params.valor){
-		var campo = {}
-		campo[params.campo] = params.valor;
-		filtro[entidade] = {$elemMatch: campo};
+		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
+		if (params.campo && params.valor){
+				var campo = {}
+				campo[params.campo] = params.valor;
+				filtro[params.entidade] = {$elemMatch: campo};
+		}
+		return filtro;
 	}
+};
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+exports.listarCondominioPorEntidade = function(params,callback){
+	
+	var filtro = util.obterFiltro(params)
 
 	model.find(
-		{_id: mongoose.Types.ObjectId("5813f94f31b3412890527aae")},
 		filtro,
-		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
 		function(error, dados){
-			if (!error){
-				callback(dados);
-			} else {
-				callback({erro:"Dados não localizados"});
-			}
+			if (!error) { callback(dados); }
+			else        { callback({erro:"Dados não localizados"}); }
+		}
+	);
+}
+
+exports.listarEntidade = function(params,callback){
+
+	var filtro = util.obterFiltro(params);
+
+	model.find(
+
+		{_id: mongoose.Types.ObjectId(params.condominio)},
+		filtro,
+		function(error, dados){
+			if (!error){ callback(dados); } 
+			else	   { callback({erro:"Dados não localizados"}); }
 		}
 	);
 		
+};
+
+exports.alterarEntidade = function(params,body,callback){
+
+	var filtro = {};
+
+	var dados  = body.dados;
+
+	// prepara dados
+	var dataSet = {};
+	for (var campo in dados){
+		dataSet[params.entidade+".$."+campo] = dados[campo];
+	}
+
+	filtro[params.entidade] = {$elemMatch : body.filtro};
+
+	model.update(
+		{ "_id" : mongoose.Types.ObjectId(params.condominio),
+		  filtro // "titulares": { $elemMatch: { telefone: "61991330123" } }
+		},
+		{ $set: dataSet }
+	);
+
 }
 
 exports.insert = function(entidade,dados,callback){

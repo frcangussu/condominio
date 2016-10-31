@@ -81,6 +81,15 @@ Update
 		}
 	)
 
+	// alterar um titular
+	db.condominios.update(
+		{
+			"_id" : ObjectId("5813f94f31b3412890527aae"),
+			"titulares": { $elemMatch: { telefone: "61991330123" } }
+		},
+		{ $set: { "titulares.$.cpf" : '81096127172', "titulares.$.uid":"2222222222222222222" } }
+	)	
+
 Node.js
 =======
 
