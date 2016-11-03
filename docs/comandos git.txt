@@ -59,7 +59,7 @@ git chekcout -b [nome branch]
 Merge - Aula 5 - 10:47
 ======================
 
-entrar no branch "master" (destino): git checkou master
+entrar no branch "master" (destino): git checkout master
 trazer as alterações de "fernando" para a "master": git merge fernando
 
 
