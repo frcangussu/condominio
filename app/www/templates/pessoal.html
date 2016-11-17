@@ -34,7 +34,8 @@
             <br>
         </div>
         <div id="pessoal-button-bar11" class="button-bar">
-            <a ui-sref="tabsController.liberaOEnviada" id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right" ng-class="{'button-positive': ctrl.contato.status == 1, 'ion-checkmark-round': ctrl.contato.status == 1, 'button-assertive': ctrl.contato.status != 1, 'ion-close': ctrl.contato.status != 1}">{{ctrl.textoButtonAction}}</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="ctrl.contato.status == 1" ng-click="ctrl.shareAnywhere()">Confirmar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right ion-close button-balanced" ng-show="ctrl.contato.status != 1">Cancelar</a>
         </div>
     </ion-content>
 </ion-view>

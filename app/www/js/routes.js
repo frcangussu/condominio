@@ -8,7 +8,6 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-
   /**
    * FLUXO INICIAL
    * @description: cadastro inicial pós instalação
@@ -197,8 +196,8 @@ angular.module('app.routes', [])
   });
 
   // console.log(localStorage.home);
-  // $urlRouterProvider.otherwise('/tabs/registrarVisita')
-  $urlRouterProvider.otherwise(localStorage.home);
+  $urlRouterProvider.otherwise('/tabs/registrarVisita');
+  // $urlRouterProvider.otherwise(localStorage.home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 
 });

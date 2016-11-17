@@ -10,6 +10,9 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
@@ -22,13 +25,10 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
-        },
-        "cordova-plugin-sim": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
