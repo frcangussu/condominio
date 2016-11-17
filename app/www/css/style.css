@@ -1,4 +1,5 @@
 body { color: #FFA500; }
+input {color: white;}
 ion-view, .pane, .view {background-color: #F6F6F6; }
 
 /* Empty. Add your own CSS if you like */

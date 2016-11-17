@@ -18,15 +18,21 @@ C:\Users\olxlg\AppData\Local\Android\sdk
 Ionic
 =====
 
+>> ionic state restore
+
 >> gerar apk
 	cordova run android --device --stacktrace
 
 >> precisa estar no diretorio do APP
 	ionic start "myapp" template(blank, tabs, sidemenu)
 	ionic platform add android
+	ionic platform remove android
+	ionic platform List
+	ionic plugin list
 	ionic serve 
 	ionic build android
 	ionic run android
+	ionic prepare android
 
 
 Mongo DB:
@@ -39,6 +45,14 @@ Select
 
 	// consulta por ObjectId
 	db.condominio.find({_id:ObjectId('57f663659d840d2abcd60c3f')}).pretty()
+
+	// consultar titulares pelo id do condominio
+	db.condominios.find(
+		{_id: ObjectId("5813f94f31b3412890527aae") },
+		{titulares:{
+			$elemMatch: {nome: "fernando"}
+		}}
+	)
 
 Update
 
@@ -67,11 +81,22 @@ Update
 		}
 	)
 
+	// alterar um titular
+	db.condominios.update(
+		{
+			"_id" : ObjectId("5813f94f31b3412890527aae"),
+			"titulares": { $elemMatch: { telefone: "61991330123" } }
+		},
+		{ $set: { "titulares.$.cpf" : '81096127172', "titulares.$.uid":"2222222222222222222" } }
+	)	
+
 Node.js
 =======
 
 abrir cmd
 acessar a pasta do projeto (c:/desenv/rest)
+criar app.js (vazio)
+digitar npm init
 digitar nodemon
 abrir o browser (localhost:3000)
 

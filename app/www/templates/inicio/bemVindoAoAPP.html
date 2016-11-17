@@ -1,14 +1,17 @@
 <ion-view title="Bem vindo ao APP" hide-back-button="true" id="page1" style="background-color:#000000;">
-    <ion-content padding="true" class="has-header">
-        <form id="bemVindoAoAPP-form6" class="list">
+    <ion-content padding="true" class="has-header" data-ng-if="vm.exibirTela()">
+
+        <form id="bemVindoAoAPP-form6" class="list" >
             <hr>
             <div class="spacer" style="width: 300px; height: 18px;"></div>
             <label class="item item-input clear input" id="bemVindoAoAPP-input3">
                 <span class="input-label">Informe o telefone:</span>
-                <input type="text" placeholder="(99)99999-9999">
+                <input type="tel" placeholder="(99)999999999" style="color:white" data-ng-model="vm.telefone" mask="(99)999999999">
             </label>
         </form>
+        <!--{{vm.telefone}}-->
+        <!--vm.condominio: {{vm.condominio}}<br>-->
+
         <hr class="margin-zero">
-        <a ui-sref="selecioneOSeuPapel" id="bemVindoAoAPP-button1" style="text-align:right;" class="button button-assertive button-large button-block button-clear icon-right ion-arrow-right-c">Avançar</a>
+        <a data-ng-click="vm.avancar()" id="bemVindoAoAPP-button1" style="text-align:right;" class="button button-assertive button-large button-block button-clear icon-right ion-arrow-right-c">Avançar</a>
     </ion-content>
-</ion-view>

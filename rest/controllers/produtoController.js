@@ -15,3 +15,13 @@ exports.save = function(params,callback){
 		}
 	});
 };
+
+exports.list = function(callback){
+	Produto.find({},function(error, produto){
+		if (error){
+			callback({error: "Não foi possível localizar produtos"});
+		} else {
+			callback(produto);
+		}
+	});
+}

@@ -52,23 +52,21 @@
             "type": "registry",
             "id": "cordova-plugin-compat"
         },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-contacts": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-contacts"
-        },
         "is_top_level": true,
-        "variables": {
-            "CONTACTS_USAGE_DESCRIPTION": " "
-        }
+        "variables": {}
     },
     "cordova-plugin-sim": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-sim"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-contacts@~2.2.0"
         },
         "is_top_level": true,
         "variables": {}

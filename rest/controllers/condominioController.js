@@ -14,51 +14,38 @@ exports.list = function(callback){
 }
 
 exports.save = function(params,callback){
+	
 	new Condominio({
-		'nome':params.nome
-	}).save(function(error,condominio){
-		if(error){
-			callback({error: 'Não foi possível salvar'})
+		'nome': params.nome,
+		'endereco': params.endereco,
+		'cep': params.cep,
+		'telefone': params.telefone,
+		'localizacao': params.localizacao
+	}).save(function(error, condominio){
+		if (error){
+			callback({error:'Não foi possível salvar os dados do condomínio'});
 		} else {
 			callback(condominio);
 		}
+	});
+};
+
+exports.delete = function(id,callback){
+
+	if (!id){
+		callback({required:"ID não localizado"});
+		return;
+	}
+
+	Condominio.findById(id,function(error, condominio){
+		if (error){
+			callback({error: 'Não foi possível excluir o condomínio'});
+		} else {
+			Condominio.remove({ _id: id }, function(error){
+				if(!error){
+					callback({resposta:"Condominio excluido com sucesso"});
+				}
+			})
+		}
 	})
 }
-
-//permite chamada a um metodo de outro arquivo
-// exports.save = function(params,callback){
-	
-// 	new Condominio({
-// 		'nome': params.nome,
-// 		'endereco': params.endereco,
-// 		'cep': params.cep,
-// 		'telefone': params.telefone,
-// 		'localizacao': params.localizacao
-// 	}).save(function(error, condominio){
-// 		if (error){
-// 			callback({error:'Não foi possível salvar os dados do condomínio'});
-// 		} else {
-// 			callback(condominio);
-// 		}
-// 	});
-// };
-
-// exports.delete = function(id,callback){
-
-// 	if (!id){
-// 		callback({required:"ID não localizado"});
-// 		return;
-// 	}
-
-// 	Condominio.findById(id,function(error, condominio){
-// 		if (error){
-// 			callback({error: 'Não foi possível excluir o condomínio'});
-// 		} else {
-// 			Condominio.remove({ _id: id }, function(error){
-// 				if(!error){
-// 					callback({resposta:"Condominio excluido com sucesso"});
-// 				}
-// 			})
-// 		}
-// 	})
-// }

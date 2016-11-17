@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
@@ -14,6 +17,9 @@
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "cordova-plugin-sim": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
         "cordova-plugin-splashscreen": {
@@ -32,9 +38,5 @@
             "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.app653783"
-        }
-    }
+    "dependent_plugins": {}
 }

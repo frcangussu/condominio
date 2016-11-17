@@ -1,0 +1,84 @@
+{
+  "name": "angular-ui-mask",
+  "version": "1.8.7",
+  "author": {
+    "name": "https://github.com/angular-ui/ui-mask/graphs/contributors"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/angular-ui/ui-mask",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "~1.2.0",
+    "event-stream": "~3.3.1",
+    "gesalakacula": "^1.4.0",
+    "gulp": "~3.9.0",
+    "gulp-angular-protractor": "0.0.6",
+    "gulp-bump": "^0.3.1",
+    "gulp-concat": "~2.6.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-footer": "~1.0.5",
+    "gulp-git": "^1.4.0",
+    "gulp-header": "~1.2.2",
+    "gulp-jshint": "1.11.2",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "~1.2.2",
+    "gulp-uglify": "~1.2.0",
+    "jasmine-core": "^2.3.4",
+    "jshint-stylish": "~2.0.1",
+    "karma": "^0.13.9",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "~0.5",
+    "karma-firefox-launcher": "~0.1",
+    "karma-jasmine": "~0.3",
+    "karma-ng-html2js-preprocessor": "^0.1.0",
+    "karma-sauce-launcher": "^0.2.14",
+    "phantomjs": "^1.9.18",
+    "protractor": "^3.0.0",
+    "run-sequence": "^1.1.2"
+  },
+  "scripts": {},
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular-ui/ui-mask.git"
+  },
+  "keywords": [
+    "angular",
+    "angular-ui",
+    "mask"
+  ],
+  "gitHead": "5970499953bddc23ad69aad1d4def01f9aa230e0",
+  "description": "Apply a mask on an input field so the user can only type pre-determined pattern.",
+  "bugs": {
+    "url": "https://github.com/angular-ui/ui-mask/issues"
+  },
+  "_id": "angular-ui-mask@1.8.7",
+  "_shasum": "2935ae82345aded60e7b8c997f3902dfb8ed465b",
+  "_from": "angular-ui-mask@latest",
+  "_npmVersion": "3.10.3",
+  "_nodeVersion": "6.3.1",
+  "_npmUser": {
+    "name": "powerkiki",
+    "email": "adrien.crivelli@gmail.com"
+  },
+  "dist": {
+    "shasum": "2935ae82345aded60e7b8c997f3902dfb8ed465b",
+    "tarball": "https://registry.npmjs.org/angular-ui-mask/-/angular-ui-mask-1.8.7.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "powerkiki",
+      "email": "adrien.crivelli@gmail.com"
+    },
+    {
+      "name": "proloser",
+      "email": "deansofer@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/angular-ui-mask-1.8.7.tgz_1469549078884_0.89357959642075"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/angular-ui-mask/-/angular-ui-mask-1.8.7.tgz"
+}

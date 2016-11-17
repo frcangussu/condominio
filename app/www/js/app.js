@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngCordova',
-'app.controllers',
+
+angular.module('app', ['ionic', 'app.controllers', 
+
 // fluxo inicial
 'app.bemVindoAoAPPCtrl',
 'app.cadastroDeSNdicoCtrl',
@@ -33,7 +34,7 @@ angular.module('app', ['ionic', 'ngCordova',
 'app.trocarSindicoCtrl',
 'app.validarPorteirosCtrl',
 
-'app.routes', 'app.directives','app.services',])
+'app.routes', 'app.directives','app.services', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {

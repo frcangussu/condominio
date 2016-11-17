@@ -16,31 +16,31 @@ angular.module('app.routes', [])
   .state('bemVindoAoAPP', {
     url: '/home',
     templateUrl: 'templates/inicio/bemVindoAoAPP.html',
-    controller: 'bemVindoAoAPPCtrl'
+    controller: 'bemVindoAoAPPCtrl', controllerAs: 'vm'
   })
 
   .state('selecioneOSeuPapel', {
     url: '/selecione',
     templateUrl: 'templates/inicio/selecioneOSeuPapel.html',
-    controller: 'selecioneOSeuPapelCtrl'
+    controller: 'selecioneOSeuPapelCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroDeSNdico', {
     url: '/cadSindico',
     templateUrl: 'templates/inicio/cadastroDeSNdico.html',
-    controller: 'cadastroDeSNdicoCtrl'
+    controller: 'cadastroDeSNdicoCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroPortaria', {
     url: '/cadPortaria',
     templateUrl: 'templates/inicio/cadastroPortaria.html',
-    controller: 'cadastroPortariaCtrl'
+    controller: 'cadastroPortariaCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroEfetuadoComSucesso', {
     url: '/sucessoPortaria',
     templateUrl: 'templates/inicio/cadastroEfetuadoComSucesso.html',
-    controller: 'cadastroEfetuadoComSucessoCtrl'
+    controller: 'cadastroEfetuadoComSucessoCtrl', controllerAs: 'vm'
   })
 
   /**
@@ -59,7 +59,7 @@ angular.module('app.routes', [])
       'tab1': {
         templateUrl: 'templates/registrarVisita.html',
         controller: 'registrarVisitaCtrl',
-        controllerAs: 'ctrl'
+        controllerAs: 'vm'
       }
     }
   })
@@ -69,7 +69,7 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/tipoDeVisita.html',
-        controller: 'tipoDeVisitaCtrl'
+        controller: 'tipoDeVisitaCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -77,37 +77,37 @@ angular.module('app.routes', [])
   .state('alterarMeusDados', {
     url: '/alterarPerfil',
     templateUrl: 'templates/alterarMeusDados.html',
-    controller: 'alterarMeusDadosCtrl'
+    controller: 'alterarMeusDadosCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroDeDependentes', {
     url: '/cadDependentes',
     templateUrl: 'templates/cadastroDeDependentes.html',
-    controller: 'cadastroDeDependentesCtrl'
+    controller: 'cadastroDeDependentesCtrl', controllerAs: 'vm'
   })
 
   .state('alteraDependentes', {
     url: '/alteraDependente',
     templateUrl: 'templates/alteraDependentes.html',
-    controller: 'alteraDependentesCtrl'
+    controller: 'alteraDependentesCtrl', controllerAs: 'vm'
   })
 
   .state('dependentesCadastrados', {
     url: '/page12',
     templateUrl: 'templates/dependentesCadastrados.html',
-    controller: 'dependentesCadastradosCtrl'
+    controller: 'dependentesCadastradosCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroDeInquilino', {
     url: '/cadInquilino',
     templateUrl: 'templates/cadastroDeInquilino.html',
-    controller: 'cadastroDeInquilinoCtrl'
+    controller: 'cadastroDeInquilinoCtrl', controllerAs: 'vm'
   })
 
   .state('cadastrarCondominio', {
     url: '/cadCondominio',
     templateUrl: 'templates/cadastrarCondominio.html',
-    controller: 'cadastrarCondominioCtrl'
+    controller: 'cadastrarCondominioCtrl', controllerAs: 'vm'
   })
 
   .state('tabsController.codigoLiberacao', {
@@ -115,7 +115,7 @@ angular.module('app.routes', [])
     views: {
       'tab2': {
         templateUrl: 'templates/codigoLiberacao.html',
-        controller: 'codijgoLiberacaoCtrl'
+        controller: 'codijgoLiberacaoCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -125,7 +125,7 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/liberaOEnviada.html',
-        controller: 'liberaOEnviadaCtrl'
+        controller: 'liberaOEnviadaCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -135,7 +135,7 @@ angular.module('app.routes', [])
     views: {
       'tab2': {
         templateUrl: 'templates/ticketsRecebidos.html',
-        controller: 'ticketsRecebidosCtrl'
+        controller: 'ticketsRecebidosCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -145,8 +145,7 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/pessoal.html',
-        controller: 'pessoalCtrl',
-        controllerAs: 'ctrl'
+        controller: 'pessoalCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -156,7 +155,7 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/cancelarConvite.html',
-        controller: 'cancelarConviteCtrl'
+        controller: 'cancelarConviteCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -166,7 +165,7 @@ angular.module('app.routes', [])
     views: {
       'tab1': {
         templateUrl: 'templates/profissional.html',
-        controller: 'profissionalCtrl'
+        controller: 'profissionalCtrl', controllerAs: 'vm'
       }
     }
   })
@@ -174,25 +173,25 @@ angular.module('app.routes', [])
   .state('infoConvite', {
     url: '/infoConvite',
     templateUrl: 'templates/infoConvite.html',
-    controller: 'infoConviteCtrl'
+    controller: 'infoConviteCtrl', controllerAs: 'vm'
   })
 
   .state('validarPorteiros', {
     url: '/validarPortaria',
     templateUrl: 'templates/validarPorteiros.html',
-    controller: 'validarPorteirosCtrl'
+    controller: 'validarPorteirosCtrl', controllerAs: 'vm'
   })
 
   .state('trocarSindico', {
     url: '/page15',
     templateUrl: 'templates/trocarSindico.html',
-    controller: 'trocarSindicoCtrl'
+    controller: 'trocarSindicoCtrl', controllerAs: 'vm'
   })
 
   .state('signup', {
     url: '/page20',
     templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
+    controller: 'signupCtrl', controllerAs: 'vm'
   });
 
   // console.log(localStorage.home);
