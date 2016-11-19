@@ -34,12 +34,16 @@ angular.module('app', ['ionic', 'app.controllers',
 'app.trocarSindicoCtrl',
 'app.validarPorteirosCtrl',
 
-'app.routes', 'app.directives','app.services', 'ngCordova'])
+'app.routes', 'app.directives','app.services', 'app.constants', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope) {
+  
+  console.log("app.js >>> ",localStorage);
+  
   $ionicPlatform.ready(function() {
 
     localStorage.setItem('home', '/home');
+    console.log(" Passou app.js >>>>");
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

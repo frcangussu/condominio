@@ -197,7 +197,12 @@ angular.module('app.routes', [])
 
   // console.log(localStorage.home);
   // $urlRouterProvider.otherwise('/tabs/registrarVisita')
-  $urlRouterProvider.otherwise(localStorage.home);
+  // console.log("routes.js >>> ",localStorage);
+  // $urlRouterProvider.otherwise(localStorage.home);
+
+  var home = localStorage.home || "/home";
+
+  $urlRouterProvider.otherwise(home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 
 });
