@@ -10,9 +10,9 @@ angular.module('app', ['ionic', 'app.controllers',
 
 // fluxo inicial
 'app.bemVindoAoAPPCtrl',
-'app.cadastroDeSNdicoCtrl',
+'app.cadastroDeSindicoCtrl',
 'app.cadastroEfetuadoComSucessoCtrl',
-'app.cadastroPortariaCtrl',
+'app.cadastroRecepcaoCtrl',
 'app.selecioneOSeuPapelCtrl',
 
 // fluxo principal
