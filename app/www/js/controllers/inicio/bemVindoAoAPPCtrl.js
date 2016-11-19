@@ -7,7 +7,7 @@
         var vm = this;
 
         // mock
-        $state.go("tabsController.registrarVisita");
+        $state.go("selecioneOSeuPapel");
 
         // teste 
         $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
