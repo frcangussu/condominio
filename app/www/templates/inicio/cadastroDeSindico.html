@@ -1,25 +1,25 @@
 <ion-view title="Cadastro de Síndico" hide-back-button="true" id="page3" style="background-color:#000000;">
     <ion-content padding="true" class="has-header">
         <form id="cadastroDeSindico-form9" class="list">
-            <hr>
-            <label class="item item-input clear" id="cadastroDeSindico-input6">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="Fulano de Tal">
+            <label class="item item-input item-floating-label" id="cadastroDeSindico-input6">
+                <span class="input-label" aria-label="Nome" id="labelNome">Nome</span>
+                <input type="text" placeholder="Nome">
             </label>
-            <label class="item item-input clear" id="cadastroDeSindico-input7">
+            <br>
+            <label class="item item-input item-floating-label" id="cadastroDeSindico-input7">
                 <span class="input-label">Senha</span>
-                <input type="text" placeholder="********">
+                <input type="password" placeholder="Senha">
             </label>
-            <hr>
-            <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+            <br>
+            <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center; border-radius: 6px 6px 0 0;">
                 <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
             </div>
-            <button id="cadastroDeSindico-button16" style="border-radius:0px 0px 0px 0px;" class="button button-energized  button-block icon ion-android-camera margin-zero"></button>
-            <hr>
-            <div id="cadastroDeSindico-button-bar1" class="button-bar">
-                <a ui-sref="selecioneOSeuPapel" id="cadastroDeSindico-button12" style="border-radius:2px 2px 2px 2px;" class="button button-calm button-large button-clear icon-left ion-arrow-left-c">Voltar</a>
-                <a href="#" onclick="window.open('https://creator.ionic.io/share/c1eec3452819#/cadCondominio', '_system', 'location=yes'); return false;" id="cadastroDeSindico-button15" style="border-radius:2px 2px 2px 2px;" class="button button-assertive button-large button-clear icon-right ion-checkmark-round">Salvar</a>
-            </div>
+            <button id="cadastroDeSindico-button16" style="border-radius:0px 0px 6px 6px;" class="button button-energized  button-block icon ion-android-camera margin-zero"></button>
+
+            <button id="cadastroDeSNdico-button9" 
+                    class="button button-positive button-large button-block button-outline ic-selected" 
+                    data-componentid="btnSalvar" data-tap-disabled="true">Salvar</button>
+            
         </form>
     </ion-content>
 </ion-view>
