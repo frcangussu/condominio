@@ -31,16 +31,17 @@ router.post('/:controller/cadastra',function(req,res){
 
 /**
  * Rotas para os ELEMENTOS do documento principal
+ * Exemplo: http://192.168.1.5:3000/rest/entidade/titulares/nome/fernando
  */
-router.get('/:entidade',function(req,res){
-	var entidade = req.params.entidade;
-	mainController.listEntidade(entidade,null,function(response){
+router.get('/entidade/:entidade/:campo/:valor',function(req,res){
+	console.log(req.params);
+	mainController.listarEntidade(req.params,function(response){
 		res.json(response);
 	});
 });
 
 router.get('/condominio/:condominio/entidade/:entidade/:campo/:valor',function(req,res){
-	mainController.listarEntidade(req.params,function(response){
+	mainController.listarEntidadePorCondominio(req.params,function(response){
 		res.json(response);
 	});
 });
