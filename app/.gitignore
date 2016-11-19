@@ -4,4 +4,4 @@
 node_modules/
 platforms/
 plugins/
-bemVindoAoAPPCtrl.js
+www/js/controllers/inicio/bemVindoAoAPPCtrl.js
