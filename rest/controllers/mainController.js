@@ -20,12 +20,14 @@ exports.listCondominio = function(params,callback){
 	});
 }
 
+exports.save = function(modelName,params,callback){
 
-exports.save = function(item,callback){
+	var Model = require('../models/'+modelName);
 
-	item.save(function(error, registro){
+	new Model(params)
+	.save(function(error, registro){
 		if (error){
-			callback({error:'Não foi possível salvar'});
+			callback({error:'Não foi possível salvar '+modelName});
 		} else {
 			callback(registro);
 		}
