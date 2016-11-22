@@ -20,12 +20,14 @@ exports.listCondominio = function(params,callback){
 	});
 }
 
+exports.save = function(modelName,params,callback){
 
-exports.save = function(item,callback){
+	var Model = require('../models/'+modelName);
 
-	item.save(function(error, registro){
+	new Model(params)
+	.save(function(error, registro){
 		if (error){
-			callback({error:'Não foi possível salvar'});
+			callback({error:'Não foi possível salvar '+modelName});
 		} else {
 			callback(registro);
 		}
@@ -88,6 +90,26 @@ exports.listarCondominioPorEntidade = function(params,callback){
 }
 
 exports.listarEntidade = function(params,callback){
+
+	var filtro = {};
+
+	filtro[0] = {};
+	filtro[0][params.entidade+"."+params.campo] = params.valor;
+
+	filtro[1] = util.obterFiltro(params);
+
+	model.find(
+		filtro[0],
+		filtro[1],
+		function(error, dados){
+			if (!error){ callback(dados); } 
+			else	   { callback({erro:"Dados não localizados"}); }
+		}
+	);
+		
+};
+
+exports.listarEntidadePorCondominio = function(params,callback){
 
 	var filtro = util.obterFiltro(params);
 

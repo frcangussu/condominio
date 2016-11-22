@@ -40,6 +40,9 @@ Mongo DB:
 
 Select
 
+	// consulta o elemento 
+	db.condominios.find({"titulares.nome":"fernando"},{titulares:{$elemMatch: {nome:"fernando"}}})
+
 	// consulta um elemento no array "sindicos"
 	db.condominio.find({},{sindicos:{$elemMatch: {nome:"Reinaldo"}}}).pretty()
 
