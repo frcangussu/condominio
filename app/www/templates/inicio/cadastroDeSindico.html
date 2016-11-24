@@ -1,0 +1,68 @@
+<ion-view title="Cadastro de Síndico" hide-back-button="true" id="page3" style="background-color:#000000;">
+    <ion-content padding="true" class="has-header">
+        
+        <form id="formCampos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
+            <label class="item item-input item-floating-label" id="cadastroDeSindico-input6">
+                <span class="input-label" aria-label="Nome" id="labelNome">Nome</span>
+                <input type="text" id="txtNome" placeholder="Nome" data-ng-model="vm.sindico.nome">
+            </label>
+            <br>
+            <label class="item item-input item-floating-label" id="cadastroDeSindico-input7">
+                <span class="input-label">Senha</span>
+                <input type="password" id="txtSenha" placeholder="Senha" data-ng-model="vm.sindico.senha">
+            </label>
+        </form>
+
+        <br>
+
+        <form id="formFotos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
+            
+            <!-- inicio: Exibição da imagem -->
+            <div data-ng-if="!vm.sucesso" class="imagemCamera" style="line-height:250px;">
+                <i data-ng-if="false" class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+            </div>
+            <div data-ng-show="vm.sucesso" class="imagemCamera">
+                <img src="" id="imgCamera" 
+                     style="vertical-align-middle;width:250px;height:250px;border-radius:130px;margin:5px 0;">
+            </div>
+            <button id="cadastroDeSindico-button16" style="border-radius:0px 0px 6px 6px;" class="button button-energized  button-block icon ion-android-camera margin-zero" 
+                        data-ng-click="vm.foto()"></button>
+            <!-- fim: Exibição da imagem -->
+            
+
+            <!-- botão SALVAR -->
+            <button id="cadastroDeSNdico-button9" 
+                    data-ng-click="vm.salvaDados()"
+                    class="button button-positive button-large button-block button-outline ic-selected"
+                    data-componentid="btnSalvar" 
+                    data-tap-disabled="true">Salvar</button>
+                    
+        </form>
+
+        <!-- inicio: Confirmação da senha -->
+        <form id="cadastroDeSindico-form9" class="list" data-ng-show="vm.exibirConfirmacaoSenha">
+            <br>
+            <label class="item item-input item-floating-label" id="cadastroDeSindico-input8">
+                <span class="input-label">Senha</span>
+                <input type="password" id="txtConfirmaSenha" placeholder="Informe novamente a senha" data-ng-model="vm.sindico.confirmaSenha">
+            </label>
+            <button id="cadastroDeSNdico-button9" 
+                    data-ng-click="vm.salvaDados()"
+                    class="button button-positive button-large button-block button-outline ic-selected"
+                    data-componentid="btnConfirma" 
+                    data-tap-disabled="true">Ok</button>
+        </form>
+        <!-- fim: Confirmação da senha -->
+
+    </ion-content>
+</ion-view>
+<style>
+.imagemCamera{
+    margin: 0px; 
+    background-color: #252525; 
+    text-align: center; 
+    border-radius: 6px 6px 0 0;
+    min-width: 340px !important;
+    min-height: 250px !important;
+}
+</style>

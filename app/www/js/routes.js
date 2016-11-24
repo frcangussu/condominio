@@ -8,7 +8,6 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-
   /**
    * FLUXO INICIAL
    * @description: cadastro inicial pós instalação
@@ -26,20 +25,20 @@ angular.module('app.routes', [])
     controller: 'selecioneOSeuPapelCtrl', controllerAs: 'vm'
   })
 
-  .state('cadastroDeSNdico', {
+  .state('cadastroDeSindico', {
     url: '/cadSindico',
-    templateUrl: 'templates/inicio/cadastroDeSNdico.html',
-    controller: 'cadastroDeSNdicoCtrl', controllerAs: 'vm'
+    templateUrl: 'templates/inicio/cadastroDeSindico.html',
+    controller: 'cadastroDeSindicoCtrl', controllerAs: 'vm'
   })
 
-  .state('cadastroPortaria', {
-    url: '/cadPortaria',
-    templateUrl: 'templates/inicio/cadastroPortaria.html',
-    controller: 'cadastroPortariaCtrl', controllerAs: 'vm'
+  .state('cadastroRecepcao', {
+    url: '/cadRecepcao',
+    templateUrl: 'templates/inicio/cadastroRecepcao.html',
+    controller: 'cadastroRecepcaoCtrl', controllerAs: 'vm'
   })
 
   .state('cadastroEfetuadoComSucesso', {
-    url: '/sucessoPortaria',
+    url: '/sucessoRecepcao',
     templateUrl: 'templates/inicio/cadastroEfetuadoComSucesso.html',
     controller: 'cadastroEfetuadoComSucessoCtrl', controllerAs: 'vm'
   })
@@ -178,7 +177,7 @@ angular.module('app.routes', [])
   })
 
   .state('validarPorteiros', {
-    url: '/validarPortaria',
+    url: '/validarRecepcao',
     templateUrl: 'templates/validarPorteiros.html',
     controller: 'validarPorteirosCtrl', controllerAs: 'vm'
   })
@@ -197,7 +196,14 @@ angular.module('app.routes', [])
 
   // console.log(localStorage.home);
   // $urlRouterProvider.otherwise('/tabs/registrarVisita')
-  $urlRouterProvider.otherwise(localStorage.home);
+  // console.log("routes.js >>> ",localStorage);
+  // $urlRouterProvider.otherwise(localStorage.home);
+
+  var home = localStorage.home || "/home";
+
+  $urlRouterProvider.otherwise(home);
+  // $urlRouterProvider.otherwise('/tabs/registrarVisita');
+  // $urlRouterProvider.otherwise(localStorage.home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 
 });
