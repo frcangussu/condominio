@@ -5,6 +5,8 @@ function ($scope, $stateParams, $state, $ionicPlatform, $cordovaContacts) {
 
   var vm = this;
 
+  console.log(">>>>> registrarVisitaCtrl.js");
+
   vm.contatos = [
     {name: {givenName: 'Guilherme Dias'}},
     {name: {givenName: 'Gustavo Dias'}},

@@ -6,79 +6,89 @@
 
         var vm = this;
 
-        // mock
-        $state.go("selecioneOSeuPapel");
+        vm.destino = "cadastrarCondominio";
 
-        // teste 
-        $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
-            function(response){
-                console.log(response);
-            },
-            function(err){
-                console.log("Erro ao tentar localizar");
-            }
-        );
+        // mock
+        // $state.go(vm.destino);
 
         // identifica cadastro inicial
-        if (localStorage.getItem("uid"))
-            $state.go("tabsController.registrarVisita");
-
-        vm.condominio = false;
-        vm.titular = false;
-
-        vm.exibirTela = function(){
-            if(vm.condominio)
-                 return false;
-            else return true;
-        }
-
-        /**
-         * inicialização: verifica se o usuário já possui cadastro
-         */
-        // document.addEventListener("deviceready", function () {
-        $ionicPlatform.ready(function() {
-
-            var device = $cordovaDevice.getDevice();
-            vm.uid = device.manufacturer+"."+device.serial+"."+device.uuid;
+        if (localStorage.getItem("uid")){
             
-            // recupera o id do condominio pelo uid do dispositivo
-            vm.obtemCondominio("uid",vm.uid).then(function(response){
+            console.log(localStorage.getItem("uid"));
+
+            // $state.go("tabsController.registrarVisita");
+            $state.go(vm.destino);
+
+        } else {
+
+            console.log(">>>> Passou A <<<<");
+
+            vm.condominio = false;
+            vm.titular = false;
+
+            vm.exibirTela = function(){
+                if(vm.condominio)
+                    return false;
+                else return true;
+            }
+
+            /**
+             * inicialização: verifica se o usuário já possui cadastro
+             */
+            $ionicPlatform.ready(function() {
+
+                var device = $cordovaDevice.getDevice();
+                vm.uid = device.manufacturer+"."+device.serial+"."+device.uuid;
                 
-                vm.condominio = (response.data[0]) ? response.data[0]["_id"] : null ;
+                // recupera o id do condominio pelo uid do dispositivo
+                vm.obtemCondominio("uid",vm.uid).then(function(response){
+                    
+                    vm.condominio = (response.data[0]) ? response.data[0]["_id"] : null ;
 
-                // se ainda não foi cadastrado retorna para que o usuário informe o número do telefone
-                if (!vm.condominio){
-                    alert('O seu UID não foi localizado em nossos registros');
-                    return;
-                }
-
-                localStorage.setItem("uid",vm.uid);
-                // localStorage.setItem("condominio",vm.condominio);
-
-                // se existir o titular (consultadado por uid) navega para a tela inicial do app
-                $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
-
-                    // sucesso
-                    function(response){
-
-                        vm.titular = response.data[0].titulares[0];
-
-                        localStorage.setItem("usuario",JSON.stringify(vm.titular));
-                        
-                        if (vm.titular && vm.titular.telefone){
-                            $state.go("tabsController.registrarVisita");
-                        } 
-                    },
-
-                    // erro
-                    function(err){
-                        alert('Erro ao tentar identificar o dispositivo');
+                    // se ainda não foi cadastrado retorna para que o usuário informe o número do telefone
+                    if (!vm.condominio){
+                        alert('O seu UID não foi localizado em nossos registros');
+                        return;
                     }
-                );
-            }); 
+
+                    console.log(">>> uid: ",vm.uid);
+
+                    localStorage.setItem("uid",vm.uid);
+                    // localStorage.setItem("condominio",vm.condominio);
+
+                    // se existir o titular (consultadado por uid) navega para a tela inicial do app
+                    $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
+
+                        // sucesso
+                        function(response){
+
+                            vm.titular = response.data[0].titulares[0];
 
 
-        }, false);
+                            localStorage.setItem("usuario",JSON.stringify(vm.titular));
+                            
+                            console.log(">>> vm.titular: ",vm.titular);
+                            if (vm.titular && vm.titular.telefone){
+                                // $state.go("tabsController.registrarVisita");
+                                $state.go(vm.destino);
+                                console.log(">>>> Passou B.1 <<<<");
+                            } 
+                            console.log(">>>> Passou B.2 <<<<");
+
+
+                        },
+
+                        // erro
+                        function(err){
+                            alert('Erro ao tentar identificar o dispositivo');
+                        }
+                    );
+                }); 
+
+
+            }, false);
+
+        }
 
 
         /**
@@ -94,9 +104,12 @@
                 vm.condominio = (response.data[0]) ? response.data[0]["_id"] : null ;
 
                 if (!vm.condominio){
-                    $state.go("selecioneOSeuPapel");
+                    // $state.go("selecioneOSeuPapel");
+                    $state.go(vm.destino);
                     return;
                 }
+
+                console.log(">>>> Passou C <<<<");
 
                 $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/telefone/'+telefone).then(
                     function(response){
@@ -117,11 +130,15 @@
                             //////////////////////////////////////////////////////
                             vm.exibirValidacao = true;
                             
-
-                            $state.go("tabsController.registrarVisita");
+                            // $state.go("tabsController.registrarVisita");
+                            $state.go(vm.destino);
                         } else {
-                            $state.go("selecioneOSeuPapel");
+                            // $state.go("selecioneOSeuPapel");
+                            $state.go(vm.destino);
                         }
+
+                        console.log(">>>> Passou D <<<<");
+                        
                     }, 
                     function(err){
                         alert('Erro ao tentar localizar o usuário');
