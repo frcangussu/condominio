@@ -6,10 +6,8 @@
 
         var vm = this;
 
-        vm.destino = "cadastrarCondominio";
-
         // mock
-        // $state.go(vm.destino);
+        vm.destino = "cadastrarCondominio";
 
         // identifica cadastro inicial
         if (localStorage.getItem("uid")){
