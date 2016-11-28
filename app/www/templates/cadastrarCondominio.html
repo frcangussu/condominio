@@ -47,7 +47,19 @@
                 }
             </style>
         </div>
-        <button id="cadastrarCondominio-button61" style="color:#87CB32;text-align:left;" class="button button-dark button-large button-block icon-right ion-ios-upload-outline margin-zero">Moradores</button>
+
+        <!-- controle de upload -->
+        <input id="fileSelector" type="file" style="visibility:hidden"/>
+        <button id="cadastrarCondominio-button61" style="color:#87CB32;text-align:left;" 
+                class="button button-dark button-large button-block icon-right ion-ios-upload-outline margin-zero">Moradores</button>
+        <script type="text/javascript">
+        $("#cadastrarCondominio-button61").click(function() {
+            $("#fileSelector").click();
+        });
+        </script>
+        <!-- controle de upload -->
+
+
         <div id="cadastrarCondominio-markdown9" style="color:#6F9BA1;font-size:14px;" class="font-size-14">
             <blockquote>
                 <p>Selecione o arquivo com os dados dos moradores para que possamos efetuar o cadastro</p>
