@@ -16,14 +16,14 @@ angular.module('app.services', [])
 
 	}])
 
-	.service('Array', [function () {
+	.service('Lista', [function () {
 
 		/**
 		 * Localiza e retorna um elemento do array
 		 */
 		this.obterItem = function (lista, campo, valor) {
 			return lista.find(function (item) {
-				return item["campo"] == "valor";
+				return (item[campo] == valor) ? item : false;
 			});
 		}
 
