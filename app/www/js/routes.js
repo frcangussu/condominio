@@ -54,6 +54,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.registrarVisita', {
+    cache: false,
     url: '/registrarVisita',
     views: {
       'tab1': {
@@ -201,8 +202,8 @@ angular.module('app.routes', [])
 
   var home = localStorage.home || "/home";
 
-  $urlRouterProvider.otherwise(home);
-  // $urlRouterProvider.otherwise('/tabs/registrarVisita');
+  // $urlRouterProvider.otherwise(home);
+  $urlRouterProvider.otherwise('/tabs/registrarVisita');
   // $urlRouterProvider.otherwise(localStorage.home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 
