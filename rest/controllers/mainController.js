@@ -5,8 +5,7 @@ exports.save = function(modelName,params,callback){
 
 	var Model = require('../models/'+modelName);
 
-	new Model(params)
-	.save(function(error, registro){
+	new Model(params).save(function(error, registro){
 		if (error){
 			callback({error:'Não foi possível salvar '+modelName});
 		} else {
@@ -35,6 +34,19 @@ exports.delete = function(modelName,id,callback){
 			})
 		}
 	})
+}
+
+exports.get = function(modelName,params,callback){
+	
+	var Model = require('../models/'+modelName);
+
+	Model.find(params,function(error,response){
+		if (error){
+			callback({error: "Não foi possível recuperar os dados"});
+		} else {
+			callback(response);
+		}
+	});
 }
 
 exports.condominio = {};
