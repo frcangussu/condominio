@@ -23,19 +23,20 @@
         </div>
         <div class="spacer" style="width: 300px; height: 35px;"></div>
         <div id="pessoal-markdown12" style="color:#1E95A8;font-size:21px;text-align:center;">
-            <p>{{ctrl.contato.name.givenName}}</p>
+            <p>{{vm.contato.name.givenName}}</p>
         </div>
         <div>
             <br>
             <center>
-                <img src="https://creator.ionic.io/img/avatar-img.png" class="radius" style="width:50%;height:auto;" ng-if="!ctrl.contato.photos[0]">
-                <img ng-src="{{ctrl.contato.photos[0].value}}" class="radius" style="width:50%;height:auto;" ng-if="ctrl.contato.photos[0]">
+                <img src="https://creator.ionic.io/img/avatar-img.png" class="radius" style="width:50%;height:auto;" ng-if="!vm.contato.photos[0]">
+                <img ng-src="{{vm.contato.photos[0].value}}" class="radius" style="width:50%;height:auto;" ng-if="vm.contato.photos[0]">
             </center>
             <br>
         </div>
         <div id="pessoal-button-bar11" class="button-bar">
-            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="ctrl.contato.status == 1" ng-click="ctrl.shareAnywhere()">Confirmar</a>
-            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right ion-close button-balanced" ng-show="ctrl.contato.status != 1">Cancelar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && vm.contato.possuiApp" ng-click="vm.confirmar()">Confirmar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && !vm.contato.possuiApp" ng-click="vm.shareAnywhere()">Confirmar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right ion-close button-balanced" ng-show="vm.contato.status != 1" ng-click="vm.cancelar()">Cancelar</a>
         </div>
     </ion-content>
 </ion-view>

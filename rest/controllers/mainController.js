@@ -7,7 +7,8 @@ exports.listCondominio = function(params,callback){
 
 	if (params.campo && params.valor){
 		var campo = params.campo;
-		filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
+		// filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
+		filtro[campo] = params.valor;
 	}
 
 	model.find(filtro,function(error, dados){

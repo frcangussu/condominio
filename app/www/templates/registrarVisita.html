@@ -8,7 +8,7 @@
             <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96" ng-repeat="contato in vm.contatos"  ng-click="vm.action(contato)">
                 <img src="https://creator.ionic.io/img/avatar-img.png" alt="" ng-if="!contato.photos[0]" />
                 <img ng-src="{{contato.photos[0].value}}" alt="" ng-if="contato.photos[0]"/>
-                <h2calm>{{contato.name.givenName}}
+                <h2calm>{{contato.name.givenName}} {{contato.status}}
                     <p ng-if="contato.status == 1">Enviar Convite</p>
                     <p ng-if="contato.status == 2">Convite Enviado</p>
                     <p ng-if="contato.status == 3">Convite Recebido</p>
