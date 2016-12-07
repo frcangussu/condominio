@@ -17,6 +17,9 @@ Permissão
 =========
 
 Após cadastro de inquilino o proprietário não poderá enviar convite (ticket) enquanto não excluir o inquilino
+* O proprietário deverá cadastrar o inquilino principal;
+* * O inquilino principal deve cadastrar os demais moradores da unidade;
+* Após cadastramento do inquilino, o app notifica o síndico, informando que a partir daquele momento, o inquilino passa ser responsável pelas visitas
 
 Convite Profissional
 ====================
