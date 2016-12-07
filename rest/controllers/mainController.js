@@ -12,14 +12,16 @@ exports.listCondominio = function(params,callback){
 	}
 
 	model.find(filtro,function(error, dados){
-		console.log("model.find.filtro",filtro);	
+		console.log("model.find.filtro",filtro);
 		if (error){
 			callback({error:'Não foi possível encontrar registros'});
 		} else {
+			console.log("teste");
+			console.log(dados);
 			callback(dados);
 		}
 	});
-}
+};
 
 exports.save = function(modelName,params,callback){
 
@@ -60,9 +62,9 @@ exports.delete = function(modelName,id,callback){
 
 var util = {
 	obterFiltro: function(params){
-		
+
 		var filtro = {};
-		
+
 		filtro[params.entidade] = 1;
 
 		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
@@ -78,7 +80,7 @@ var util = {
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 exports.listarCondominioPorEntidade = function(params,callback){
-	
+
 	var filtro = util.obterFiltro(params)
 
 	model.find(
@@ -103,11 +105,11 @@ exports.listarEntidade = function(params,callback){
 		filtro[0],
 		filtro[1],
 		function(error, dados){
-			if (!error){ callback(dados); } 
+			if (!error){ callback(dados); }
 			else	   { callback({erro:"Dados não localizados"}); }
 		}
 	);
-		
+
 };
 
 exports.listarEntidadePorCondominio = function(params,callback){
@@ -119,11 +121,11 @@ exports.listarEntidadePorCondominio = function(params,callback){
 		{_id: mongoose.Types.ObjectId(params.condominio)},
 		filtro,
 		function(error, dados){
-			if (!error){ callback(dados); } 
+			if (!error){ callback(dados); }
 			else	   { callback({erro:"Dados não localizados"}); }
 		}
 	);
-		
+
 };
 
 exports.alterarEntidade = function(params,body,callback){
@@ -158,10 +160,10 @@ exports.insert = function(entidade,dados,callback){
 
 	var item = {};
 	item[entidade] = dados;
-	
+
 	model.update(
 		{_id: mongoose.Types.ObjectId(dados.condominio) },
-		{ $push: item },		
+		{ $push: item },
 		function(error,sucesso){
 			if(!error){
 				if (sucesso.nModified)
@@ -174,4 +176,3 @@ exports.insert = function(entidade,dados,callback){
 		}
 	)
 };
-

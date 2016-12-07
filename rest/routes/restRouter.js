@@ -34,7 +34,7 @@ router.get('/condominio/porEntidade/:entidade/:campo/:valor',function(req,res){
  * Exemplo: http://192.168.1.5:3000/rest/entidade/titulares/nome/fernando
  */
 router.get('/entidade/:entidade/:campo/:valor',function(req,res){
-	console.log(req.params);
+	console.log(req.params, 'teste');
 	mainController.listarEntidade(req.params,function(response){
 		res.json(response);
 	});
@@ -47,12 +47,12 @@ router.get('/condominio/:condominio/entidade/:entidade/:campo/:valor',function(r
 });
 
 // route.get('/identifica/usuario/:telefone/:uid',function(){
-	
+
 // 	req.params.entidade = "titulares";
 
 // 	req.params.filtro = {
 // 		"telefone":req.params.telefone,
-// 		"uid":req.params.uid 
+// 		"uid":req.params.uid
 // 	}
 
 // 	mainController.listarEntidade(req.params,function(response){
@@ -92,7 +92,7 @@ router.post('/cadastra/:entidade',function(req,res){
 });
 
 router.delete('/remove/:id',function(req,res){
-	
+
 	var id = req.params.id;
 
 	mainController.delete("Produto", id, function(response){

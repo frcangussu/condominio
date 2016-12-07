@@ -26,7 +26,7 @@ router.post('/cadastra',function(req,res){
 });
 
 router.delete('/remove/:id',function(req,res){
-	
+
 	var id = req.params.id;
 
 	mainController.delete("Condominio", id, function(response){
