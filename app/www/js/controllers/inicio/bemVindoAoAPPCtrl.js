@@ -70,7 +70,9 @@
                                 // $state.go("tabsController.registrarVisita");
                                 $state.go(vm.destino);
                                 console.log(">>>> Passou B.1 <<<<");
-                            } 
+                            } else {
+                                alert("Usuário não localizado, favor solicitar cadastro");
+                            }
                             console.log(">>>> Passou B.2 <<<<");
 
 
@@ -94,13 +96,19 @@
          */
         vm.avancar = function(){
 
-            var telefone = Texto.obterNumero(vm.telefone);
+            var telefone = Texto.obterNumeros(vm.telefone);
+
+            if (telefone.length < 10){
+                alert("Informe o número de telefone com o DDD + 11 dígitos");
+                return;
+            }
 
             // recupera o id do condominio pelo telefone informado
             vm.obtemCondominio("telefone",telefone).then(function(response){
                 
                 vm.condominio = (response.data[0]) ? response.data[0]["_id"] : null ;
 
+                // caso ainda não tenha sido cadastrado o usuário, então trata-se de cadastro de síndico ou recepção
                 if (!vm.condominio){
                     // $state.go("selecioneOSeuPapel");
                     $state.go(vm.destino);
@@ -127,6 +135,17 @@
                             // Implementar rotina de validação por SMS e E-mail //
                             //////////////////////////////////////////////////////
                             vm.exibirValidacao = true;
+
+                            // registra o usuário na colection "usuarios"
+                            $http.post(PARAMS.REST.IP+'/usuario/cadastra',{"uid":vm.uid, "telefone": telefone}).then(
+                                function(res){
+                                    console.log(">>>> usuário cadastrado: ",res);
+                                    localStorage.setItem("telefone",telefone);
+                                },
+                                function(error){
+                                    console.log("Erro ao cadastrar o documento usuário: ",error);
+                                }
+                            );
                             
                             // $state.go("tabsController.registrarVisita");
                             $state.go(vm.destino);
