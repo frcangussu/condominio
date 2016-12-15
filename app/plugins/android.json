@@ -42,6 +42,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
     "dependent_plugins": {}

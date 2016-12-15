@@ -1,10 +1,10 @@
 angular.module('app.cadastroDeSindicoCtrl', [])
 
-.controller('cadastroDeSindicoCtrl', ['$scope', '$stateParams','Camera', '$timeout', '$http', 'PARAMS', '$cordovaDevice',
+.controller('cadastroDeSindicoCtrl', ['$scope', '$stateParams','Camera', '$timeout', '$http', 'CONST', '$cordovaDevice',
  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, Camera, $timeout, $http, PARAMS, $cordovaDevice) {
+function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice) {
     var vm = this;
 
     vm.sindico = {};
@@ -37,7 +37,7 @@ function ($scope, $stateParams, Camera, $timeout, $http, PARAMS, $cordovaDevice)
 
         if (vm.validaDados()){
             // http://192.168.1.7:3000/rest/sindico/cadastra
-            $http.post(PARAMS.REST.IP+'/sindico/cadastra',vm.sindico).then(function(res){
+            $http.post(CONST.REST.IP+'/sindico/cadastra',vm.sindico).then(function(res){
                 
                 // salva o uid
                 try {

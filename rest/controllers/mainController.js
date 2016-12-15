@@ -14,6 +14,37 @@ exports.save = function(modelName,params,callback){
 	});
 };
 
+exports.update = function(modelName,id,params,callback){
+	
+	var model = require('../models/'+modelName);
+
+	console.log('>>> id: ', id); 
+	console.log('>>> params: ', params); 
+	console.log('>>> modelName: ', modelName); 
+	console.log('>>> model: ', model); 
+
+	if (!id){
+		callback({required:"ID não localizado"});
+		return;
+	}
+
+	model.findById(id,function(error, dados){
+		if (error){
+			callback({error: 'Não foi possível alterar "'+modelName+'"'});
+		} else {
+			// console.log('>>> dados: ', dados); 
+
+			model.update({ _id: id }, params, function(error){
+
+				if(!error){
+					callback({resposta:modelName+" alterado com sucesso"});
+				}
+			})
+		}
+	})
+
+}
+
 exports.delete = function(modelName,id,callback){
 
 	var model = require('../models/'+modelName);

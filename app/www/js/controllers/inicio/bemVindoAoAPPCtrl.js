@@ -1,13 +1,16 @@
     angular.module('app.bemVindoAoAPPCtrl', ['ngMask'])
 
-    .controller('bemVindoAoAPPCtrl', ['$scope', '$stateParams', '$ionicPlatform', '$cordovaDevice', 'Texto', '$state','$http', 'PARAMS',
+    .controller('bemVindoAoAPPCtrl', ['$scope', '$stateParams', '$ionicPlatform', '$cordovaDevice', 'Texto', '$state','$http', 'CONST',
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $ionicPlatform, $cordovaDevice, Texto, $state, $http, PARAMS) {
+    function ($scope, $stateParams, $ionicPlatform, $cordovaDevice, Texto, $state, $http, CONST) {
 
         var vm = this;
 
         // mock
         vm.destino = "cadastrarCondominio";
+        // vm.destino = "cadastroDeSindico";
+
+        console.log(vm.destino);
 
         // identifica cadastro inicial
         if (localStorage.getItem("uid")){
@@ -55,7 +58,7 @@
                     // localStorage.setItem("condominio",vm.condominio);
 
                     // se existir o titular (consultadado por uid) navega para a tela inicial do app
-                    $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
+                    $http.get(CONST.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/uid/'+vm.uid).then(
 
                         // sucesso
                         function(response){
@@ -117,7 +120,7 @@
 
                 console.log(">>>> Passou C <<<<");
 
-                $http.get(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/telefone/'+telefone).then(
+                $http.get(CONST.REST.IP+'/condominio/'+vm.condominio+'/entidade/titulares/telefone/'+telefone).then(
                     function(response){
                         vm.titular = response.data[0].titulares[0];
                         if (vm.titular){
@@ -137,7 +140,7 @@
                             vm.exibirValidacao = true;
 
                             // registra o usuário na colection "usuarios"
-                            $http.post(PARAMS.REST.IP+'/usuario/cadastra',{"uid":vm.uid, "telefone": telefone}).then(
+                            $http.post(CONST.REST.IP+'/usuario/cadastra',{"uid":vm.uid, "telefone": telefone}).then(
                                 function(res){
                                     console.log(">>>> usuário cadastrado: ",res);
                                     localStorage.setItem("telefone",telefone);
@@ -168,7 +171,7 @@
          * retorna o "_id" do condominio de acordo com campo e valor informados
          */
         vm.obtemCondominio = function(campo,valor){
-            return $http.get(PARAMS.REST.IP+'/condominio/porEntidade/titulares/'+campo+'/'+valor);
+            return $http.get(CONST.REST.IP+'/condominio/porEntidade/titulares/'+campo+'/'+valor);
         }
 
         /**
@@ -181,7 +184,7 @@
                 filtro: {"telefone" : telefone}
             };
 
-            $http.put(PARAMS.REST.IP+'/condominio/'+vm.condominio+'/altera/titulares',params).then(
+            $http.put(CONST.REST.IP+'/condominio/'+vm.condominio+'/altera/titulares',params).then(
 
                 // sucesso
                 function(response){ alert(msg); },

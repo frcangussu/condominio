@@ -66,13 +66,26 @@ router.get('/condominio/:condominio/entidade/:entidade/:campo/:valor',function(r
 
 /**
  * @type: PUT
- * @description: altera os dados de uma enteidade (titular, sindico, et.)
+ * @description: altera os dados de uma entidade (titular, sindico, et.)
  * @argument: condominio - ObjectId do condominio
  * @argument: entidade   - nome da entidade
  * @example: http://192.168.1.4:3000/rest/condominio/5813f94f31b3412890527aae/altera/titulares
  */
 router.put('/condominio/:condominio/altera/:entidade',function(req,res){
 	mainController.condominio.alterarEntidade(req.params,req.body,function(){
+		res.json(response);
+	});
+});
+
+/**
+ * @type: PUT
+ * @description: altera os dados de um documento de condominio
+ * @argument: condominio - ObjectId do condominio
+ * @example: http://192.168.43.197:3000/rest/condominio/583193cd0310930b00e2b053
+ */
+router.put('/altera/condominio/:condominio',function(req,res){
+	
+	mainController.update("condominio",req.params.condominio,req.body,function(response){
 		res.json(response);
 	});
 });
