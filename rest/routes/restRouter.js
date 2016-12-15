@@ -23,6 +23,7 @@ router.get('/condominio/:campo/:valor',function(req,res){
  * @argument: campo    - nome do campo da entidade
  * @argument: valor	   - valor existente no campo informado
  * @returns: documento condominio
+ * @example: http://localhost:3000/condominio/porEntidade/titulares/telefone/61991330123
  */
 router.get('/condominio/porEntidade/:entidade/:campo/:valor',function(req,res){
 	mainController.condominio.listarPorEntidade(req.params,function(response){
