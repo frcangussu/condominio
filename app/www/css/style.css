@@ -3,6 +3,7 @@ input {color: white;}
 hr{border:solid 1px #0C4854;border-top:none;}
 input[type="text"] {color:#10D4F4 !important;}
 input[type="password"] {color:#10D4F4 !important;}
+textarea{color:#10D4F4 !important;}
 .input-label{color:#a7a7a7 !important;}
 label{border:solid 1px #383838 !important;border-radius:6px !important;}
 ion-view, .pane, .view {background-color: #F6F6F6; }

@@ -352,6 +352,14 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "id": "com.lampa.startapp.startapp",
+        "file": "plugins/com.lampa.startapp/www/startApp.js",
+        "pluginId": "com.lampa.startapp",
+        "merges": [
+            "startApp"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -369,7 +377,8 @@ module.exports.metadata =
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-camera": "2.3.0",
     "cordova-plugin-geolocation": "2.4.0",
-    "cordova-plugin-file": "4.3.1"
+    "cordova-plugin-file": "4.3.1",
+    "com.lampa.startapp": "0.1.4"
 };
 // BOTTOM OF METADATA
 });

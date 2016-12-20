@@ -15,6 +15,26 @@ router.get('/condominio/:campo/:valor',function(req,res){
 	});
 });
 
+/**
+ * @description: Realiza a busca por um documento de uma collection (collectionName)
+ * @argument: collectionName
+ * @returns: lista de documentos
+ */
+router.get('/find/:collectionName',function(req,res){
+
+	var filter = [];
+	for (var key in req.query){
+		var item = {}
+		item[key] = new RegExp(req.query[key],"i"); //new RegExp("a|b", "i");
+		filter.push(item);
+	}
+
+	mainController.get(req.params.collectionName,filter,function(response){
+		res.json(response);
+	});
+	
+});
+
 
 /**
  * @type: GET
@@ -124,9 +144,14 @@ router.post('/usuario/cadastra',function(req,res){
 	var params = {
 		uid: req.body.uid,
 		telefone: req.body.telefone 
-	}
+	};
 
-	mainController.get("usuario",params,function(response){
+	var filter = [
+		{uid: req.body.uid},
+		{telefone: req.body.telefone} 
+	];
+
+	mainController.get("usuario",filter,function(response){
 		if (response.length){
 			res.json({error: 'Cadastro não efetuado: Usuário já cadastrado'});
 		} else {
@@ -149,6 +174,41 @@ router.post('/cadastra/:entidade',function(req,res){
 		res.json(response);
 	});
 });
+
+
+
+/**
+ * @type: POST
+ * @description: inserer um documento em uma collection qualquer
+ * @params: collectionName
+ * @example: http://192.168.43.197/cadastra/documento/municipios
+ */
+router.post('/cadastra/documento/:collectionName',function(req,res){
+
+	console.log('>>> req.body: ', req.body); 
+
+	mainController.save(req.params.collectionName, req.body, function(response){
+		res.json(response);
+	});
+});
+
+router.post('/adiciona/elemento/:collectionName/:documentId/:listName',function(req,res){
+
+	mainController.push(
+		req.params.collectionName, 
+		req.params.documentId,
+		req.params.listName,
+		req.body,
+		
+		function(response){
+			res.json(response);
+		}
+	);
+});
+
+
+
+
 
 module.exports = router;
 

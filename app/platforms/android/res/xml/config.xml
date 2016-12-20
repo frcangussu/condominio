@@ -39,6 +39,9 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
+    <feature name="startApp">
+        <param name="android-package" value="com.lampa.startapp.startApp" />
+    </feature>
     <name>app</name>
     <description>
         An Ionic Framework and Cordova project.

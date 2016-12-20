@@ -3,6 +3,9 @@ var condominio    = require('../models/condominio');
 
 exports.save = function(modelName,params,callback){
 
+	console.log('>>> modelName: ', modelName); 
+	console.log('>>> params: ', params); 
+
 	var Model = require('../models/'+modelName);
 
 	new Model(params).save(function(error, registro){
@@ -67,18 +70,59 @@ exports.delete = function(modelName,id,callback){
 	})
 }
 
-exports.get = function(modelName,params,callback){
-	
+exports.get = function(modelName,filter,callback){
+
+	console.log('>>> modelName: ', modelName);
+	 
 	var Model = require('../models/'+modelName);
 
-	Model.find(params,function(error,response){
+
+	console.log('>>> filter: ', filter); 
+
+	Model.find( {$and:filter} , function(error,response){
 		if (error){
 			callback({error: "Não foi possível recuperar os dados"});
 		} else {
 			callback(response);
 		}
 	});
-}
+};
+
+/**
+ * @description - Adicionar um elemento a um array da collection
+ * @example     - ainda não foi testado
+ */
+exports.push = function(modelName, documentId, listName, dados, callback){
+	
+	var Model = require('../models/'+modelName);
+
+	if (!documentId){
+		callback({required:"Favor informar o _id de "+modelName});
+		return;
+	}
+
+	var item = {};
+	item[listName] = dados;
+	
+	Model.update(
+		{_id: mongoose.Types.ObjectId(documentId) },
+		{ $push: item },		
+		function(error,sucesso){
+			if(!error){
+				if (sucesso.nModified)
+					callback({info:listName+" cadastrado com sucesso"});
+				else
+					callback({warn:"Não foi possível cadastrar "+listName});
+			} else {
+				callback({erro: "Erro ao tentar inserir "+listName});
+			}
+		}
+	)
+};
+
+/********************************************************************************************************** */
+/********************************************************************************************************** */
+/********************************************************************************************************** */
 
 exports.condominio = {};
 
