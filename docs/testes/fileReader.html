@@ -1,0 +1,132 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+    <script>
+    
+    function Ctrl($scope,$http) {
+
+        $scope.cadastrar = function(){
+            ufs.forEach(function(elem,i,a){
+                
+                $http.post('http://192.168.43.197:3000/rest/cadastra/documento/cidade',elem).then(
+                    function(success){
+                        // console.log(">>> Dados salvos com sucesso: ", elem.nome);
+                    },
+                    function(err){
+                        
+                        var municipios = elem.municipios;
+                        elem.municipios = [];
+
+                        // em caso de erro adiciona um municipio por vez
+                        $http.post('http://192.168.43.197:3000/rest/cadastra/documento/cidade',elem).then(
+                            function(item){
+                                municipios.forEach(function(municipio,i,a){
+                                    $http.post('http://192.168.43.197:3000/rest/adiciona/elemento/cidade/'+item.data._id+'/municipios',municipio).then(
+                                        function(successMunicipio){ document.getElementById("fim").innerHTML += "."; },
+                                        function(errorMunicipio){
+                                            console.log(">>> errorMunicipio: ",errorMunicipio);
+                                        }
+                                    );
+                                });
+                            },
+                            function(err2){
+                                console.log(">>> err2: ",err2);
+                            }
+                        );
+
+                    }
+                );
+            });        
+        }
+
+    };
+
+    </script>
+
+  </head>
+  <body>
+
+<div ng-controller="Ctrl">
+
+        <form>
+            
+            <input type="button" id="cadastrar" data-ng-click="cadastrar()" style="display:none" />
+            <input type="file" id="files" name="files[]" multiple /><br>
+            <output id="list"></output><br>
+            <span id="fim"></span>
+        </form>
+</div>
+
+        <script>
+
+        var ufs = [];
+        
+        function handleFileSelect(evt){
+
+            var file = this.files[0];
+
+            // Only process image files.
+            // if (!file.type.match('image.*')) {
+            //      continue;
+            // }
+
+            var reader = new FileReader();
+
+            // reader.onloadstart = function(e) {
+                // document.getElementById('progress_bar').className = 'loading';-->
+            // };
+
+            var resultado = ""; 
+            reader.onloadend = function(evt) {
+                if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+                    var display = document.getElementById("list");
+                    display.innerHTML = resultado;
+                    // document.getElementById('byte_content').textContent = evt.target.result;
+                    // document.getElementById('byte_range').textContent = ['Read bytes: ', start + 1, ' - ', stop + 1, ' of ', file.size, ' byte file'].join('');
+
+                }
+            };           
+
+            reader.onload = function(progressEvent){
+
+                var municipios = [];
+
+                // By lines
+                var lines = this.result.split('\n');
+
+                var fields = lines[0].split(",");
+
+                for (var line = 1; line < lines.length; line++){
+                    //resultado += lines[line]+"<br>";
+                    var dados = lines[line].split(",");
+                    var item  = {};
+                    for (var i=0; i < dados.length; i++){
+                        item[fields[i]] = dados[i];
+                    }
+                    
+                    municipios.push(item);
+                    
+                    if (ufs[dados[0]]){
+                        ufs[dados[0]]["municipios"].push(item);
+                    } else {
+                        ufs[dados[0]] = {codigo: dados[0], nome: dados[1],municipios:[]};
+                    }
+                }
+
+            };
+
+            reader.onloadend = function(evt) {
+                if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+                    document.getElementById('cadastrar').click();
+                }
+            };
+            
+            reader.readAsText(file);
+        };    
+
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);        
+
+        </script>        
+    </body>
+</html>
