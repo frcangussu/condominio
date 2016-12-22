@@ -24,8 +24,27 @@ router.get('/find/:collectionName',function(req,res){
 
 	var filter = [];
 	for (var key in req.query){
+		
+		// caso o objeto venha como string		
+		var toParse = req.query[key];
+		try {
+			req.query[key] = JSON.parse(toParse);
+		} catch (error) {
+			req.query[key] = toParse;
+		}
+
 		var item = {}
+		
 		item[key] = new RegExp(req.query[key],"i"); //new RegExp("a|b", "i");
+		
+		if (req.query[key].type && req.query[key].value) {
+
+			item[key] = new RegExp(req.query[key].value,"i");
+
+			if (req.query[key].type == "number")
+				item[key] = req.query[key].value;
+		}
+
 		filter.push(item);
 	}
 
@@ -61,7 +80,6 @@ router.get('/condominio/porEntidade/:entidade/:campo/:valor',function(req,res){
  * @returns: elemento
  */
 router.get('/entidade/:entidade/:campo/:valor',function(req,res){
-	console.log(req.params);
 	mainController.condominio.listarEntidade(req.params,function(response){
 		res.json(response);
 	});
@@ -184,9 +202,6 @@ router.post('/cadastra/:entidade',function(req,res){
  * @example: http://192.168.43.197/cadastra/documento/municipios
  */
 router.post('/cadastra/documento/:collectionName',function(req,res){
-
-	console.log('>>> req.body: ', req.body); 
-
 	mainController.save(req.params.collectionName, req.body, function(response){
 		res.json(response);
 	});

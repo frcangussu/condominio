@@ -17,32 +17,36 @@ exports.save = function(modelName,params,callback){
 	});
 };
 
-exports.update = function(modelName,id,params,callback){
+exports.update = function(modelName,documentId,params,callback){
 	
 	var model = require('../models/'+modelName);
 
-	console.log('>>> id: ', id); 
-	console.log('>>> params: ', params); 
-	console.log('>>> modelName: ', modelName); 
-	console.log('>>> model: ', model); 
-
-	if (!id){
+	if (!documentId){
 		callback({required:"ID não localizado"});
 		return;
 	}
 
-	model.findById(id,function(error, dados){
+	model.findById(documentId,function(error, documento){
+
 		if (error){
 			callback({error: 'Não foi possível alterar "'+modelName+'"'});
 		} else {
-			// console.log('>>> dados: ', dados); 
 
-			model.update({ _id: id }, params, function(error){
-
-				if(!error){
-					callback({resposta:modelName+" alterado com sucesso"});
+			model.update(
+				{_id: mongoose.Types.ObjectId(documentId) },
+				{$set:params},
+				function(error,sucesso){
+					if(!error){
+						if (sucesso.nModified)
+							callback({info:modelName+" alterado com sucesso"});
+						else
+							callback({warn:"Não foi possível alterar "+modelName});
+					} else {
+						callback({erro: "Erro ao tentar alterar "+modelName});
+					}
 				}
-			})
+			);
+
 		}
 	})
 
@@ -72,12 +76,7 @@ exports.delete = function(modelName,id,callback){
 
 exports.get = function(modelName,filter,callback){
 
-	console.log('>>> modelName: ', modelName);
-	 
 	var Model = require('../models/'+modelName);
-
-
-	console.log('>>> filter: ', filter); 
 
 	Model.find( {$and:filter} , function(error,response){
 		if (error){
