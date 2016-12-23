@@ -1,0 +1,7 @@
+<div class="list" style="margin: 0 5px 0 0;">
+    <button data-ng-repeat="item in lista" ng-click="selecionarItem(item)"   
+            class="item button button-full button-dark" 
+            style="margin: 0px;border-top: solid 1px silver; text-align:left;">
+        <span ng-click="selecionarItem(item)">{{obterValor(item)}}</span>
+    </button>
+</div>

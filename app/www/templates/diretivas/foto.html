@@ -1,0 +1,22 @@
+<div id="formFoto" class="list">
+    
+    <!-- inicio: Exibição da imagem -->
+    <div data-ng-if="!sucesso" class="imagemCamera" style="line-height:250px;"></div>
+    <div data-ng-show="sucesso" class="imagemCamera">
+        <img src="" id="imgCamera" style="vertical-align-middle;width:250px;height:250px;border-radius:130px;margin:5px 0;">
+    </div>
+    <button data-ng-click="foto()" style="border-radius:0px 0px 6px 6px;" class="button button-energized  button-block icon ion-android-camera margin-zero"></button>
+    <!-- fim: Exibição da imagem -->
+    
+</div>
+
+<style>
+.imagemCamera{
+    margin: 0px; 
+    background-color: #252525; 
+    text-align: center; 
+    border-radius: 6px 6px 0 0;
+    min-width: 340px !important;
+    min-height: 250px !important;
+}
+</style>
