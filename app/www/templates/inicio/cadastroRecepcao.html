@@ -1,25 +1,32 @@
-<ion-view title="Cadastro Recepção" hide-back-button="true" id="page4" style="background-color:#000000;">
+<ion-view title="Cadastrar Recepcionista" hide-back-button="true" id="page4" style="background-color:#000000;">
     <ion-content padding="true" class="has-header">
         <form id="cadastroRecepcao-form10" class="list">
-            <hr>
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Selecionar Condomínio">
-            </label>
-            <label class="item item-input clear" id="cadastroRecepcao-input8">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="Fulano de Tal">
-            </label>
-            <label class="item item-input clear" id="cadastroRecepcao-input9">
-                <span class="input-label">Senha</span>
-                <input type="text" placeholder="********">
-            </label>
-            <hr>
-            <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+
+            <div class="item item-input item-floating-label" id="cadastrarCondominio-input23" name="cep">
+                
+                <span class="input-label">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    Selecionar Condomínio
+                </span>
+                
+                <input type="text" typeahead placeholder="Selecionar Condomínio" proximo="id.nome" data-ng-model="vm.condominio.nome" collection="condominio", field="nome" on-select="vm.obterCondominio">
+
             </div>
-            <button id="cadastroRecepcao-button17" style="border-radius:0px 0px 0px 0px;" class="button button-energized  button-block icon ion-android-camera margin-zero"></button>
-            <hr>
+
+            <label class="item item-input item-floating-label" id="cadastroRecepcao-input8">
+                <span class="input-label">Nome do Recepcionista</span>
+                <input type="text" placeholder="Nome do Recepcionista" id="id.nome" proximo-campo="id.senha">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Senha</span>
+                <input type="text" placeholder="Senha" id="id.senha">
+            </label>
+
+            <br>
+
+            <foto data-ng-model="vm.foto"></foto>
+            
             <div id="cadastroRecepcao-button-bar2" class="button-bar">
                 <a ui-sref="selecioneOSeuPapel" id="cadastroRecepcao-button18" style="border-radius:2px 2px 2px 2px;" class="button button-calm button-large button-clear icon-left ion-arrow-left-c">Voltar</a>
                 <a ui-sref="cadastroEfetuadoComSucesso" id="cadastroRecepcao-button19" style="border-radius:2px 2px 2px 2px;" class="button button-assertive button-large button-clear icon-right ion-checkmark-round">Salvar</a>
@@ -27,3 +34,13 @@
         </form>
     </ion-content>
 </ion-view>
+<!--<style>
+.imagemCamera{
+    margin: 0px; 
+    background-color: #252525; 
+    text-align: center; 
+    border-radius: 6px 6px 0 0;
+    min-width: 340px !important;
+    min-height: 250px !important;
+}
+</style>-->

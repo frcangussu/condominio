@@ -4,22 +4,6 @@ angular.module('app.services', [])
 
 	}])
 
-	.service('message', ['$ionicLoading', function ($ionicLoading){
-		this.show = function(msg,duration){
-
-			var options = {};
-			options.template = '<div style="z-index: 1000;position:absolute;width: 100%;height: 100%;top:0px;left:0px;background-color:silver;color:black;">'+msg+'</div>'
-			if (duration)
-				options.duration = duration;
-
-			$ionicLoading.show(options);
-		}
-
-		this.hide = function(){
-			$ionicLoading.hide();
-		}
-	}])
-
 	.service('loading', ['$ionicLoading', function ($ionicLoading){
 		this.show = function(msg,duration){
 

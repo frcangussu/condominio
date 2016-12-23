@@ -1,5 +1,137 @@
 angular.module('app.directives', [])
 
+    .directive("foto",['Camera',function(Camera){
+        return{
+            restrict: "E",
+            scope: {},
+            require: "?ngModel",
+            templateUrl: "templates/diretivas/foto.html",
+            link: function($scope,elem,attr,ngModel){
+
+                $scope.sucesso = false;
+                $scope.image = document.getElementById('imgCamera');
+
+                /** Abre a câmera exibe a imagem  */
+                $scope.foto = function(){
+                    
+                    Camera.abrir().then(
+                        
+                        function (imageData) {
+                            console.log($scope.image);
+                            $scope.image.src = "data:image/jpeg;base64," + imageData;
+
+                            ngModel.$setViewValue($scope.image.src);
+                            ngModel.$render();
+
+                            $scope.sucesso = true;
+                        }, 
+                        
+                        function (err) {
+                            alert('Erro ao abrir a camera');
+                            console.log(err);
+                        }
+                        
+                    );
+
+                }
+
+            }
+        }
+    }])
+
+    .directive("typeahead",['$http','CONST','$compile','$templateRequest',function($http,CONST,$compile,$templateRequest){
+        return{
+            restrict: 'A',
+            scope: {collection:'@', field:'@', onSelect:"=", proximo:"@"},
+            require: '?ngModel',
+            link: function($scope,elem,attr,ngModel){
+                
+                // faz um append do template no parent
+                $templateRequest('templates/diretivas/typeahead.html').then(function(html){
+                    
+                    // Convert the html to an actual DOM node
+                    var template = angular.element(html);
+                    
+                    // Append it to the directive element
+                    elem.parent().append(template);
+                    
+                    // And let Angular $compile it
+                    $compile(template)($scope);
+
+                });
+
+                // pula o campo
+                elem.bind('keydown', function (e) {
+                    var code = e.keyCode || e.which;
+                    if (code === 13 && $scope.proximo) {
+                        e.preventDefault();
+                        document.getElementById($scope.proximo).focus();
+                    }
+                    return;
+                });
+
+                elem.bind("keyup",function(e){
+
+                    var code = e.keyCode || e.which;
+                    
+                    if (code === 27){
+                        
+                        ngModel.$setViewValue("");
+                        ngModel.$render();
+                        
+                        $scope.lista = [];
+                    } else if (ngModel.$viewValue) {
+                        
+                        var config = {"params":{}};
+                        config.params[$scope.field] = ngModel.$viewValue;
+
+                        $http.get(CONST.REST.IP+'/find/'+$scope.collection,config).then(
+                            function(response){
+                                $scope.lista = response.data;
+                                $scope.selected = undefined;
+                            },
+                            function(error){}
+                        );
+
+                    }
+
+                });
+
+                elem.bind("blur",function(){
+                    
+                    $scope.lista = [];
+                    $scope.$parent.$apply();
+                    
+                    if (!$scope.selected){
+                        ngModel.$setViewValue("");
+                        ngModel.$render();
+                    }
+                        
+                });
+
+                $scope.selecionarItem = function(item){
+                    ngModel.$setViewValue(item[$scope.field]);
+                    ngModel.$render();
+
+                    if ($scope.onSelect)
+                        $scope.onSelect(item); // callback
+
+                    $scope.selected = item;
+
+                    $scope.lista = [];
+                };                
+
+                $scope.exibirLista = function(){
+                    return $scope.lista && $scope.lista.length && ngModel.$modelValue.length > 4;
+                };
+
+                $scope.obterValor = function(item){
+                    return item[$scope.field];
+                };
+
+            }
+        }
+    }])
 
     .directive("localizacao",['$cordovaGeolocation','$timeout','loading','$http','CONST',function($cordovaGeolocation,$timeout,loading,$http,CONST){
 
@@ -14,7 +146,7 @@ angular.module('app.directives', [])
 
                 var vm = {};
                 
-                vm.deviceLocation = true;
+                $scope.deviceLocation = true;
 
                 var googleCoord = new google.maps.LatLng(CONST.COORDENADAS.LATITUDE, CONST.COORDENADAS.LONGITUDE);
                 var googleMapOptions = {
@@ -30,19 +162,19 @@ angular.module('app.directives', [])
                 $cordovaGeolocation.getCurrentPosition(posOptions).then(
                     function (position) {
                         
-                        vm.la = position.coords.latitude
-                        vm.lo = position.coords.longitude
+                        $scope.la = position.coords.latitude
+                        $scope.lo = position.coords.longitude
 
                         // redefine a localização
-                        googleMapOptions.center = new google.maps.LatLng(vm.la,vm.lo);
+                        googleMapOptions.center = new google.maps.LatLng($scope.la,$scope.lo);
                         
-                        ngModel.$setViewValue(vm.la+", "+vm.lo);
-                        // $scope.definirLocalizacao(vm.la,vm.lo);
+                        ngModel.$setViewValue($scope.la+", "+$scope.lo);
+                        // $scope.definirLocalizacao($scope.la,$scope.lo);
 
                         loading.hide();
 
                     }, function(err) {
-                        vm.deviceLocation = false;
+                        $scope.deviceLocation = false;
                         loading.hide(); 
                     }
                 );
@@ -57,7 +189,7 @@ angular.module('app.directives', [])
 
                     loading.show("Aguarde, abrindo Mapa");
 
-                    if (vm.map){
+                    if ($scope.map){
 
                         $timeout(function() {
                             document.getElementById("map").style.display = "inline";
@@ -70,7 +202,7 @@ angular.module('app.directives', [])
 
                         // centraliza o mapa na localização da cidade informada
                         // somente se não encontrou a localização do dispositivo                        
-                        if (!vm.deviceLocation){
+                        if (!$scope.deviceLocation){
 
                             // filtro por: código do município
                             var config = {"params":{
@@ -91,8 +223,8 @@ angular.module('app.directives', [])
 
                         }
 
-                        vm.map = new google.maps.Map(document.getElementById("map"), googleMapOptions);
-                        vm.map.addListener('click', function(e) {
+                        $scope.map = new google.maps.Map(document.getElementById("map"), googleMapOptions);
+                        $scope.map.addListener('click', function(e) {
                             try {
                                 
                                 document.getElementById("map").style.display = "none";
@@ -121,10 +253,10 @@ angular.module('app.directives', [])
                 $scope.definirLocalizacao = function(latitude,longitude)
                 {
                     try {
-                        // $scope.$parent.$parent.vm.localizacao = $scope.$parent.$parent.vm.dados.localizacao = latitude + ", " + longitude;
+                        // $scope.$parent.$parent.$scope.localizacao = $scope.$parent.$parent.$scope.dados.localizacao = latitude + ", " + longitude;
                         $scope.$parent.$parent.$apply();
                     } catch (error) {
-                        // $scope.$parent.vm.localizacao = $scope.$parent.vm.dados.localizacao = latitude + ", " + longitude;
+                        // $scope.$parent.$scope.localizacao = $scope.$parent.$scope.dados.localizacao = latitude + ", " + longitude;
                         $scope.$parent.$apply(); 
                     } 
                    

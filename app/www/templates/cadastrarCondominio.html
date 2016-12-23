@@ -1,6 +1,6 @@
 <ion-view title="Cadastrar Condominio" hide-back-button="true" id="page22" style="background-color:#000000;">
     <ion-content padding="true" class="has-header">
-        <form id="cadastrarCondominio-form17" class="xlist">
+        <form id="cadastrarCondominio-form17" class="list">
             <div id="cadastrarCondominio-markdown8" style="color:#7CBB36;font-size:18px;" class="button button-dark button-block margin-zero">
                 <p>Síndico:
                     <strong>{{vm.sindico.nome}}</strong>
@@ -22,14 +22,25 @@
             
             <label class="item item-input item-floating-label" id="id.municipio" name="cidade">
                 <span class="input-label">Cidade</span>
-                <input type="text" id="id.municipio" placeholder="Município" data-ng-model="vm.condominio.municipio" data-ng-keydown="vm.buscaMunicipio()" proximo-campo="id.endereco">
+                <input type="text" id="id.municipio" placeholder="Município" data-ng-model="vm.condominio.municipio" data-ng-keyup="vm.buscaMunicipio()" proximo-campo="id.endereco">
             </label>
-            <ul class="list" data-ng-show="vm.municipios.length" style="width:98%; padding:0px 0px 10px 7px;" data-ng-show="vm.condominio.municipio.length > 4">
+            <div class="list" data-ng-show="vm.municipios.length && vm.condominio.municipio.length > 4" style="margin: 0 5px 0 0;">
+                <button data-ng-repeat="municipio in vm.municipios" 
+                        data-ng-click="vm.selecionarMunicipio(municipio)" 
+                        class="item button button-full button-dark" 
+                        style="margin: 0px;border-top: solid 1px silver; text-align:left;">
+                    <span data-ng-if="!municipio.naoSelecionar">{{municipio.UF}} - {{municipio.nomeMunicipio}}</span>
+                    <span data-ng-if="municipio.naoSelecionar" >{{municipio.nomeMunicipio}}</span>
+                </button>
+                <!--<button class="item button button-full button-positive" style="margin: 0px;border-top: solid 1px silver; text-align:left;">button-positive' </button>-->
+            </div>
+
+            <!--<ul class="list" data-ng-show="vm.municipios.length" style="width:98%; padding:0px 0px 10px 7px;" data-ng-show="vm.condominio.municipio.length > 4">
                 <li class="item" data-ng-repeat="municipio in vm.municipios" data-ng-click="vm.selecionarMunicipio(municipio)">
                     <span data-ng-if="!municipio.naoSelecionar">{{municipio.UF}} - {{municipio.nomeMunicipio}}</span>
                     <span data-ng-if="municipio.naoSelecionar" >{{municipio.nomeMunicipio}}</span>
                 </li>
-            </ul> 
+            </ul> -->
             
             <label class="item item-input item-floating-label" id="cadastrarCondominio-textarea1" name="endereco">
                 <span class="input-label">Endereço</span>

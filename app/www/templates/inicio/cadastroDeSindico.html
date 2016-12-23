@@ -18,7 +18,9 @@
         <form id="formFotos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
             
             <!-- inicio: Exibição da imagem -->
-            <div data-ng-if="!vm.sucesso" class="imagemCamera" style="line-height:250px;">
+            <foto data-ng-model="vm.sindico.foto"></foto>
+
+            <!--<div data-ng-if="!vm.sucesso" class="imagemCamera" style="line-height:250px;">
                 <i data-ng-if="false" class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
             </div>
             <div data-ng-show="vm.sucesso" class="imagemCamera">
@@ -26,7 +28,7 @@
                      style="vertical-align-middle;width:250px;height:250px;border-radius:130px;margin:5px 0;">
             </div>
             <button id="cadastroDeSindico-button16" style="border-radius:0px 0px 6px 6px;" class="button button-energized  button-block icon ion-android-camera margin-zero" 
-                        data-ng-click="vm.foto()"></button>
+                        data-ng-click="vm.foto()"></button>-->
             <!-- fim: Exibição da imagem -->
             
 
