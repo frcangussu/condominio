@@ -1,30 +1,5 @@
 angular.module('app.directives', [])
-    
-    .directive('pattern', function () {
-        return {
-            require: 'ngModel',
-            link: function (scope, element, attr, ngModelCtrl) {
-                
-                function fromUser(text) {
-                    if (text) {
 
-                        var pattern = new RegExp(attr.pattern.replace("[","[^"));
-                        
-                        var transformedInput = text.replace(pattern, '');
-
-                        if (transformedInput !== text) {
-                            ngModelCtrl.$setViewValue(transformedInput);
-                            ngModelCtrl.$render();
-                        }
-                        return transformedInput;
-                    }
-                    return undefined;
-                }
-
-                ngModelCtrl.$parsers.push(fromUser);
-            }
-        };
-    })
 
     .directive("localizacao",['$cordovaGeolocation','$timeout','loading','$http','CONST',function($cordovaGeolocation,$timeout,loading,$http,CONST){
 

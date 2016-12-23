@@ -1,8 +1,21 @@
+/** Placeholder **/
+
+input::-webkit-input-placeholder {color: #484848; font-size:16px;} /* Chrome/Opera/Safari */
+input::-moz-placeholder 		 {color: #484848; font-size:16px;} /* Firefox 19+ */
+input:-ms-input-placeholder 	 {color: #484848; font-size:16px;} /* IE 10+ */
+input:-moz-placeholder 			 {color: #484848; font-size:16px;} /* Firefox 18- */
+
+/** PLaceholder item-floating-label **/
+label.item-floating-label input::-webkit-input-placeholder {color: #A7A7A7; font-size:18px;} /* Chrome/Opera/Safari */
+label.item-floating-label input::-moz-placeholder 		   {color: #A7A7A7; font-size:18px;} /* Firefox 19+ */
+label.item-floating-label input:-ms-input-placeholder 	   {color: #A7A7A7; font-size:18px;} /* IE 10+ */
+label.item-floating-label input:-moz-placeholder 		   {color: #A7A7A7; font-size:18px;} /* Firefox 18- */
+
 body { color: #FFA500; }
 input {color: white;}
 hr{border:solid 1px #0C4854;border-top:none;}
-input[type="text"] {color:#10D4F4 !important;}
-input[type="password"] {color:#10D4F4 !important;}
+input[type="text"] {color:#10D4F4 !important;font-size: 20px;}
+input[type="password"] {color:#10D4F4 !important;font-size: 20px;}
 textarea{color:#10D4F4 !important;}
 .input-label{color:#a7a7a7 !important;}
 label{border:solid 1px #383838 !important;border-radius:6px !important;}

@@ -17,11 +17,11 @@
             
             <label class="item item-input" id="id.uf" name="cidade" style="background:none">
                 <span class="input-label">UF</span>
-                <input type="text" id="id.uf" placeholder="[ informe a UF ]" data-ng-model="vm.condominio.uf" pattern="[a-zA-Z]" style="text-transform:uppercase;" maxlength="2" proximo-campo="id.municipio">
+                <input type="text" id="id.uf" placeholder="[ informe a UF ]" data-ng-model="vm.condominio.uf" style="text-transform:uppercase;" maxlength="2" proximo-campo="id.municipio">
             </label>
             
             <label class="item item-input item-floating-label" id="id.municipio" name="cidade">
-                <span class="input-label">Municipio</span>
+                <span class="input-label">Cidade</span>
                 <input type="text" id="id.municipio" placeholder="Município" data-ng-model="vm.condominio.municipio" data-ng-keydown="vm.buscaMunicipio()" proximo-campo="id.endereco">
             </label>
             <ul class="list" data-ng-show="vm.municipios.length" style="width:98%; padding:0px 0px 10px 7px;" data-ng-show="vm.condominio.municipio.length > 4">
