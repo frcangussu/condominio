@@ -142,7 +142,8 @@ router.post('/sindico/cadastra',function(req,res){
 	var params = {sindicos:[{
 		nome: req.body.nome,
 		senha: req.body.senha,
-		foto: req.body.foto
+		foto: req.body.foto,
+		inicio: new Date()
 	}]};
 
 	mainController.save("condominio",params,function(response){

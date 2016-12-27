@@ -1,5 +1,21 @@
 angular.module('app.directives', [])
 
+    .directive("ngOnEnter",[function(){
+        return{
+            restrict: "A",
+            scope: {ngOnEnter:"="},
+            link: function($scope,elem,attr){
+
+                elem.bind("keyup",function(e){
+                    var code = e.keyCode || e.which;
+                    if (code === 13) {
+                        e.preventDefault();
+                        $scope.ngOnEnter();
+                    }
+                });
+            }
+        }
+    }])
     .directive("foto",['Camera',function(Camera){
         return{
             restrict: "E",

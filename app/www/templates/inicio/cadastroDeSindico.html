@@ -2,38 +2,27 @@
     <ion-content padding="true" class="has-header">
         
         <form id="formCampos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
-            <label class="item item-input item-floating-label" id="cadastroDeSindico-input6">
+            <label class="item item-input item-stacked-label" for="id.nome">
                 <span class="input-label" aria-label="Nome" id="labelNome">Nome</span>
-                <input type="text" id="txtNome" placeholder="Nome" data-ng-model="vm.sindico.nome">
+                <input type="text" id="id.nome" placeholder="Nome" data-ng-model="vm.sindico.nome" proximo-campo="id.cpf">
             </label>
-            <br>
-            <label class="item item-input item-floating-label" id="cadastroDeSindico-input7">
+            <label class="item item-input item-stacked-label" for="id.cpf">
+                <span class="input-label" aria-label="CPF" id="id.cpf.label">CPF</span>
+                <input type="text" id="id.cpf" placeholder="___.___.___-__" data-ng-model="vm.sindico.cpf" mask="999.999.999-99" proximo-campo="id.senha">
+            </label>
+            <label class="item item-input item-stacked-label" for="id.senha">
                 <span class="input-label">Senha</span>
-                <input type="password" id="txtSenha" placeholder="Senha" data-ng-model="vm.sindico.senha">
+                <input type="password" id="id.senha" placeholder="Senha" data-ng-model="vm.sindico.senha" proximo-campo="id.salvar">
             </label>
         </form>
 
-        <br>
-
-        <form id="formFotos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
+        <form id="formFoto" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
             
-            <!-- inicio: Exibição da imagem -->
+            <!-- inicio: Captura/Exibição da imagem -->
             <foto data-ng-model="vm.sindico.foto"></foto>
-
-            <!--<div data-ng-if="!vm.sucesso" class="imagemCamera" style="line-height:250px;">
-                <i data-ng-if="false" class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-            </div>
-            <div data-ng-show="vm.sucesso" class="imagemCamera">
-                <img src="" id="imgCamera" 
-                     style="vertical-align-middle;width:250px;height:250px;border-radius:130px;margin:5px 0;">
-            </div>
-            <button id="cadastroDeSindico-button16" style="border-radius:0px 0px 6px 6px;" class="button button-energized  button-block icon ion-android-camera margin-zero" 
-                        data-ng-click="vm.foto()"></button>-->
-            <!-- fim: Exibição da imagem -->
             
-
             <!-- botão SALVAR -->
-            <button id="cadastroDeSNdico-button9" 
+            <button id="id.salvar" 
                     data-ng-click="vm.salvaDados()"
                     class="button button-positive button-large button-block button-outline ic-selected"
                     data-componentid="btnSalvar" 
@@ -42,18 +31,18 @@
         </form>
 
         <!-- inicio: Confirmação da senha -->
-        <form id="cadastroDeSindico-form9" class="list" data-ng-show="vm.exibirConfirmacaoSenha">
+        <!--<form id="id.confirmacao.form" class="list" data-ng-show="vm.exibirConfirmacaoSenha">
             <br>
-            <label class="item item-input item-floating-label" id="cadastroDeSindico-input8">
+            <label class="item item-input item-stacked-label">
                 <span class="input-label">Senha</span>
-                <input type="password" id="txtConfirmaSenha" placeholder="Informe novamente a senha" data-ng-model="vm.sindico.confirmaSenha">
+                <input type="password" id="id.confirmacao.senha" placeholder="Informe novamente a senha" data-ng-model="vm.sindico.confirmaSenha">
             </label>
-            <button id="cadastroDeSNdico-button9" 
+            <button id="id.confirmacao.salvar" 
                     data-ng-click="vm.salvaDados()"
                     class="button button-positive button-large button-block button-outline ic-selected"
                     data-componentid="btnConfirma" 
                     data-tap-disabled="true">Ok</button>
-        </form>
+        </form>-->
         <!-- fim: Confirmação da senha -->
 
     </ion-content>
