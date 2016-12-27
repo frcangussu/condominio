@@ -208,6 +208,9 @@ exports.condominio.alterarEntidade = function(params,body,callback){
 
 	filtro[params.entidade] = {$elemMatch : body.filtro};
 
+	console.log('>>> filtro: ', filtro); 
+	console.log('>>> dados: ', dados); 
+
 	condominio.update(
 		{ "_id" : mongoose.Types.ObjectId(params.condominio),
 		  filtro // "titulares": { $elemMatch: { telefone: "61991330123" } }
