@@ -1,9 +1,9 @@
 angular.module('app.cadastrarCondominioCtrl', [])
 
-.controller('cadastrarCondominioCtrl', ['$scope', '$stateParams', '$http', 'CONST', 'Lista', '$window', '$cordovaGeolocation', '$cordovaSocialSharing', '$timeout', 'loading',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('cadastrarCondominioCtrl', ['$scope', '$state', '$http', 'CONST', 'Lista', '$window', '$cordovaGeolocation', '$cordovaSocialSharing', '$timeout', 'loading', '$ionicPopup',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http, CONST, Lista, $window, $cordovaGeolocation, $cordovaSocialSharing, $timeout, loading) {
+// TIP: Access Route Parameters for your page via $state.parameterName
+function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $cordovaSocialSharing, $timeout, loading, $ionicPopup) {
 
     // db.municipios.find({nomeMunicipio: /Monte carmelo/i})
     // db.municipios.find( { $and: [ { UF: /mg/i }, { nomeMunicipio: /Monte/i } ] } )
@@ -16,6 +16,7 @@ function ($scope, $stateParams, $http, CONST, Lista, $window, $cordovaGeolocatio
 
     vm.condominio = {};
 
+    // busca dados iniciais
     if (vm.uid){
         // http://192.168.1.7:3000/rest/condominio/uid/samsung.a899ee4c.e48b6cf7ff12de19
         $http.get(CONST.REST.IP+'/condominio/uid/'+vm.uid).then(
@@ -29,6 +30,36 @@ function ($scope, $stateParams, $http, CONST, Lista, $window, $cordovaGeolocatio
             function(err){}
         );
     }
+
+    vm.alert = function(msg, title, foco, callback){
+        var alerta = $ionicPopup.alert({
+            title: title || "Alerta",
+            template: msg,
+            okText: "OK"
+        });
+
+        alerta.then(function(){
+            
+            if(foco || vm.focoId)
+                vm.foco(foco || vm.focoId,100);
+            
+            if(callback)
+                callback();
+        });
+    };
+
+    vm.foco = function(id,time){
+        vm.focoId = id;
+        $timeout(function(){
+            try {
+                var campo = document.getElementById(id);
+                campo.focus();
+            } catch (error) {
+                console.log("Erro ao definir o foco do campo '"+id+"'.");
+            }
+        },time || 1 );
+    };
+    
 
     vm.buscaCEP = function(){
 
@@ -75,24 +106,66 @@ function ($scope, $stateParams, $http, CONST, Lista, $window, $cordovaGeolocatio
 
             );
         } else if(vm.condominio.cep && vm.condominio.cep.length){
-            alert("CEP incorreto!");
+            vm.alert("CEP incorreto!","CEP","id.cep");
         }
     }
 
+
+    vm.validaDados = function(){
+        
+        if(!vm.condominio.nome){
+            vm.alert("Favor informar o nome","Nome obrigatório","id.nome");
+            return;
+        }
+        
+        if(!vm.condominio.cep){
+            vm.alert("Favor informar o CEP","CEP obrigatório","id.cep");
+            return;
+        }
+
+        if(!vm.condominio.uf){
+            vm.alert("Favor informar a UF","UF obrigatória","id.uf");
+            return;
+        }
+
+        if(!vm.condominio.municipio){
+            vm.alert("Favor informar o Município","Município obrigatório","id.municipio");
+            return;
+        }
+
+        if(!vm.condominio.endereco){
+            vm.alert("Favor informar o Endereço","Endereço obrigatório","id.endereco");
+            return;
+        }
+
+        if(!vm.condominio.localizacao){
+            vm.alert("Favor informar a Localização","Localização obrigatória",'id.confirma');
+            return;
+        }            
+
+        return true;
+    };
+
     vm.salvar = function(){
         
-        loading.show('Salvando os Dados');
-        $http.put(CONST.REST.IP+'/altera/condominio/'+vm.condominio._id,vm.condominio).then(
-            
-            function(success){
-               loading.show('Dados salvos com sucesso',2000);
-            },
+        if (vm.validaDados()){
+            loading.show('Salvando os Dados');
+            $http.put(CONST.REST.IP+'/altera/condominio/'+vm.condominio._id,vm.condominio).then(
+                
+                function(success){
+                    loading.hide();
+                    vm.alert("Dados salvos com sucesso", "Condomínio", null, function(){
+                        $state.go("tabsController.registrarVisita");
+                    })
+                    // loading.show('Dados salvos com sucesso',2000);
+                },
 
-            function(err){
-                console.log('>>> err: ', err); 
-            }
+                function(err){
+                    console.log('>>> err: ', err); 
+                }
 
-        );
+            );
+        }
     };
 
     vm.selecionarMunicipio = function(municipio){

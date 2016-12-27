@@ -121,7 +121,7 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
 
         alerta.then(function(){
             
-            if(foco || vm.focoId,100)
+            if(foco || vm.focoId)
                 vm.foco(foco || vm.focoId,100);
             
             if(callback)

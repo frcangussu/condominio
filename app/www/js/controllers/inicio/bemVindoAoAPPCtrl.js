@@ -8,8 +8,8 @@
 
         // mock
         // vm.destino = "cadastrarCondominio";
-        vm.destino = "cadastroDeSindico";
-        // vm.destino = "cadastroRecepcao";
+        // vm.destino = "cadastroDeSindico";
+        vm.destino = "cadastroRecepcao";
 
         console.log(vm.destino);
 
