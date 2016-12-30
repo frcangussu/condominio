@@ -133,18 +133,24 @@ router.put('/altera/condominio/:condominio',function(req,res){
 /**
  * @type: POST
  * @description: insere um documento na collection de condominios já com o seu síndico 
- * @param: nome  - nome do sindico
+ * @param: nome  - nome do 'sindico'
  * @param: senha - senha do sindico
  * @param: foto  - foto do sindico em base64
  * @example: http://192.168.1.7:3000/rest/sindico/cadastra
  */
 router.post('/sindico/cadastra',function(req,res){
 	var params = {sindicos:[{
-		nome: req.body.nome,
-		senha: req.body.senha,
-		foto: req.body.foto,
-		inicio: new Date()
+		nome: 	  req.body.nome,
+		senha: 	  req.body.senha,
+		foto: 	  req.body.foto,
+		uid: 	  req.body.uid,
+		telefone: req.body.telefone,
+		ativo:    req.body.ativo,
+		inicio:   new Date()
 	}]};
+
+	console.log('>>> params.uid: ', params.uid); 
+	console.log('>>> params.telefone: ', params.telefone); 
 
 	mainController.save("condominio",params,function(response){
 		res.json(response);
@@ -160,10 +166,7 @@ router.post('/sindico/cadastra',function(req,res){
  */
 router.post('/usuario/cadastra',function(req,res){
 	
-	var params = {
-		uid: req.body.uid,
-		telefone: req.body.telefone 
-	};
+	var params = req.body;
 
 	var filter = [
 		{uid: req.body.uid},
@@ -189,9 +192,12 @@ router.post('/usuario/cadastra',function(req,res){
  */
 router.post('/cadastra/:entidade',function(req,res){
 	var entidade   = req.params.entidade;
-	mainController.condominio.cadastraEntidade(entidade, req.body, function(response){
-		res.json(response);
-	});
+	mainController.condominio.cadastraEntidade(entidade, req.body, 
+		function(response){
+			res.json(response);
+		},function(error){
+			throw new Error(error.msg);
+		});
 });
 
 

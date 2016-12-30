@@ -1,66 +1,112 @@
 angular.module('app.cadastroRecepcaoCtrl', [])
 
-.controller('cadastroRecepcaoCtrl', ['$scope', '$stateParams', 'Camera', '$ionicPopup', 
-function ($scope, $stateParams, Camera, $ionicPopup) {
+.controller('cadastroRecepcaoCtrl', ['$scope', '$state', 'Camera', '$ionicPopup','$timeout','$cordovaDevice', 'CONST', '$http','uid', 'message',
+function ($scope, $state, Camera, $ionicPopup, $timeout, $cordovaDevice, CONST, $http, uid, message) {
 
     var vm = this;
 
     vm.dados = {};
+    vm.condominio = {};
     
     vm.obterCondominio = function(condominio){
-        // vm.condominio.selecionado = $scope.onSelect;
-        console.log('>>> condominio: ', condominio);  
-        vm.dados.condominio = condominio; 
+        debugger;
+        vm.condominio = condominio; 
+        vm.dados.condominio = condominio._id;
+        vm.foco("id.nome");
     }
 
     vm.alert = function(msg, title, foco, callback){
         
-        var alerta = $ionicPopup.alert({
-            title: title || "Alerta",
-            template: msg,
-            okText: "OK"
-        });
-
-        alerta.then(function(){
-            
+        message.alert.show(title,msg,function(){
             if(foco || vm.focoId)
                 vm.foco(foco || vm.focoId,100);
             
             if(callback)
                 callback();
-        });
+        })
+
+        // var alerta = $ionicPopup.alert({
+        //     title: title || "Alerta",
+        //     template: msg,
+        //     okText: "OK"
+        // });
+
+        // alerta.then(function(){
+            
+        //     if(foco || vm.focoId)
+        //         vm.foco(foco || vm.focoId,100);
+            
+        //     if(callback)
+        //         callback();
+        // });
     };
 
     vm.salvaDados = function()
     {
         if (vm.validaDados()){
-            // http://192.168.1.7:3000/rest/sindico/cadastra
-            // $http.post(CONST.REST.IP+'/sindico/cadastra',vm.sindico).then(
 
-                    try {
-                        // salva o uid
-                        var device = $cordovaDevice.getDevice();
-                        vm.dados.uid = device.manufacturer+"."+device.serial+"."+device.uuid;
-                        localStorage.setItem("uid",vm.dados.uid);
+            uid.obter(function(res){
+                vm.dados.uid      = res.uid;
+                vm.dados.telefone = res.telefone;
+            });
 
-                        $http.put(CONST.REST.IP+'/condominio/'+vm.condominio+'/altera/recepcionistas',vm.dados).then(
+            $http.get(CONST.REST.IP+'/condominio/porEntidade/recepcionistas/cpf/'+vm.dados.cpf).then(
+                function(success){
+
+                    // Verifica se o cpf já está cadastrado                    
+                    var cadastrado = false;
+                    success.data.forEach(function(e,i,a){
+                        if (e._id === vm.condominio._id){
+                            cadastrado = true;
+                            vm.alert("Você já está cadastrado no condomínio "+vm.condominio.nome);
+                            $state.go("tabsController.registrarVisita");
+                            return;
+                        }
+                    });
+
+                    vm.dadosUsuario = Object.assign({}, vm.dados); // duplica o objeto sem manter a referência
+                    delete vm.dadosUsuario["condominio"];
+
+                    // se não está cadastrado, então realiza o cadastro
+                    if (!cadastrado)
+                    {
+                        $http.post(CONST.REST.IP+'/usuario/cadastra',vm.dadosUsuario).then(
                             
                             function(success){
-                                vm.alert("Os dados foram salvos com sucesso, solicite ao síndico a validação do seu cadastro.","Sucesso",null,function(){
-                                    $state.go("bemVindoAoAPP");
-                                });
+                                vm.dados.inicio = "";
+                                debugger;
+                                $http.post(CONST.REST.IP+'/cadastra/recepcionistas',vm.dados).then(
+                                    function(success){
+                                        vm.alert("Os dados foram salvos com sucesso, solicite ao síndico a validação do seu cadastro.","Sucesso",null,function(){
+                                            // $state.go("bemVindoAoAPP");
+                                            $state.go("tabsController.registrarVisita");
+                                        });
 
-                                // $state.go("tabsController.registrarVisita");
+                                    },
+
+                                    function(error){
+                                        vm.alert("Não foi possível salvar os dados, tente novamente mais tarde.", "Erro");
+                                    }
+                                );
                             },
 
                             function(error){
-                                vm.alert("Não foi possível salvar os dados, tente novamente mais tarde.", "Erro");
+                                console.log("Erro ao cadastrar o documento usuário: ",error);
                             }
-                        );
+                        );            
 
-                    } catch (error) {
-                        console.log("Dispositivo não está conectado");
+
+
                     }
+
+                },
+                
+                function(error){
+                    vm.alert("Não foi possível salvar os dados, tente novamente mais tarde;","Erro");
+                    return;
+                }
+            );
+
 
 
         };
@@ -68,7 +114,7 @@ function ($scope, $stateParams, Camera, $ionicPopup) {
 
     vm.validaDados = function(){
         
-        if (!vm.dados.condominio){
+        if (!vm.condominio.nome){
             vm.alert("Favor informar o condomínio","Condomínio obrigatório","id.condominio");
             return;
         }
@@ -78,17 +124,30 @@ function ($scope, $stateParams, Camera, $ionicPopup) {
             return;
         }
 
+        if (!vm.dados.cpf){
+            vm.alert("Favor informar o CPF","CPF obrigatório","id.cpf");
+            return;
+        }
+
         if (!vm.dados.senha) {
             vm.alert("Favor informar a senha","Senha obrigatória","id.senha");
             return;
         }
 
         // exibe a confirmacao da senha
-        if (!vm.dados.confirmaSenha){
+        if (!vm.confirmaSenha){
 
             vm.exibeConfirmacaoSenha();
             // vm.exibirConfirmacaoSenha = true;
             vm.foco('id.confirmacao.senha',1000);
+            return;
+        }
+
+        if (vm.confirmaSenha != vm.dados.senha) {
+            vm.alert("A senha não confere, favor informar novamente","Alerta");
+            vm.dados.senha = "";
+            vm.confirmaSenha = "";
+            vm.foco('id.senha',500);
             return;
         }
 
@@ -98,21 +157,28 @@ function ($scope, $stateParams, Camera, $ionicPopup) {
     vm.exibeConfirmacaoSenha = function(){
         
         var myPopup = $ionicPopup.show({
-            template: '<input type="password" id="id.confirmacao.senha" ng-model="vm.dados.confirmaSenha" ng-on-enter="vm.salvaDados">',
+            template: '<input type="password" id="id.confirmacao.senha" ng-model="vm.confirmaSenha" ng-on-enter="vm.salvaDados">',
             title: 'Confirme a sua senha',
             subTitle: '( esta senha será utilizada para acesso do APP na internet )',
             scope: $scope,
             buttons: [
-                { text: 'Cancel' },
+                {
+                    text: 'Cancelar',
+                    onTap: function(e){
+                        vm.confirmaSenha =
+                        vm.dados.senha = null;
+                        vm.foco("id.senha");
+                    } 
+                },
                 {
                     text: '<b>Confirmar</b>',
                     id:   'id.alert.ok',
                     type: 'button-positive',
                     onTap: function (e) {
-                        if (!vm.dados.confirmaSenha) {
+                        if (!vm.confirmaSenha) {
                             e.preventDefault();
                         } else {
-                            return vm.dados.confirmaSenha;
+                            return vm.confirmaSenha;
                         }
                     }
                 }
@@ -120,9 +186,22 @@ function ($scope, $stateParams, Camera, $ionicPopup) {
         });
         
         myPopup.then(function(senha){
-            vm.salvaDados();
+            if (senha) 
+                vm.salvaDados();
         });  
     };    
+
+    vm.foco = function(id,time){
+        vm.focoId = id;
+        $timeout(function(){
+            try {
+                var campo = document.getElementById(id);
+                campo.focus();
+            } catch (error) {
+                console.log("Erro ao definir o foco do campo '"+id+"'.");
+            }
+        },time || 1 );
+    };
 
     // /** Câmera */
     // vm.sucesso = false;

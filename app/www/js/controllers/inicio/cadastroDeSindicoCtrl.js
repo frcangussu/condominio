@@ -1,7 +1,7 @@
 angular.module('app.cadastroDeSindicoCtrl', [])
 
-.controller('cadastroDeSindicoCtrl', ['$scope', '$stateParams','Camera', '$timeout', '$http', 'CONST', '$cordovaDevice','$ionicPopup', '$state',
-function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, $ionicPopup, $state) {
+.controller('cadastroDeSindicoCtrl', ['$scope', '$stateParams','Camera', '$timeout', '$http', 'CONST', '$cordovaDevice','$ionicPopup', '$state', 'uid', 'message',
+function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, $ionicPopup, $state, uid, message) {
     var vm = this;
 
     vm.sindico = {};
@@ -10,37 +10,44 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
     vm.salvaDados = function(){
 
         if (vm.validaDados()){
-            // http://192.168.1.7:3000/rest/sindico/cadastra
-            $http.post(CONST.REST.IP+'/sindico/cadastra',vm.sindico).then(
+
+            uid.obter(function(res){
                 
-                function(success){
-                
-                    // salva o uid
-                    try {
-                        var device = $cordovaDevice.getDevice();
-                        vm.uid = device.manufacturer+"."+device.serial+"."+device.uuid;
-                        localStorage.setItem("uid",vm.uid);
-                    } catch (error) {
-                        console.log("Dispositivo não está conectado");
+                vm.sindico.uid      = res.uid;
+                vm.sindico.telefone = res.telefone;
+                vm.sindico.ativo    = true;
+
+                $http.post(CONST.REST.IP+'/sindico/cadastra',vm.sindico).then(
+            
+                    function(response){
+
+                        delete vm.sindico["condominio"];
+                        
+                        $http.post(CONST.REST.IP+'/usuario/cadastra',vm.sindico).then(
+                            
+                            function(success){
+                                vm.alert("Os dados foram salvos com sucesso","Sucesso",null,function(){
+                                    $state.go("cadastrarCondominio");
+                                });
+                                // $state.go("tabsController.registrarVisita");
+                            },
+
+                            function(error){
+                                console.log("Erro ao cadastrar o documento usuário: ",error);
+                            }
+                        );            
+
+                    },
+
+                    function(error){
+                        vm.alert("Não foi possível salvar os dados, tente novamente mais tarde.", "Erro");
                     }
+                );
+            });
 
-                    console.log(success);
-
-                    vm.alert("Os dados foram salvos com sucesso","Sucesso",null,function(){
-                        $state.go("cadastrarCondominio");
-                    });
-
-                    // $state.go("tabsController.registrarVisita");
-                },
-
-                function(error){
-                    vm.alert("Não foi possível salvar os dados, tente novamente mais tarde.", "Erro");
-                }
-            );
         };
 
     };
-
 
     vm.exibeConfirmacaoSenha = function(){
         var myPopup = $ionicPopup.show({
@@ -49,10 +56,16 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
             subTitle: '( esta senha será utilizada para acesso do APP na internet )',
             scope: $scope,
             buttons: [
-                { text: 'Cancel' },
+                { 
+                    text: 'Cancelar',
+                    onTap: function(e){
+                        vm.sindico.confirmaSenha =
+                        vm.sindico.senha = null;
+                        vm.foco("id.senha");
+                    } 
+                },
                 {
                     text: '<b>Confirmar</b>',
-                    id:   'id.alert.ok',
                     type: 'button-positive',
                     onTap: function (e) {
                         if (!vm.sindico.confirmaSenha) {
@@ -110,20 +123,29 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
     };
 
     vm.alert = function(msg, title, foco, callback){
-        var alerta = $ionicPopup.alert({
-            title: title || "Alerta",
-            template: msg,
-            okText: "OK"
-        });
 
-        alerta.then(function(){
-            
+        message.alert.show(title,msg,function(){
             if(foco || vm.focoId)
                 vm.foco(foco || vm.focoId,100);
             
             if(callback)
                 callback();
-        });
+        })
+
+        // var alerta = $ionicPopup.alert({
+        //     title: title || "Alerta",
+        //     template: msg,
+        //     okText: "OK"
+        // });
+
+        // alerta.then(function(){
+            
+        //     if(foco || vm.focoId)
+        //         vm.foco(foco || vm.focoId,100);
+            
+        //     if(callback)
+        //         callback();
+        // });
     }
 
     vm.foco = function(id,time){

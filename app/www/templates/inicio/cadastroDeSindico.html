@@ -2,14 +2,23 @@
     <ion-content padding="true" class="has-header">
         
         <form id="formCampos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
+
+            <ion-checkbox data-ng-model="vm.sindico.titular" style="background-color:transparent;">
+                Sou titular/inquilino?
+                <span style="float:right;font-weight:bold;color:white;" data-ng-if="vm.sindico.titular">Sim</span>
+                <span style="float:right" data-ng-if="!vm.sindico.titular">Não</span>
+            </ion-checkbox>
+            <br>
             <label class="item item-input item-stacked-label" for="id.nome">
                 <span class="input-label" aria-label="Nome" id="labelNome">Nome</span>
                 <input type="text" id="id.nome" placeholder="Nome" data-ng-model="vm.sindico.nome" proximo-campo="id.cpf">
             </label>
+
             <label class="item item-input item-stacked-label" for="id.cpf">
                 <span class="input-label" aria-label="CPF" id="id.cpf.label">CPF</span>
-                <input type="text" id="id.cpf" placeholder="___.___.___-__" data-ng-model="vm.sindico.cpf" mask="999.999.999-99" proximo-campo="id.senha">
+                <input type="text" id="id.cpf" placeholder="____.____.____ - ___" data-ng-model="vm.sindico.cpf" mask="999.999.999-99" proximo-campo="id.senha">
             </label>
+
             <label class="item item-input item-stacked-label" for="id.senha">
                 <span class="input-label">Senha</span>
                 <input type="password" id="id.senha" placeholder="Senha" data-ng-model="vm.sindico.senha" proximo-campo="id.salvar">

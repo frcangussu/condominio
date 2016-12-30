@@ -208,6 +208,7 @@ exports.condominio.alterarEntidade = function(params,body,callback){
 
 	filtro[params.entidade] = {$elemMatch : body.filtro};
 
+	console.log('>>> body: ', body); 
 	console.log('>>> filtro: ', filtro); 
 	console.log('>>> dados: ', dados); 
 
@@ -220,10 +221,10 @@ exports.condominio.alterarEntidade = function(params,body,callback){
 
 }
 
-exports.condominio.cadastraEntidade = function(entidade,dados,callback){
+exports.condominio.cadastraEntidade = function(entidade,dados,callback,error){
 
 	if (!dados.condominio){
-		callback({required:"Favor informar o condominio"});
+		error({msg:"Condomínio não localizado"});
 		return;
 	}
 
@@ -232,7 +233,7 @@ exports.condominio.cadastraEntidade = function(entidade,dados,callback){
 	
 	condominio.update(
 		{_id: mongoose.Types.ObjectId(dados.condominio) },
-		{ $push: item },		
+		{ $push: item },	
 		function(error,sucesso){
 			if(!error){
 				if (sucesso.nModified)

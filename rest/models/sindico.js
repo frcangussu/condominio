@@ -11,7 +11,7 @@ var SindicoSchema = new Schema({
 	morador:Boolean,
 	inicio:String,
 	fim:String,
-	status:String
+	ativo:Boolean
 });
 
 module.exports = mongoose.model('Sindico',SindicoSchema);

@@ -19,6 +19,10 @@ input:-moz-placeholder 			 {color: #484848; font-size:16px;} /* Firefox 18- */
 .item-floating-label input:-ms-input-placeholder 	   {color: #A7A7A7; font-size:18px;} /* IE 10+ */
 .item-floating-label input:-moz-placeholder 		   {color: #A7A7A7; font-size:18px;} /* Firefox 18- */
 
+/** CHECKBOX **/
+.checkbox input:before, .checkbox-icon:before{background: transparent;}
+label.item.item-checkbox div.item-content{color:#A7A7A7;}
+
 .item-stacked-label input, .item-stacked-label textarea{background-color: transparent;}
 body { color: #FFA500; }
 input {color: white;}

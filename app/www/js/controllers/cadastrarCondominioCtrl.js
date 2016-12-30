@@ -1,9 +1,9 @@
 angular.module('app.cadastrarCondominioCtrl', [])
 
-.controller('cadastrarCondominioCtrl', ['$scope', '$state', '$http', 'CONST', 'Lista', '$window', '$cordovaGeolocation', '$cordovaSocialSharing', '$timeout', 'loading', '$ionicPopup',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('cadastrarCondominioCtrl', ['$scope', '$state', '$http', 'CONST', 'Lista', '$window', '$cordovaGeolocation', '$cordovaSocialSharing', '$timeout', 'message', '$ionicPopup', 'uid',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $state.parameterName
-function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $cordovaSocialSharing, $timeout, loading, $ionicPopup) {
+function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $cordovaSocialSharing, $timeout, message, $ionicPopup) {
 
     // db.municipios.find({nomeMunicipio: /Monte carmelo/i})
     // db.municipios.find( { $and: [ { UF: /mg/i }, { nomeMunicipio: /Monte/i } ] } )
@@ -18,9 +18,8 @@ function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $co
 
     // busca dados iniciais
     if (vm.uid){
-        // http://192.168.1.7:3000/rest/condominio/uid/samsung.a899ee4c.e48b6cf7ff12de19
-        $http.get(CONST.REST.IP+'/condominio/uid/'+vm.uid).then(
-            function(response){
+        // $http.get(CONST.REST.IP+'/condominio/uid/'+vm.uid).then(
+        $http.get(CONST.REST.IP+'/condominio/porEntidade/sindicos/uid/'+vm.uid).then(function(response){
                 vm.condominio = response.data[0];
                 vm.sindico = Lista.obterItem(vm.condominio.sindicos,"ativo",true);
                 
@@ -67,7 +66,7 @@ function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $co
 
         if (vm.condominio.cep && vm.condominio.cep.length===10){
 
-            loading.show("Buscando Endereço...");
+            message.loading.show("Buscando Endereço...");
 
             var cep = vm.condominio.cep.replace(/\./g, "");
                 cep = cep.replace(/\-/g, "");
@@ -76,6 +75,8 @@ function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $co
 
                 function(success){
                     var endereco = [];
+
+                    success.data = success.data[0] || success.data;
                     
                     if (success.data.logradouro)
                         endereco.push(success.data.logradouro);
@@ -96,11 +97,11 @@ function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $co
                         }
                     );
 
-                    loading.hide();
+                    message.loading.hide();
                 },
 
                 function(err){
-                    loading.hide();
+                    message.loading.hide();
                     console.log('>>> CEP não encontrado: ', err); 
                 }
 
@@ -149,15 +150,15 @@ function ($scope, $state, $http, CONST, Lista, $window, $cordovaGeolocation, $co
     vm.salvar = function(){
         
         if (vm.validaDados()){
-            loading.show('Salvando os Dados');
+            message.loading.show('Salvando os Dados');
             $http.put(CONST.REST.IP+'/altera/condominio/'+vm.condominio._id,vm.condominio).then(
                 
                 function(success){
-                    loading.hide();
+                    message.loading.hide();
                     vm.alert("Dados salvos com sucesso", "Condomínio", null, function(){
                         $state.go("tabsController.registrarVisita");
                     })
-                    // loading.show('Dados salvos com sucesso',2000);
+                    // message.loading.show('Dados salvos com sucesso',2000);
                 },
 
                 function(err){

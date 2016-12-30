@@ -33,7 +33,7 @@ angular.module('app.directives', [])
                     Camera.abrir().then(
                         
                         function (imageData) {
-                            console.log($scope.image);
+                            // console.log($scope.image);
                             $scope.image.src = "data:image/jpeg;base64," + imageData;
 
                             ngModel.$setViewValue($scope.image.src);
@@ -43,7 +43,7 @@ angular.module('app.directives', [])
                         }, 
                         
                         function (err) {
-                            alert('Erro ao abrir a camera');
+                            // alert('Erro ao abrir a camera');
                             console.log(err);
                         }
                         
@@ -58,7 +58,7 @@ angular.module('app.directives', [])
     .directive("typeahead",['$http','CONST','$compile','$templateRequest',function($http,CONST,$compile,$templateRequest){
         return{
             restrict: 'A',
-            scope: {collection:'@', field:'@', onSelect:"=", proximo:"@"},
+            scope: {collection:'@', field:'@', onSelect:"=", proximo:"@", length: "@"},
             require: '?ngModel',
             link: function($scope,elem,attr,ngModel){
                 
@@ -90,13 +90,13 @@ angular.module('app.directives', [])
 
                     var code = e.keyCode || e.which;
                     
-                    if (code === 27){
+                    if (code === 27 || (!ngModel.$viewValue)){
                         
+                        $scope.lista = [];
                         ngModel.$setViewValue("");
                         ngModel.$render();
                         
-                        $scope.lista = [];
-                    } else if (ngModel.$viewValue) {
+                    } else if (ngModel.$viewValue.length > ($scope.length || 3)) {
                         
                         var config = {"params":{}};
                         config.params[$scope.field] = ngModel.$viewValue;
@@ -149,7 +149,7 @@ angular.module('app.directives', [])
         }
     }])
 
-    .directive("localizacao",['$cordovaGeolocation','$timeout','loading','$http','CONST',function($cordovaGeolocation,$timeout,loading,$http,CONST){
+    .directive("localizacao",['$cordovaGeolocation','$timeout','message','$http','CONST',function($cordovaGeolocation,$timeout,message,$http,CONST){
 
         return {
             restrict: 'A',
@@ -171,7 +171,7 @@ angular.module('app.directives', [])
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };    
 
-                loading.show("Aguardando a localização...");
+                message.loading.show("Aguardando a localização...");
 
                 // busca a localização do dispositivo
                 var posOptions = {timeout: 4000, enableHighAccuracy: false, maximumAge: 0};
@@ -187,11 +187,11 @@ angular.module('app.directives', [])
                         ngModel.$setViewValue($scope.la+", "+$scope.lo);
                         // $scope.definirLocalizacao($scope.la,$scope.lo);
 
-                        loading.hide();
+                        message.loading.hide();
 
                     }, function(err) {
                         $scope.deviceLocation = false;
-                        loading.hide(); 
+                        message.loading.hide(); 
                     }
                 );
 
@@ -203,13 +203,13 @@ angular.module('app.directives', [])
                     divMap.setAttribute("style","display:none;z-index: 1000;position:absolute;width: 100%;height: 100%;top:0px;left:0px;");
                     document.body.appendChild(divMap);
 
-                    loading.show("Aguarde, abrindo Mapa");
+                    message.loading.show("Aguarde, abrindo Mapa");
 
                     if ($scope.map){
 
                         $timeout(function() {
                             document.getElementById("map").style.display = "inline";
-                            loading.hide();
+                            message.loading.hide();
                         },1000);
 
                     } else {
@@ -261,7 +261,7 @@ angular.module('app.directives', [])
                                 document.getElementById($scope.proximo).focus();
                         });
                         
-                        loading.hide();
+                        message.loading.hide();
                     }
                     
                 });

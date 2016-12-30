@@ -9,28 +9,39 @@
                     Selecionar Condomínio
                 </span>
                 
-                <input typeahead type="text" id="id.condominio" placeholder="Selecionar Condomínio" proximo="id.nome" data-ng-model="vm.dados.condominio.nome" collection="condominio", field="nome" on-select="vm.obterCondominio">
+                <input typeahead type="text" id="id.condominio" placeholder="Selecionar Condomínio" proximo="id.nome" data-ng-model="vm.condominio.nome" collection="condominio", field="nome" on-select="vm.obterCondominio">
 
             </div>
 
             <label class="item item-input item-floating-label" id="cadastroRecepcao-input8">
                 <span class="input-label">Nome do Recepcionista</span>
-                <input type="text" placeholder="Nome do Recepcionista" id="id.nome" proximo-campo="id.senha" data-ng-model="vm.dados.nome">
+                <input type="text" placeholder="Nome do Recepcionista" id="id.nome" proximo-campo="id.cpf" data-ng-model="vm.dados.nome">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">CPF</span>
+                <input type="text" placeholder="____.____.____ - ___" mask="999.999.999-99" id="id.cpf" proximo-campo="id.senha" data-ng-model="vm.dados.cpf">
             </label>
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Senha</span>
-                <input type="text" placeholder="Senha" id="id.senha" data-ng-model="vm.dados.senha">
+                <input type="password" placeholder="Senha" id="id.senha" data-ng-model="vm.dados.senha">
             </label>
 
             <br>
 
             <foto data-ng-model="vm.dados.foto"></foto>
+
+            <button id="id.salvar" 
+                    data-ng-click="vm.salvaDados()"
+                    class="button button-positive button-large button-block button-outline ic-selected"
+                    data-componentid="btnSalvar" 
+                    data-tap-disabled="true">Salvar</button>
             
-            <div id="cadastroRecepcao-button-bar2" class="button-bar">
+            <!--<div id="cadastroRecepcao-button-bar2" class="button-bar">
                 <a ui-sref="selecioneOSeuPapel" id="cadastroRecepcao-button18" style="border-radius:2px 2px 2px 2px;" class="button button-calm button-large button-clear icon-left ion-arrow-left-c">Voltar</a>
-                <a ui-sref="cadastroEfetuadoComSucesso" id="cadastroRecepcao-button19" style="border-radius:2px 2px 2px 2px;" class="button button-assertive button-large button-clear icon-right ion-checkmark-round">Salvar</a>
-            </div>
+                <a  id="cadastroRecepcao-button19" style="border-radius:2px 2px 2px 2px;" class="button button-assertive button-large button-clear icon-right ion-checkmark-round">Salvar</a>
+            </div>-->
         </form>
     </ion-content>
 </ion-view>
