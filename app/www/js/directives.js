@@ -1,4 +1,50 @@
 angular.module('app.directives', [])
+    .directive('field',['$compile','$templateRequest','PARAMS','validar',function($compile,$templateRequest,PARAMS,validar){
+        return {
+            restrict: "E",
+            scope: {type:"@",label:"@",display:"@",hide:"@",placeholder:"@",proximo:"@",invalido:"=",ngModel:"="},
+            require: '?ngModel',
+            link: function($scope,elemento,atributos,ngModel){
+                
+                $scope.invalido = true;
+
+                var src = {};
+
+                switch ($scope.type) {
+                    case "senha": 
+                        src.template   = 'templates/diretivas/campoSenha.html';
+                        src.validacao  = validar.senha; // oriem: services.js
+                        src.validar    = PARAMS.VALIDAR.SENHA; 
+                        break;
+                    case "cpf":   
+                        src.template  = 'templates/diretivas/campoCpf.html';
+                        src.validacao = validar.cpf; // oriem: services.js
+                        src.validar   = PARAMS.VALIDAR.CPF;   
+                        break;
+                    
+                    default:
+                        break;
+                }
+
+                $templateRequest(src.template).then(function(html){
+                    var template = angular.element(html);
+                    elemento.append(template);
+                    $compile(template)($scope);
+                });
+
+
+                elemento.on("change",function(e){
+                    
+                    $scope.invalido = !src.validacao(ngModel.$viewValue);
+
+                    $compile(elemento.contents())($scope);
+                });
+
+                
+            }
+
+        }
+    }])
 
     .directive("ngOnEnter",[function(){
         return{
@@ -16,6 +62,7 @@ angular.module('app.directives', [])
             }
         }
     }])
+
     .directive("foto",['Camera',function(Camera){
         return{
             restrict: "E",
@@ -282,6 +329,7 @@ angular.module('app.directives', [])
             }
         };
     }])
+    
     .directive('proximoCampo', function () {
         return {
             restrict: 'A',

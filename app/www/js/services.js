@@ -4,6 +4,65 @@ angular.module('app.services', [])
 
 	}])
 
+	.service('validar', ['Texto',function (Texto) {
+		this.cpf = function(strCPF) {
+
+			strCPF = Texto.obterNumeros(strCPF);
+
+			var Soma;
+			var Resto;
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
+
+			for (i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11)) Resto = 0;
+			if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+			Soma = 0;
+			for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+			Resto = (Soma * 10) % 11;
+
+			if ((Resto == 10) || (Resto == 11)) Resto = 0;
+			if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+			return true;
+		}
+
+		this.senha = function(pass){
+			
+			var score = 0;
+			if (!pass)
+				return score;
+
+			// award every unique letter until 5 repetitions
+			var letters = new Object();
+			for (var i=0; i<pass.length; i++) {
+				letters[pass[i]] = (letters[pass[i]] || 0) + 1;
+				score += 5.0 / letters[pass[i]];
+			}
+
+			// bonus points for mixing it up
+			var variations = {
+				digits: /\d/.test(pass),
+				lower: /[a-z]/.test(pass),
+				upper: /[A-Z]/.test(pass),
+				// nonWords: /\W/.test(pass),
+			}
+
+			variationCount = 0;
+			for (var check in variations) {
+				variationCount += (variations[check] == true) ? 1 : 0;
+			}
+			score += (variationCount - 1) * 10;
+
+			console.log('>>> score: ', score); 
+
+			return parseInt(score) > 55;
+			
+		}
+	}])
+
 	.service('uid',['$state','$cordovaDevice', 'message', '$http','CONST', function($state,$cordovaDevice,message,$http,CONST){
 		
 		this.cadastrado = function(uid, callback){
@@ -111,6 +170,10 @@ angular.module('app.services', [])
 		 * extrair somente os numeros de uma string
 		 */
 		this.obterNumeros = function (valor) {
+
+			if (!valor)
+				return;
+				
 			var numberPattern = /\d+/g;
 			return valor.match(numberPattern).join("");
 		}

@@ -18,15 +18,20 @@
                 <input type="text" placeholder="Nome do Recepcionista" id="id.nome" proximo-campo="id.cpf" data-ng-model="vm.dados.nome">
             </label>
 
-            <label class="item item-input item-stacked-label">
+            vm.dados.cpfInvalido: {{vm.dados.cpfInvalido}}
+            <field type="cpf" proximo="id.senha" data-ng-model="vm.dados.cpf" invalido="vm.dados.cpfInvalido"></field>
+
+            <!--<label class="item item-input item-stacked-label">
                 <span class="input-label">CPF</span>
                 <input type="text" placeholder="____.____.____ - ___" mask="999.999.999-99" id="id.cpf" proximo-campo="id.senha" data-ng-model="vm.dados.cpf">
-            </label>
+            </label>-->
 
-            <label class="item item-input item-floating-label">
+            vm.dados.senhaInvalida: {{vm.dados.senhaInvalida}}
+            <field type="senha" proximo="id.salvar" data-ng-model="vm.dados.senha" invalido="vm.dados.senhaInvalida"></field>
+            <!--<label class="item item-input item-floating-label">
                 <span class="input-label">Senha</span>
                 <input type="password" placeholder="Senha" id="id.senha" data-ng-model="vm.dados.senha">
-            </label>
+            </label>-->
 
             <br>
 

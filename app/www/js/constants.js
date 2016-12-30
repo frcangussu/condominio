@@ -1,5 +1,9 @@
 angular.module('app.constants', [])
 
+.constant('PARAMS',{
+    VALIDAR: {CPF:false, SENHA: false}
+})
+
 .constant('CONST', {
     REST: {IP: 'http://192.168.43.197:3000/rest'},
     // REST: {IP: 'http://localhost:3000/rest'},
