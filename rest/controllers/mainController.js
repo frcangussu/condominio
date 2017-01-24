@@ -1,34 +1,10 @@
 var mongoose = require('mongoose');
-var model    = require('../models/condominio');
-
-exports.listCondominio = function(params,callback){
-
-	var filtro = {};
-
-	if (params.campo && params.valor){
-		var campo = params.campo;
-		// filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
-		filtro[campo] = params.valor;
-	}
-
-	model.find(filtro,function(error, dados){
-		console.log("model.find.filtro",filtro);
-		if (error){
-			callback({error:'Não foi possível encontrar registros'});
-		} else {
-			console.log("teste");
-			console.log(dados);
-			callback(dados);
-		}
-	});
-};
-
+var condominio    = require('../models/condominio');
 exports.save = function(modelName,params,callback){
 
 	var Model = require('../models/'+modelName);
 
-	new Model(params)
-	.save(function(error, registro){
+	new Model(params).save(function(error, registro){
 		if (error){
 			callback({error:'Não foi possível salvar '+modelName});
 		} else {
@@ -36,7 +12,6 @@ exports.save = function(modelName,params,callback){
 		}
 	});
 };
-
 
 exports.delete = function(modelName,id,callback){
 
@@ -55,44 +30,59 @@ exports.delete = function(modelName,id,callback){
 				if(!error){
 					callback({resposta:modelName+" excluído com sucesso"});
 				}
-			})
+			});
 		}
-	})
-}
-
-var util = {
-	obterFiltro: function(params){
-
-		var filtro = {};
-
-		filtro[params.entidade] = 1;
-
-		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
-		if (params.campo && params.valor){
-				var campo = {}
-				campo[params.campo] = params.valor;
-				filtro[params.entidade] = {$elemMatch: campo};
-		}
-		return filtro;
-	}
+	});
 };
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-exports.listarCondominioPorEntidade = function(params,callback){
 
-	var filtro = util.obterFiltro(params)
+exports.get = function(modelName,params,callback){
 
-	model.find(
+	var Model = require('../models/'+modelName);
+
+	Model.find(params,function(error,response){
+		if (error){
+			callback({error: "Não foi possível recuperar os dados"});
+		} else {
+			callback(response);
+		}
+	});
+};
+
+exports.condominio = {};
+
+exports.condominio.listar = function(params,callback){
+
+	var filtro = {};
+
+	if (params.campo && params.valor){
+		var campo = params.campo;
+		// filtro[campo] = { $regex: params.valor, $options: "i", $diacriticSensitive: false };
+		filtro[campo] = params.valor;
+	}
+	condominio.find(filtro,function(error, dados){
+		console.log("model.find.filtro",filtro);
+		if (error){
+			callback({error:'Não foi possível encontrar registros'});
+		} else {
+			callback(dados);
+		}
+	});
+};
+
+exports.condominio.listarPorEntidade = function(params,callback){
+
+	var filtro = util.obterFiltro(params);
+
+	condominio.find(
 		filtro,
 		function(error, dados){
 			if (!error) { callback(dados); }
 			else        { callback({erro:"Dados não localizados"}); }
 		}
 	);
-}
+};
 
-exports.listarEntidade = function(params,callback){
+exports.condominio.listarEntidade = function(params,callback){
 
 	var filtro = {};
 
@@ -101,7 +91,7 @@ exports.listarEntidade = function(params,callback){
 
 	filtro[1] = util.obterFiltro(params);
 
-	model.find(
+	condominio.find(
 		filtro[0],
 		filtro[1],
 		function(error, dados){
@@ -112,11 +102,11 @@ exports.listarEntidade = function(params,callback){
 
 };
 
-exports.listarEntidadePorCondominio = function(params,callback){
+exports.condominio.listarEntidadeDeCondominio = function(params,callback){
 
 	var filtro = util.obterFiltro(params);
 
-	model.find(
+	condominio.find(
 
 		{_id: mongoose.Types.ObjectId(params.condominio)},
 		filtro,
@@ -128,7 +118,7 @@ exports.listarEntidadePorCondominio = function(params,callback){
 
 };
 
-exports.alterarEntidade = function(params,body,callback){
+exports.condominio.alterarEntidade = function(params,body,callback){
 
 	var filtro = {};
 
@@ -142,16 +132,16 @@ exports.alterarEntidade = function(params,body,callback){
 
 	filtro[params.entidade] = {$elemMatch : body.filtro};
 
-	model.update(
+	condominio.update(
 		{ "_id" : mongoose.Types.ObjectId(params.condominio),
-		  filtro // "titulares": { $elemMatch: { telefone: "61991330123" } }
+		  filtro // {"titulares": { $elemMatch: { telefone: "61991330123" } }}
 		},
 		{ $set: dataSet }
 	);
 
-}
+};
 
-exports.insert = function(entidade,dados,callback){
+exports.condominio.cadastraEntidade = function(entidade,dados,callback){
 
 	if (!dados.condominio){
 		callback({required:"Favor informar o condominio"});
@@ -160,8 +150,7 @@ exports.insert = function(entidade,dados,callback){
 
 	var item = {};
 	item[entidade] = dados;
-
-	model.update(
+	condominio.update(
 		{_id: mongoose.Types.ObjectId(dados.condominio) },
 		{ $push: item },
 		function(error,sucesso){
@@ -174,5 +163,22 @@ exports.insert = function(entidade,dados,callback){
 				callback({erro: "Erro ao tentar inserir "+entidade});
 			}
 		}
-	)
+	);
+};
+
+var util = {
+	obterFiltro: function(params){
+
+		var filtro = {};
+
+		filtro[params.entidade] = 1;
+
+		// {"titulares":{$elemMatch: {telefone: "61991330123"}}},
+		if (params.campo && params.valor){
+				var campo = {};
+				campo[params.campo] = params.valor;
+				filtro[params.entidade] = {$elemMatch: campo};
+		}
+		return filtro;
+	}
 };

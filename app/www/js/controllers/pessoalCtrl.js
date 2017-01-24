@@ -12,9 +12,7 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing) {
 
   $http.get('http://localhost:3000/api/rest/entidade/titulares/telefone/'+ vm.contato.phoneNumbers[0])
   .success(function(response){
-    console.log(response[0].titulares);
-    vm.contato.possuiApp = response[0].titulares.length > 0;
-    console.log(vm.contato.possuiApp);
+    vm.contato.possuiApp = response.length > 0;
   });
 
 //------------------------------------------------------------------------------

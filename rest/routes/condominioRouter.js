@@ -1,4 +1,5 @@
 var express = require('express');
+var jwt = require('jsonwebtoken');
 var router  = express.Router();
 var condominioController = require('../controllers/condominioController');
 var mainController = require('../controllers/mainController');
@@ -31,7 +32,20 @@ router.delete('/remove/:id',function(req,res){
 
 	mainController.delete("Condominio", id, function(response){
 		res.json(response);
-	})
+	});
+});
+
+router.put('/update/convidados', function (req,res){
+
+	var ticket = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
+	condominioController.update(
+		{"titulares":{"$elemMatch":{"telefone":req.body.telefone }}},// query
+		{"nome": req.body.nome, "ticket": ticket},// objeto para salvar
+		 function (response){ // callback
+			 res.json(response);
+		 }
+	);
 });
 
 module.exports = router;

@@ -49,3 +49,10 @@ exports.delete = function(id,callback){
 		}
 	});
 };
+
+exports.update = function (query, objt){
+	Condominio.update(query, {$set: objts}, function (error,condominio){
+		if(!error)
+			callback({resposta: 'Atualizacào realizada com sucesso!'});
+	});
+};
