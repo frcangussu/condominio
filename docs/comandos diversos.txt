@@ -57,6 +57,14 @@ Select
 		}}
 	)
 
+Backup
+
+	// export (acessar a pasta onde deseja salvar o arquivo) - mongoexport é um comando externo
+	mongoexport --host localhost --db API --collection "cidades" --out cidades.json  
+
+	// import (acessar a pasta onde deseja salvar o arquivo) - mongoimport é um comando externo
+	mongoimport -d mydb -c things --type csv --file locations.csv --headerline
+
 Update
 
 	Ex: http://stackoverflow.com/questions/10432677/update-field-in-exact-element-array-in-mongodb

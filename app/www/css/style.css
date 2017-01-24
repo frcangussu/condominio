@@ -1,10 +1,38 @@
+/** $ionicPopup **/
+.popup-container .popup{background-color: rgba(240, 240, 240, 0.9);border-radius:10px !important;}
+.popup{border-radius:10px !important;}
+.popup .popup-body{color:#4e4e4e;font-size: 19px}
+.popup .popup-body input{border-radius: 5px;padding: 5px;}
+.popup .popup-head{border-bottom: none;}
+.popup .popup-head h3{font-size: 18px !important;color:#2f4f4f;}
+.popup .popup-buttons button{border-radius: 5px !important;}
+
+/** Placeholder **/
+input::-webkit-input-placeholder {color: #484848; font-size:16px;} /* Chrome/Opera/Safari */
+input::-moz-placeholder 		 {color: #484848; font-size:16px;} /* Firefox 19+ */
+input:-ms-input-placeholder 	 {color: #484848; font-size:16px;} /* IE 10+ */
+input:-moz-placeholder 			 {color: #484848; font-size:16px;} /* Firefox 18- */
+
+/** PLaceholder item-floating-label **/
+.item-floating-label input::-webkit-input-placeholder {color: #A7A7A7; font-size:18px;} /* Chrome/Opera/Safari */
+.item-floating-label input::-moz-placeholder 		   {color: #A7A7A7; font-size:18px;} /* Firefox 19+ */
+.item-floating-label input:-ms-input-placeholder 	   {color: #A7A7A7; font-size:18px;} /* IE 10+ */
+.item-floating-label input:-moz-placeholder 		   {color: #A7A7A7; font-size:18px;} /* Firefox 18- */
+
+/** CHECKBOX **/
+.checkbox input:before, .checkbox-icon:before{background: transparent;}
+label.item.item-checkbox div.item-content{color:#A7A7A7;}
+
+.item-stacked-label input, .item-stacked-label textarea{background-color: transparent;}
 body { color: #FFA500; }
 input {color: white;}
 hr{border:solid 1px #0C4854;border-top:none;}
-input[type="text"] {color:#10D4F4 !important;}
-input[type="password"] {color:#10D4F4 !important;}
+input[type="text"] {color:#10D4F4 !important;font-size: 20px;}
+input[type="search"] {color:#10D4F4 !important;font-size: 20px;}
+input[type="password"] {color:#10D4F4 !important;font-size: 20px;}
+textarea{color:#10D4F4 !important;}
 .input-label{color:#a7a7a7 !important;}
-label{border:solid 1px #383838 !important;border-radius:6px !important;}
+label, .item.item-input{border:solid 1px #383838 !important;border-radius:6px !important;}
 ion-view, .pane, .view {background-color: #F6F6F6; }
 
 /* Empty. Add your own CSS if you like */
@@ -17,7 +45,7 @@ ion-view, .pane, .view {background-color: #F6F6F6; }
 .margin20 {margin-top: 20px; margin-bottom: 20px !important; }
 .margin30 {margin-top: 30px; margin-bottom: 30px !important; }
 .dark {background-color: #20211E !important; border-color: #333333; }
-.dark {h2, .bg-dark span, .bg-dark input {color: #87CC31; }
+.bg-dark span, .bg-dark input {color: #87CC31; }
 
 .buttonbar {
 	position: fixed;

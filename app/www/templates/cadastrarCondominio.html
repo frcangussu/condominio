@@ -1,4 +1,4 @@
-<ion-view title="Cadastrar Condominio" hide-back-button="true" id="page22" class="pull-left dark">
+<ion-view title="Cadastrar Condominio" hide-back-button="true" id="page22" style="background-color:#000000;">
     <ion-content padding="true" class="has-header">
         <form id="cadastrarCondominio-form17" class="list">
             <div id="cadastrarCondominio-markdown8" style="color:#7CBB36;font-size:18px;" class="button button-dark button-block margin-zero">
@@ -6,63 +6,97 @@
                     <strong>{{vm.sindico.nome}}</strong>
                 </p>
             </div>
-            <label class="item item-input" id="cadastrarCondominio-input12" name="nome">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="Jardim das Acácias">
+            <label class="item item-input item-floating-label" id="cadastrarCondominio-input12" name="nome">
+                <span class="input-label">Nome do Condomínio</span>
+                <input type="text" placeholder="Nome do Condomínio" id="id.nome" data-ng-model="vm.condominio.nome" proximo-campo="id.cep"> <!-- data-ng-keyup="vm.event=$event"> -->
             </label>
-            <label class="item item-input" id="cadastrarCondominio-input23" name="cep">
+            <label class="item item-input" id="cadastrarCondominio-input23" name="cep" style="background:none">
                 <span class="input-label">CEP</span>
-                <input type="text" placeholder="70.000-00">
+                <input type="text" id="id.cep" placeholder="[ informe o CEP ]" data-ng-model="vm.condominio.cep" data-ng-blur="vm.buscaCEP()" mask="99.999-999" proximo-campo="id.uf">
             </label>
-            <label class="item item-input" id="cadastrarCondominio-textarea1" name="endereco">
-                <span class="input-label">Endereço</span><textarea placeholder="Jardins Mangueiral, Av. Mangueiral, Qd 14"></textarea>
+            
+            <label class="item item-input" id="id.uf" name="cidade" style="background:none">
+                <span class="input-label">UF</span>
+                <input type="text" id="id.uf" placeholder="[ informe a UF ]" data-ng-model="vm.condominio.uf" style="text-transform:uppercase;" maxlength="2" proximo-campo="id.municipio">
             </label>
-            <ion-item class="item-icon-right" id="cadastrarCondominio-list-item27">Local
-                <span class="item-note">-15.897221, -47.796960</span>
+            
+            <label class="item item-input item-floating-label" id="id.municipio" name="cidade">
+                <span class="input-label">Cidade</span>
+                <input type="text" id="id.municipio" placeholder="Município" data-ng-model="vm.condominio.municipio" data-ng-keyup="vm.buscaMunicipio()" proximo-campo="id.endereco">
+            </label>
+            <div class="list" data-ng-show="vm.municipios.length && vm.condominio.municipio.length > 4" style="margin: 0 5px 0 0;">
+                <button data-ng-repeat="municipio in vm.municipios" 
+                        data-ng-click="vm.selecionarMunicipio(municipio)" 
+                        class="item button button-full button-dark" 
+                        style="margin: 0px;border-top: solid 1px silver; text-align:left;">
+                    <span data-ng-if="!municipio.naoSelecionar">{{municipio.UF}} - {{municipio.nomeMunicipio}}</span>
+                    <span data-ng-if="municipio.naoSelecionar" >{{municipio.nomeMunicipio}}</span>
+                </button>
+                <!--<button class="item button button-full button-positive" style="margin: 0px;border-top: solid 1px silver; text-align:left;">button-positive' </button>-->
+            </div>
+
+            <!--<ul class="list" data-ng-show="vm.municipios.length" style="width:98%; padding:0px 0px 10px 7px;" data-ng-show="vm.condominio.municipio.length > 4">
+                <li class="item" data-ng-repeat="municipio in vm.municipios" data-ng-click="vm.selecionarMunicipio(municipio)">
+                    <span data-ng-if="!municipio.naoSelecionar">{{municipio.UF}} - {{municipio.nomeMunicipio}}</span>
+                    <span data-ng-if="municipio.naoSelecionar" >{{municipio.nomeMunicipio}}</span>
+                </li>
+            </ul> -->
+            
+            <label class="item item-input item-floating-label" id="cadastrarCondominio-textarea1" name="endereco">
+                <span class="input-label">Endereço</span>
+                <textarea placeholder="Endereço" data-ng-model="vm.condominio.endereco" rows="5" style="background:none;" id="id.endereco" proximo-campo="id.localizacao || btn.submit"></textarea>
+            </label>
+            
+            <!--<div id="map" data-tap-disabled="true" style="display:none;"></div>-->
+            <div localizacao codigo-municipio="vm.condominio.codigoMunicipio" data-ng-model="vm.condominio.localizacao" proximo="id.confirma">
+            <ion-item class="item-icon-right" id="cadastrarCondominio-list-item27" style="border-radius: 4px;margin-top: 2px;background-color: #1E95A8 !important;border: none;color: #FFF;">
+                Local
+                <span class="item-note" >{{vm.condominio.localizacao}}</span>
                 <i class="icon ion-ios-location"></i>
             </ion-item>
+            </div>
+
+            <!--<label data-ng-if="!vm.ngif.localizacao" class="item item-input item-floating-label" id="cadastrarCondominio-input12" name="nome">
+                <span class="input-label">Localização GPS</span>
+                <input type="text" id="id.localizacao" placeholder="Localização GPS" data-ng-model="vm.condominio.localizacao" proximo-campo="btn.submit" data-ng-focus="">
+            </label>-->
+            
         </form>
-        <div class="spacer" style="width: 300px; height: 19px;"></div>
-        <div>
-            <style>
-                .margin-zero{
-                    margin:0px !important;
-                }
-                .foto-cadastro{
-                    width: 200px;height: 200px;overflow: hidden;position: relative;left:18%;
-                    top:7px;border-top:none;
-                }
-                .foto-cadastro img {
-                    position: absolute;
-                    margin: auto; 
-                    min-height: 100%;
-                    min-width: 100%;
-                
-                    /* For the following settings we set 100%, but it can be higher if needed 
-                    See the answer's update */
-                    left: -100%;
-                    right: -100%;
-                    top: -72%;
-                    bottom: -100%;
-                }
-            </style>
-        </div>
+
+        <div class="spacer" style="width: 300px; height: 4px;"></div>
 
         <!-- controle de upload -->
-        <input id="fileSelector" type="file" style="visibility:hidden"/>
-        <button id="btnUpload" style="color:#87CB32;text-align:left;" 
-                class="button button-dark button-large button-block icon-right ion-ios-upload-outline margin-zero">Moradores</button>
-        
+        <div data-ng-if="false">
+            <input id="fileSelector" type="file" style="visibility:hidden" fileread data-ng-model="vm.arquivo"/>
+            <button id="btnUpload" style="color:#87CB32;text-align:left;" 
+                    class="button button-dark button-large button-block icon-right ion-ios-upload-outline margin-zero">Moradores</button>
+            <div id="cadastrarCondominio-markdown9" style="color:#6F9BA1;font-size:14px;margin-left:6px;" class="font-size-14">
+                <blockquote>
+                    <p>{{vm.MSG.CAD.CONDOMINIO.ARQUIVO}}</p>
+                </blockquote>
+            </div>
+        </div>
         <!-- controle de upload -->
 
-        <div id="cadastrarCondominio-markdown9" style="color:#6F9BA1;font-size:14px;" class="font-size-14">
-            <blockquote>
-                <p>Selecione o arquivo com os dados dos moradores para que possamos efetuar o cadastro</p>
-            </blockquote>
-        </div>
         <div id="cadastrarCondominio-button-bar14" class="button-bar">
-            <button id="cadastrarCondominio-button51" class="button button-positive button-large button-block button-outline icon-right ion-checkmark-round">Confirma</button>
+            <button id="id.confirma" class="button button-positive button-large button-block button-outline icon-right ion-checkmark-round" data-ng-click="vm.salvar()">Confirma</button>
+            <!--<input type="submit" id="btn.submit" class="button button-positive button-large button-block button-outline icon-right ion-checkmark-round" value="Confirma" />-->
         </div>
         <div class="spacer" style="height: 100px;"></div>
     </ion-content>
 </ion-view>
+
+<style>
+#map {
+  z-index: 1000;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top:0px;
+  left:0px;
+}
+
+.scroll {
+  height: 100%;
+}
+</style>
