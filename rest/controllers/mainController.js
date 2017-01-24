@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 var condominio    = require('../models/condominio');
 exports.save = function(modelName,params,callback){
 
+	console.log('>>> modelName: ', modelName);
+	console.log('>>> params: ', params);
+
 	var Model = require('../models/'+modelName);
 
 	new Model(params).save(function(error, registro){
@@ -12,6 +15,41 @@ exports.save = function(modelName,params,callback){
 		}
 	});
 };
+
+exports.update = function(modelName,documentId,params,callback){
+
+	var model = require('../models/'+modelName);
+
+	if (!documentId){
+		callback({required:"ID não localizado"});
+		return;
+	}
+
+	model.findById(documentId,function(error, documento){
+
+		if (error){
+			callback({error: 'Não foi possível alterar "'+modelName+'"'});
+		} else {
+
+			model.update(
+				{_id: mongoose.Types.ObjectId(documentId) },
+				{$set:params},
+				function(error,sucesso){
+					if(!error){
+						if (sucesso.nModified)
+							callback({info:modelName+" alterado com sucesso"});
+						else
+							callback({warn:"Não foi possível alterar "+modelName});
+					} else {
+						callback({erro: "Erro ao tentar alterar "+modelName});
+					}
+				}
+			);
+
+		}
+	})
+
+}
 
 exports.delete = function(modelName,id,callback){
 
@@ -35,11 +73,12 @@ exports.delete = function(modelName,id,callback){
 	});
 };
 
-exports.get = function(modelName,params,callback){
+
+exports.get = function(modelName,filter,callback){
 
 	var Model = require('../models/'+modelName);
 
-	Model.find(params,function(error,response){
+	Model.find( {$and:filter} , function(error,response){
 		if (error){
 			callback({error: "Não foi possível recuperar os dados"});
 		} else {
@@ -47,6 +86,41 @@ exports.get = function(modelName,params,callback){
 		}
 	});
 };
+
+
+/**
+ * @description - Adicionar um elemento a um array da collection
+ * @example     - ainda não foi testado
+ */
+exports.push = function(modelName, documentId, listName, dados, callback){
+
+	var Model = require('../models/'+modelName);
+
+	if (!documentId){
+		callback({required:"Favor informar o _id de "+modelName});
+		return;
+	}
+
+	var item = {};
+	item[listName] = dados;
+
+	Model.update(
+		{_id: mongoose.Types.ObjectId(documentId) },
+		{ $push: item },
+		function(error,sucesso){
+			if(!error){
+				if (sucesso.nModified)
+					callback({info:listName+" cadastrado com sucesso"});
+				else
+					callback({warn:"Não foi possível cadastrar "+listName});
+			} else {
+				callback({erro: "Erro ao tentar inserir "+listName});
+			}
+		}
+	)
+};
+
+/********************************************************************************************************** */
 
 exports.condominio = {};
 
@@ -132,6 +206,10 @@ exports.condominio.alterarEntidade = function(params,body,callback){
 
 	filtro[params.entidade] = {$elemMatch : body.filtro};
 
+	console.log('>>> body: ', body);
+	console.log('>>> filtro: ', filtro);
+	console.log('>>> dados: ', dados);
+
 	condominio.update(
 		{ "_id" : mongoose.Types.ObjectId(params.condominio),
 		  filtro // {"titulares": { $elemMatch: { telefone: "61991330123" } }}
@@ -141,10 +219,10 @@ exports.condominio.alterarEntidade = function(params,body,callback){
 
 };
 
-exports.condominio.cadastraEntidade = function(entidade,dados,callback){
+exports.condominio.cadastraEntidade = function(entidade,dados,callback,error){
 
 	if (!dados.condominio){
-		callback({required:"Favor informar o condominio"});
+		error({msg:"Condomínio não localizado"});
 		return;
 	}
 
