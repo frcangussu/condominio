@@ -1,0 +1,14 @@
+=====Heroku Login=====
+user: feliperandson@outlook.com
+password: 63RJvKtruqQO
+
+
+=====MongoDB Heroku - MLab addons=====
+URI: mongodb://heroku_nclmpnh7:17ijq6r7f1b2dbtpttbuga9s2l@ds149268.mlab.com:49268/heroku_nclmpnh7
+user: heroku_nclmpnh7
+password: 17ijq6r7f1b2dbtpttbuga9s2l
+
+
+=====Panel Mlab==========
+user: heroku_nclmpnh7
+password: Free(Pass351)*
