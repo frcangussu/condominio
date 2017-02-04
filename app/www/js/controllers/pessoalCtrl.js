@@ -7,11 +7,16 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing) {
 
   var vm = this;
   vm.contato = JSON.parse($stateParams.contato);
+  vm.isProfissional = 0;
+
+  console.log('Tela Pessoal');
+  console.log(vm.contato);
 
 //------------------------------------------------------------------------------
 
   $http.get('http://localhost:3000/api/rest/entidade/titulares/telefone/'+ vm.contato.phoneNumbers[0])
   .success(function(response){
+    console.log(response);
     vm.contato.possuiApp = response.length > 0;
   });
 
@@ -25,10 +30,15 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing) {
 //------------------------------------------------------------------------------
 
   vm.confirmar = function () {
+     // LOCALSTORAGE
     var dadosLocalStorage = JSON.parse(localStorage.getItem(vm.contato.phoneNumbers[0])) || {};
     dadosLocalStorage.status = 2;
     localStorage.setItem(vm.contato.phoneNumbers[0], JSON.stringify(dadosLocalStorage));
-    $state.transitionTo('tabsController.registrarVisita', $stateParams, {reload: true,inherit: false,notify: true});
+
+    // DB
+    console.log(vm.contato);
+
+    $state.transitionTo('tabsController.registrarVisita', $stateParams);
   };
 
 //------------------------------------------------------------------------------

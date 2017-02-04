@@ -3,7 +3,7 @@
         <div>
             <div class="item range margin-zero dark" style="border:none;">
                 <span>Pessoal</span>
-                <input type="range" value="0" min="0" max="1">
+                <input type="range" value="0" min="0" max="1"ng-model="vm.isProfissional">
                 <span>Profissional</span>
             </div>
             <style>
@@ -33,6 +33,22 @@
             </center>
             <br>
         </div>
+
+        <div ng-show="vm.isProfissional == 1">
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Username</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </div>
+
         <div id="pessoal-button-bar11" class="button-bar">
             <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && vm.contato.possuiApp" ng-click="vm.confirmar()">Confirmar</a>
             <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && !vm.contato.possuiApp" ng-click="vm.shareAnywhere()">Confirmar</a>

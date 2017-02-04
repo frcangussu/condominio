@@ -38,7 +38,6 @@ router.get('/find/:collectionName',function(req,res){
 		item[key] = new RegExp(req.query[key],"i"); //new RegExp("a|b", "i");
 
 		if (req.query[key].type && req.query[key].value) {
-
 			item[key] = new RegExp(req.query[key].value,"i");
 
 			if (req.query[key].type == "number")
@@ -80,6 +79,7 @@ router.get('/condominio/porEntidade/:entidade/:campo/:valor',function(req,res){
  * @returns: elemento
  */
 router.get('/entidade/:entidade/:campo/:valor',function(req,res){
+	console.log('ta funcionando');
 	mainController.condominio.listarEntidade(req.params,function(response){
 		res.json(response);
 	});

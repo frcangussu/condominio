@@ -6,7 +6,7 @@ function ($scope, $http, $stateParams, $state, $ionicPlatform, $cordovaContacts)
   var vm = this;
   vm.contatos = [
     {name: {givenName: 'Guilherme Dias'}, phoneNumbers: ['61981489398']},
-    {name: {givenName: 'Gustavo Dias'}, phoneNumbers: ['61981489399']},
+    {name: {givenName: 'Gustav Dias'}, phoneNumbers: ['61981489']},
     {name: {givenName: 'Izabel Dias'}, phoneNumbers: ['61981489397']},
     {name: {givenName: 'Edivaldo Dias'}, phoneNumbers: ['61981489396']},
     {name: {givenName: 'Fernando'}, phoneNumbers: ['61991330123']}
