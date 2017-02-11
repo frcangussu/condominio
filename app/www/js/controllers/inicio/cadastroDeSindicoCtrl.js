@@ -7,6 +7,18 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
     vm.sindico = {};
 
     vm.exibirConfirmacaoSenha = false;
+
+
+    $scope.$watch("vm.sindico.titular",function(newV,oldV){
+        if (newV)
+        vm.sindico.inquilino = !newV;
+    });
+
+    $scope.$watch("vm.sindico.inquilino",function(newV,oldV){
+        if (newV)
+        vm.sindico.titular = !newV;
+    });
+
     vm.salvaDados = function(){
 
         if (vm.validaDados()){
@@ -21,9 +33,32 @@ function ($scope, $stateParams, Camera, $timeout, $http, CONST, $cordovaDevice, 
             
                     function(response){
 
-                        delete vm.sindico["condominio"];
-                        
-                        $http.post(CONST.REST.IP+'/usuario/cadastra',vm.sindico).then(
+                        console.log('>>> sindico cadastrado: ', response.data);
+
+                        vm.sindico.condominio = response.data._id || response.data[0]._id;
+
+                        console.log('>>> vm.sindico: ', vm.sindico);  
+
+                        // cadastra o síndico como títular
+                        if (vm.sindico.titular){
+                            var titularCadastrado = false;
+                            $http.post(CONST.REST.IP+'/cadastra/titulares',vm.sindico).then(function(success){
+                                titularCadastrado = true;
+                            },function(error){});
+                        }
+
+                        // cadastra o síndico como inquilino
+                        if (vm.sindico.inquilino){
+                            var inquilinoCadastrado = false;
+                            $http.post(CONST.REST.IP+'/cadastra/inquilinos',vm.sindico).then(function(success){
+                                inquilinoCadastrado = true;
+                            },function(error){});
+                        }
+
+
+                        vm.dadosUsuario = Object.assign({}, vm.sindico); // duplica o objeto sem manter a referência
+                        delete vm.dadosUsuario["condominio"];
+                        $http.post(CONST.REST.IP+'/usuario/cadastra',vm.dadosUsuario).then(
                             
                             function(success){
                                 vm.alert("Os dados foram salvos com sucesso","Sucesso",null,function(){

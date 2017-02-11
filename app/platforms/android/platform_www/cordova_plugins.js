@@ -360,6 +360,14 @@ module.exports = [
         "merges": [
             "startApp"
         ]
+    },
+    {
+        "id": "phonegap-plugin-barcodescanner.BarcodeScanner",
+        "file": "plugins/phonegap-plugin-barcodescanner/www/barcodescanner.js",
+        "pluginId": "phonegap-plugin-barcodescanner",
+        "clobbers": [
+            "cordova.plugins.barcodeScanner"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -378,7 +386,8 @@ module.exports.metadata =
     "cordova-plugin-camera": "2.3.0",
     "cordova-plugin-geolocation": "2.4.0",
     "cordova-plugin-file": "4.3.1",
-    "com.lampa.startapp": "0.1.4"
+    "com.lampa.startapp": "0.1.4",
+    "phonegap-plugin-barcodescanner": "6.0.5"
 };
 // BOTTOM OF METADATA
 });

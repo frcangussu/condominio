@@ -48,6 +48,9 @@
         },
         "com.lampa.startapp": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
     "dependent_plugins": {}
