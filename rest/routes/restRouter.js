@@ -24,8 +24,8 @@ router.get('/find/:collectionName',function(req,res){
 
 	var filter = [];
 	for (var key in req.query){
-		
-		// caso o objeto venha como string		
+
+		// caso o objeto venha como string
 		var toParse = req.query[key];
 		try {
 			req.query[key] = JSON.parse(toParse);
@@ -34,11 +34,10 @@ router.get('/find/:collectionName',function(req,res){
 		}
 
 		var item = {}
-		
-		item[key] = new RegExp(req.query[key],"i"); //new RegExp("a|b", "i");
-		
-		if (req.query[key].type && req.query[key].value) {
 
+		item[key] = new RegExp(req.query[key],"i"); //new RegExp("a|b", "i");
+
+		if (req.query[key].type && req.query[key].value) {
 			item[key] = new RegExp(req.query[key].value,"i");
 
 			if (req.query[key].type == "number")
@@ -51,14 +50,14 @@ router.get('/find/:collectionName',function(req,res){
 	mainController.get(req.params.collectionName,filter,function(response){
 		res.json(response);
 	});
-	
+
 });
 
 
 /**
  * @type: GET
  * @description: recupera o condominio de baseado em um filtro de entidade
- * @argument: entidade - nome da entidade 
+ * @argument: entidade - nome da entidade
  * @argument: campo    - nome do campo da entidade
  * @argument: valor	   - valor existente no campo informado
  * @returns: documento condominio
@@ -74,12 +73,13 @@ router.get('/condominio/porEntidade/:entidade/:campo/:valor',function(req,res){
 /**
  * @type: GET
  * @description: recupera um elemento (titular, sindico, etc.) de condominio de baseado em um filtro de entidade
- * @argument: entidade - nome da entidade 
+ * @argument: entidade - nome da entidade
  * @argument: campo    - nome do campo da entidade
  * @argument: valor	   - valor existente no campo informado
  * @returns: elemento
  */
 router.get('/entidade/:entidade/:campo/:valor',function(req,res){
+	console.log('ta funcionando');
 	mainController.condominio.listarEntidade(req.params,function(response){
 		res.json(response);
 	});
@@ -90,8 +90,8 @@ router.get('/entidade/:entidade/:campo/:valor',function(req,res){
  * @type: GET
  * @description: recupera um elemento (titular, sindico, etc.) de condominio de baseado em um filtro de entidade
  * @require: ObjectId do condominio
- * @argument: condominio - ObjectId do condominio 
- * @argument: entidade   - nome da entidade 
+ * @argument: condominio - ObjectId do condominio
+ * @argument: entidade   - nome da entidade
  * @argument: campo      - nome do campo da entidade
  * @argument: valor	     - valor existente no campo informado
  * @returns: elemento
@@ -101,7 +101,6 @@ router.get('/condominio/:condominio/entidade/:entidade/:campo/:valor',function(r
 		res.json(response);
 	});
 });
-
 
 /**
  * @type: PUT
@@ -123,7 +122,7 @@ router.put('/condominio/:condominio/altera/:entidade',function(req,res){
  * @example: http://192.168.43.197:3000/rest/condominio/583193cd0310930b00e2b053
  */
 router.put('/altera/condominio/:condominio',function(req,res){
-	
+
 	mainController.update("condominio",req.params.condominio,req.body,function(response){
 		res.json(response);
 	});
@@ -132,8 +131,13 @@ router.put('/altera/condominio/:condominio',function(req,res){
 
 /**
  * @type: POST
- * @description: insere um documento na collection de condominios já com o seu síndico 
+<<<<<<< HEAD
+ * @description: insere um documento na collection de condominios já com o seu síndico
+ * @param: nome  - nome do sindico
+=======
+ * @description: insere um documento na collection de condominios já com o seu síndico
  * @param: nome  - nome do 'sindico'
+>>>>>>> 7f19f0821c533a333efcaea2f38dc5a768e8ab58
  * @param: senha - senha do sindico
  * @param: foto  - foto do sindico em base64
  * @example: http://192.168.1.7:3000/rest/sindico/cadastra
@@ -149,8 +153,8 @@ router.post('/sindico/cadastra',function(req,res){
 		inicio:   new Date()
 	}]};
 
-	console.log('>>> params.uid: ', params.uid); 
-	console.log('>>> params.telefone: ', params.telefone); 
+	console.log('>>> params.uid: ', params.uid);
+	console.log('>>> params.telefone: ', params.telefone);
 
 	mainController.save("condominio",params,function(response){
 		res.json(response);
@@ -165,12 +169,15 @@ router.post('/sindico/cadastra',function(req,res){
  * @param: telefone - telefone do usuário
  */
 router.post('/usuario/cadastra',function(req,res){
-	
-	var params = req.body;
+
+	var params = {
+		uid: req.body.uid,
+		telefone: req.body.telefone
+	}
 
 	var filter = [
 		{uid: req.body.uid},
-		{telefone: req.body.telefone} 
+		{telefone: req.body.telefone}
 	];
 
 	mainController.get("usuario",filter,function(response){
@@ -179,10 +186,10 @@ router.post('/usuario/cadastra',function(req,res){
 		} else {
 			mainController.save("usuario",params,function(response){
 				res.json(response);
-			});	
+			});
 		}
 	});
-	
+
 });
 
 /**
@@ -192,7 +199,7 @@ router.post('/usuario/cadastra',function(req,res){
  */
 router.post('/cadastra/:entidade',function(req,res){
 	var entidade   = req.params.entidade;
-	mainController.condominio.cadastraEntidade(entidade, req.body, 
+	mainController.condominio.cadastraEntidade(entidade, req.body,
 		function(response){
 			res.json(response);
 		},function(error){
@@ -217,11 +224,11 @@ router.post('/cadastra/documento/:collectionName',function(req,res){
 router.post('/adiciona/elemento/:collectionName/:documentId/:listName',function(req,res){
 
 	mainController.push(
-		req.params.collectionName, 
+		req.params.collectionName,
 		req.params.documentId,
 		req.params.listName,
 		req.body,
-		
+
 		function(response){
 			res.json(response);
 		}
@@ -235,7 +242,7 @@ router.post('/adiciona/elemento/:collectionName/:documentId/:listName',function(
 module.exports = router;
 
 // router.delete('/remove/:id',function(req,res){
-	
+
 // 	var id = req.params.id;
 
 // 	mainController.delete("Produto", id, function(response){
@@ -253,12 +260,12 @@ module.exports = router;
 // });
 
 // route.get('/identifica/usuario/:telefone/:uid',function(){
-	
+
 // 	req.params.entidade = "titulares";
 
 // 	req.params.filtro = {
 // 		"telefone":req.params.telefone,
-// 		"uid":req.params.uid 
+// 		"uid":req.params.uid
 // 	}
 
 // 	mainController.listarEntidade(req.params,function(response){

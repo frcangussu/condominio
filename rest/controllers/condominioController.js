@@ -1,4 +1,4 @@
-var Condominio = require('../models/Condominio');
+var Condominio = require('../models/condominio');
 
 exports.list = function(callback){
 
@@ -11,10 +11,10 @@ exports.list = function(callback){
 			callback(dados);
 		}
 	});
-}
+};
 
 exports.save = function(params,callback){
-	
+
 	new Condominio({
 		'nome': params.nome,
 		'endereco': params.endereco,
@@ -45,7 +45,14 @@ exports.delete = function(id,callback){
 				if(!error){
 					callback({resposta:"Condominio excluido com sucesso"});
 				}
-			})
+			});
 		}
-	})
-}
+	});
+};
+
+exports.update = function (query, objt){
+	Condominio.update(query, {$set: objts}, function (error,condominio){
+		if(!error)
+			callback({resposta: 'Atualizacào realizada com sucesso!'});
+	});
+};

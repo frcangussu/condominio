@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('app', ['ionic', 'app.controllers', 
+angular.module('app', ['ionic', 'app.controllers',
 
 // fluxo inicial
 'app.bemVindoAoAPPCtrl',
@@ -37,9 +37,8 @@ angular.module('app', ['ionic', 'app.controllers',
 'app.routes', 'app.directives','app.services', 'app.constants', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope) {
-  
   // console.log("app.js >>> ",localStorage);
-  
+
   $ionicPlatform.ready(function() {
 
     localStorage.setItem('home', '/home');
