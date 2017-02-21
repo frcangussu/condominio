@@ -59,6 +59,10 @@
                         {
                             "xml": "<feature name=\"startApp\"><param name=\"android-package\" value=\"com.lampa.startapp.startApp\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"android-package\" value=\"com.phonegap.plugins.barcodescanner.BarcodeScanner\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -96,6 +100,30 @@
                         },
                         {
                             "xml": "<uses-feature android:name=\"android.hardware.location.gps\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:clearTaskOnLaunch=\"true\" android:configChanges=\"orientation|keyboardHidden|screenSize\" android:exported=\"false\" android:name=\"com.google.zxing.client.android.CaptureActivity\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\" android:windowSoftInputMode=\"stateAlwaysHidden\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:label=\"Share\" android:name=\"com.google.zxing.client.android.encode.EncodeActivity\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.FLASHLIGHT\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"true\" />",
                             "count": 1
                         }
                     ]
@@ -144,6 +172,9 @@
             "PACKAGE_NAME": "com.ionicframework.app653783"
         },
         "com.lampa.startapp": {
+            "PACKAGE_NAME": "com.ionicframework.app653783"
+        },
+        "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.app653783"
         }
     },
@@ -509,6 +540,14 @@
             "merges": [
                 "startApp"
             ]
+        },
+        {
+            "id": "phonegap-plugin-barcodescanner.BarcodeScanner",
+            "file": "plugins/phonegap-plugin-barcodescanner/www/barcodescanner.js",
+            "pluginId": "phonegap-plugin-barcodescanner",
+            "clobbers": [
+                "cordova.plugins.barcodeScanner"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -525,6 +564,7 @@
         "cordova-plugin-camera": "2.3.0",
         "cordova-plugin-geolocation": "2.4.0",
         "cordova-plugin-file": "4.3.1",
-        "com.lampa.startapp": "0.1.4"
+        "com.lampa.startapp": "0.1.4",
+        "phonegap-plugin-barcodescanner": "6.0.5"
     }
 }

@@ -1,10 +1,13 @@
     angular.module('app.bemVindoAoAPPCtrl', ['ngMask'])
 
-    .controller('bemVindoAoAPPCtrl', ['$scope', '$stateParams', '$ionicPlatform', '$cordovaDevice', 'Texto', '$state','$http', 'CONST', 'uid',
-    // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $ionicPlatform, $cordovaDevice, Texto, $state, $http, CONST, uid) {
+    .controller('bemVindoAoAPPCtrl', ['$rootScope','$scope', '$stateParams', '$ionicPlatform', '$cordovaDevice', 'Texto', '$state','$http', 'CONST', 'uid', 'message',
+    function ($rootScope, $scope, $stateParams, $ionicPlatform, $cordovaDevice, Texto, $state, $http, CONST, uid, message) {
 
         var vm = this;
+
+        vm.exibir = false;
+
+        message.loading.show("Aguarde...");
 
         // mock
         // vm.destino = "cadastrarCondominio";
@@ -12,22 +15,16 @@
         vm.destino = "cadastroRecepcao";
 
         // identifica cadastro inicial
-        if (localStorage.getItem("uid")){
+        // if (localStorage.getItem("uid")){
             
-            $state.go("tabsController.registrarVisita");
-            // $state.go(vm.destino);
+        //     $state.go("tabsController.registrarVisita");
+            
+        //     // $state.go(vm.destino);
 
-        } else {
+        // } else {
 
             vm.condominio = false;
             vm.titular = false;
-
-            vm.exibirTela = function(){
-                if(vm.condominio)
-                    return false;
-                else 
-                    return true;
-            }
 
             /**
              * inicialização: verifica se o usuário já possui cadastro
@@ -40,22 +37,31 @@
                 // recupera o id do condominio pelo uid do dispositivo
                 uid.cadastrado(vm.uid,function(res){
                     
-                    vm.condominios = res;
+                    vm.souCadastradoComo = res;
+
+                    $rootScope.cadastro = res;
+
+                    message.loading.hide();
 
                     // se ainda não foi cadastrado permanece nesta tela para que o usuário informe o número do telefone
-                    if (!Object.keys(vm.condominios).length){
+                    if (!Object.keys(vm.souCadastradoComo).length){
+                        vm.exibir=true;
                         return;
                     } else { // se já foi cadastrado
                         localStorage.setItem("uid",vm.uid);
-                        localStorage.setItem("condominios",JSON.stringify(vm.condominios));
-                        $state.go("tabsController.registrarVisita");
+                        localStorage.setItem("condominios",JSON.stringify(vm.souCadastradoComo));
+                        
+                        if (vm.souCadastradoComo.titular || vm.souCadastradoComo.inquilino || vm.souCadastradoComo.sindico)
+                            $state.go("tabsController.registrarVisita");
+                        else if (vm.souCadastradoComo.recepcionista)
+                            $state.go("tabsController.liberarEntrada");
                     };
                 });
                 
 
             }, false);
 
-        }
+        // }
 
 
         /**

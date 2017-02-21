@@ -1,12 +1,19 @@
 <ion-view title="Cadastro de Síndico" hide-back-button="true" id="page3" style="background-color:#000000;">
     <ion-content padding="true" class="has-header">
         
+        
         <form id="formCampos" class="list" data-ng-show="!vm.exibirConfirmacaoSenha">
 
-            <ion-checkbox data-ng-model="vm.sindico.titular" style="background-color:transparent;">
-                Sou titular/inquilino?
+            <ion-checkbox data-ng-show="!vm.sindico.inquilino" data-ng-model="vm.sindico.titular" style="background-color:transparent;">
+                Sou titular?
                 <span style="float:right;font-weight:bold;color:white;" data-ng-if="vm.sindico.titular">Sim</span>
                 <span style="float:right" data-ng-if="!vm.sindico.titular">Não</span>
+            </ion-checkbox>
+            
+            <ion-checkbox data-ng-show="!vm.sindico.titular" data-ng-model="vm.sindico.inquilino" style="background-color:transparent;border-rad">
+                Sou inquilino?
+                <span style="float:right;font-weight:bold;color:white;" data-ng-if="vm.sindico.inquilino">Sim</span>
+                <span style="float:right" data-ng-if="!vm.sindico.inquilino">Não</span>
             </ion-checkbox>
             <br>
             <label class="item item-input item-stacked-label" for="id.nome">

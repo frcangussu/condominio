@@ -73,19 +73,19 @@ angular.module('app.services', [])
 			$http.get(CONST.REST.IP+'/condominio/porEntidade/titulares/uid/'+uid).then(function(response){
 
 				if (response.data[0])
-					res.titulares = response.data;
+					res.titular = response.data;
 
 				// se não encontrar em "titulares" busca em "sindicos"
 				$http.get(CONST.REST.IP+'/condominio/porEntidade/sindicos/uid/'+uid).then(function(response){
 
 					if (response.data[0])
-						res.sindicos = response.data;
+						res.sindico = response.data;
 
 					// se não encontrar em "sindicos" busca em "recepcionistas"
 					$http.get(CONST.REST.IP+'/condominio/porEntidade/recepcionistas/uid/'+uid).then(function(response){
 
 						if (response.data[0])
-							res.recepcionistas = response.data;
+							res.recepcionista = response.data;
 
 						callback(res);
 
