@@ -34,7 +34,12 @@ angular.module('app', ['ionic', 'app.controllers',
 'app.trocarSindicoCtrl',
 'app.validarPorteirosCtrl',
 
-'app.routes', 'app.directives','app.services', 'app.constants', 'ngCordova'])
+'app.routes',
+'app.directives',
+'app.services',
+'app.constants',
+'ngCordova',
+'monospaced.qrcode'])
 
 .run(function($ionicPlatform, $rootScope) {
   // console.log("app.js >>> ",localStorage);

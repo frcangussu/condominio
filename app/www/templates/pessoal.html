@@ -3,7 +3,7 @@
         <div>
             <div class="item range margin-zero dark" style="border:none;">
                 <span>Pessoal</span>
-                <input type="range" value="0" min="0" max="1"ng-model="vm.isProfissional">
+                <input type="range" value="0" min="0" max="1"ng-model="vm.tipo_visita">
                 <span>Profissional</span>
             </div>
             <style>
@@ -34,7 +34,7 @@
             <br>
         </div>
 
-        <div ng-show="vm.isProfissional == 1">
+        <div ng-show="vm.tipo_visita == 1">
           <ion-list>
             <ion-item>
               <ion-label floating>Username</ion-label>
@@ -50,9 +50,9 @@
         </div>
 
         <div id="pessoal-button-bar11" class="button-bar">
-            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && vm.contato.possuiApp" ng-click="vm.confirmar()">Confirmar</a>
-            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-show="vm.contato.status == 1 && !vm.contato.possuiApp" ng-click="vm.shareAnywhere()">Confirmar</a>
-            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right ion-close button-balanced" ng-show="vm.contato.status != 1" ng-click="vm.cancelar()">Cancelar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-if="vm.contato.status == 1 && vm.contato.possuiApp" ng-click="vm.confirmar()">Confirmar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right button-positive ion-checkmark-round" ng-if="vm.contato.status == 1 && !vm.contato.possuiApp" ng-click="vm.shareAnywhere()">Confirmar</a>
+            <a id="pessoal-button40" style="font-size:19px;" class="button button-large button-block button-outline icon-right ion-close button-balanced" ng-if="vm.contato.status != 1" ng-click="vm.cancelar()">Cancelar</a>
         </div>
     </ion-content>
 </ion-view>

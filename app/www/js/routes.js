@@ -75,6 +75,17 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.ticketsRecebidos', {
+    cache: false,
+    url: '/ticketsRecebidos',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/ticketsRecebidos.html',
+        controller: 'ticketsRecebidosCtrl', controllerAs: 'vm'
+      }
+    }
+  })
+
   .state('alterarMeusDados', {
     url: '/alterarPerfil',
     templateUrl: 'templates/alterarMeusDados.html',
@@ -127,16 +138,6 @@ angular.module('app.routes', [])
       'tab1': {
         templateUrl: 'templates/liberaOEnviada.html',
         controller: 'liberaOEnviadaCtrl', controllerAs: 'vm'
-      }
-    }
-  })
-
-  .state('tabsController.ticketsRecebidos', {
-    url: '/visitante',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/ticketsRecebidos.html',
-        controller: 'ticketsRecebidosCtrl', controllerAs: 'vm'
       }
     }
   })

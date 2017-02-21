@@ -2,10 +2,10 @@
     <ion-content padding="true" class="has-header">
       <label class="item item-input" name="pesquisa">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="search" placeholder="Localize o Visitante">
+        <input type="search" placeholder="Localize o Visitante" ng-model="vm.busca">
       </label>
         <ion-list id="registrarVisita-list13">
-            <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96" ng-repeat="contato in vm.contatos"  ng-click="vm.action(contato)">
+            <ion-item class="item-avatar item-icon-right calm" id="registrarVisita-list-item96" ng-repeat="contato in vm.contatos | filter: vm.busca"  ng-click="vm.action(contato)">
                 <img src="https://creator.ionic.io/img/avatar-img.png" alt="" ng-if="!contato.photos[0]" />
                 <img ng-src="{{contato.photos[0].value}}" alt="" ng-if="contato.photos[0]"/>
                 <h2calm>{{contato.name.givenName}} {{contato.status}}
