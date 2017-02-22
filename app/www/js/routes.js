@@ -42,7 +42,7 @@ angular.module('app.routes', [])
   .state('tabsController.tipoDeVisita',     { url: '/tipoVisita',             views: { 'tab1': { templateUrl: 'templates/tipoDeVisita.html',     controller: 'tipoDeVisitaCtrl',     controllerAs: 'vm' } } })
   .state('tabsController.codigoLiberacao',  { url: '/qrcode',                 views: { 'tab2': { templateUrl: 'templates/codigoLiberacao.html',  controller: 'codijgoLiberacaoCtrl', controllerAs: 'vm' } } })
   .state('tabsController.liberaOEnviada',   { url: '/sucesso-liberacao',      views: { 'tab1': { templateUrl: 'templates/liberaOEnviada.html',   controller: 'liberaOEnviadaCtrl',   controllerAs: 'vm' } } })
-  .state('tabsController.ticketsRecebidos', { url: '/visitante',              views: { 'tab2': { templateUrl: 'templates/ticketsRecebidos.html', controller: 'ticketsRecebidosCtrl', controllerAs: 'vm' } }, cache: false })
+  .state('tabsController.ticketsRecebidos', { url: '/ticketsRecebidos',       views: { 'tab2': { templateUrl: 'templates/ticketsRecebidos.html', controller: 'ticketsRecebidosCtrl', controllerAs: 'vm' } }, cache: false })
   .state('tabsController.pessoal',          { url: '/visitaPessoal/:contato', views: { 'tab1': { templateUrl: 'templates/pessoal.html',          controller: 'pessoalCtrl',          controllerAs: 'vm' } } })
   .state('tabsController.cancelarConvite',  { url: '/cancelarConvite',        views: { 'tab1': { templateUrl: 'templates/cancelarConvite.html',  controller: 'cancelarConviteCtrl',  controllerAs: 'vm' } } })
   .state('tabsController.profissional',     { url: '/visitaProfissional',     views: { 'tab1': { templateUrl: 'templates/profissional.html',     controller: 'profissionalCtrl',     controllerAs: 'vm' } } });
@@ -54,8 +54,8 @@ angular.module('app.routes', [])
 
   var home = localStorage.home || "/home";
 
-  $urlRouterProvider.otherwise(home);
-  // $urlRouterProvider.otherwise('/tabs/registrarVisita');
+  // $urlRouterProvider.otherwise(home);
+  $urlRouterProvider.otherwise('/tabs/registrarVisita');
   // $urlRouterProvider.otherwise(localStorage.home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 

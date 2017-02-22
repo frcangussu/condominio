@@ -31,12 +31,7 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing, $ionicPopu
 
   vm.shareAnywhere = function() {
     console.log('não esta cadastrado');
-    // $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
-  };
 
-//------------------------------------------------------------------------------
-
-  vm.confirmar = function () {
     var params = {
       nome_visitante: vm.contato.name.givenName,
       telefone_visitante: vm.contato.phoneNumbers[0],
@@ -47,16 +42,45 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing, $ionicPopu
     };
 
     console.log(params);
-    console.log(CONST.REST.IP);
+
+    $http.post(CONST.REST.IP + '/convite/enviar/semApp', params)
+    .success(function (response){
+      console.log(response);
+      // console.log(response);
+      // console.log('Enviando convite para:', vm.contato.phoneNumbers[0]);
+      salvarDadosNaLocalEstorage(vm.contato.phoneNumbers[0], 'status', 2);
+      $state.transitionTo('tabsController.registrarVisita', $stateParams);
+      // $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
+
+    }).error(function (response){
+      console.log(response);
+    });
+
+  };
+
+//------------------------------------------------------------------------------
+
+  vm.confirmar = function () {
+
+    var params = {
+      nome_visitante: vm.contato.name.givenName,
+      telefone_visitante: vm.contato.phoneNumbers[0],
+      tipo_visita: vm.tipo_visita,
+      nome_morador: localStorage.getItem('nome'),
+      telefone_morador: localStorage.getItem('telefone'),
+      uid: localStorage.getItem('uid')
+    };
 
     $http.post(CONST.REST.IP + '/convite/enviar', params)
     .success(function (response){
-      console.log(response);
-      console.log('Enviando convite para:', vm.contato.phoneNumbers[0]);
+      // console.log(response);
+      // console.log('Enviando convite para:', vm.contato.phoneNumbers[0]);
       salvarDadosNaLocalEstorage(vm.contato.phoneNumbers[0], 'status', 2);
       $state.transitionTo('tabsController.registrarVisita', $stateParams);
+
     }).error(function (response){
       console.log(response);
+
     });
   };
 
@@ -74,17 +98,21 @@ function ($scope, $http, $stateParams, $state, $cordovaSocialSharing, $ionicPopu
 
     confirma.then(function(resp){
       console.log(resp);
+
       if(resp){
-        console.log(vm.contato.phoneNumbers[0]);
-        console.log(localStorage.getItem('telefone'));
+
         $http.delete(CONST.REST.IP + '/convite/cancelar', {params:{telefone_visitante: vm.contato.phoneNumbers[0], telefone_morador: localStorage.getItem('telefone')}})
         .success(function (response){
+
           console.log('Deu certo >>>>> ',response);
+
           salvarDadosNaLocalEstorage(vm.contato.phoneNumbers[0], 'status', 1);
           $state.transitionTo('tabsController.registrarVisita', $stateParams, {reload: true,inherit: false,notify: true});
+
         }).error(function (response){
           console.log('Não deu certo >>>>> ',response);
           console.log(response);
+
         });
 
       }

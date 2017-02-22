@@ -189,7 +189,7 @@ angular.module('app.services', [])
 			return lista.find(function (item) {
 				return (item[campo] == valor) ? item : false;
 			});
-		}
+		};
 
 	}])
 
@@ -215,14 +215,9 @@ angular.module('app.services', [])
 	}])
 
 	.service('salvarDadosNaLocalEstorage', [function (){
-		console.log('teste');
-
 		return function (telefone_contato, nome_campo, valor_campo){
-			console.log(telefone_contato);
 			var obj = JSON.parse(localStorage.getItem(telefone_contato)) || {};
-			console.log(obj);
 			obj[nome_campo] = valor_campo;
-			console.log(obj);
 			localStorage.setItem(telefone_contato, JSON.stringify(obj));
 		};
 

@@ -22,6 +22,20 @@ router.post('/enviar', function (req, resp){
 
 });
 
+router.post('/enviar/semApp', function (req, resp){
+  req.body.token = jwt.sign({ nome_visitante: req.body.nome_visitante, telefone_visitante: req.body.telefone_visitante, tipo_visita: req.body.tipo_visita }, req.body.uid, { expiresIn: '1 day'});
+  // console.log(req.body);
+  conviteController.registrarConvidado(req.body, function (response){
+    // resp.status(200).json(response);
+    if(response.type !== 'ERROR') {
+        resp.status(200).json({token: req.body.token});
+    } else {
+        resp.status(400).json({type: 'ERROR', mensagem: 'Não foi possivel enviar o convite'});
+    }
+  });
+
+});
+
 router.delete('/receber', function (req, resp){
 // Procurar morador
   conviteController.buscarMorador(req.body.token, function (response){

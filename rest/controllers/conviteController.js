@@ -92,9 +92,31 @@ exports.buscarMorador = function (token, callback){
 };
 
 exports.cancelar = function (params, callback){
+  cancelarConviteNoVisitante(params, callback);
+};
+
+function cancelarConviteNoVisitante (params, callback) {
   Condominio.update(
     { titulares:{ $elemMatch:{ telefone:  params.telefone_visitante}}}, // query
     {$pull:{ "titulares.$.convites": {telefone_morador: params.telefone_morador} }}, // objeto para deletar
+    function (error,response){ // callback
+      // Error
+     if(error){
+       callback({type: 'ERROR', mensagem: 'Convite inválido.'});
+     // Sucesso
+     } else {
+       cancelarConviteNoMorador(params, callback);
+        //  callback({type: 'INFO', mensagem: 'Convite cancelado com sucesso.'});
+     }
+   }
+  );
+}
+
+
+function cancelarConviteNoMorador(params, callback){
+  Condominio.update(
+    { titulares:{ $elemMatch:{ telefone:  params.telefone_morador}}}, // query
+    {$pull:{ "titulares.$.convidados": {telefone_visitante: params.telefone_visitante} }}, // objeto para deletar
     function (error,response){ // callback
       // Error
      if(error){
@@ -105,7 +127,8 @@ exports.cancelar = function (params, callback){
      }
    }
   );
-};
+}
+
 
 exports.listar = function (params, callback){
   Condominio.find({titulares: {$elemMatch: {telefone: params.telefone}}}, {titulares: {$elemMatch: {telefone: params.telefone}}, "titulares.convites": 1}, function (error, resp){
