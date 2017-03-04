@@ -32,11 +32,7 @@ function ($scope, $http, $stateParams, $state, $ionicPlatform, $cordovaContacts)
       // console.log(item.phoneNumbers[0]);
       var object = JSON.parse(localStorage.getItem(item.phoneNumbers[0])) || {};
       // console.log(object);
-      if(object.status)
-        item.status = object.status || 1;
-      else
-        item.status = 1;
-
+      item.status = object.status || 1;
     });
   }
 

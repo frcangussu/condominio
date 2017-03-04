@@ -30,7 +30,7 @@ angular.module('app.services', [])
 		}
 
 		this.senha = function(pass){
-			
+
 			var score = 0;
 			if (!pass)
 				return score;
@@ -56,49 +56,62 @@ angular.module('app.services', [])
 			}
 			score += (variationCount - 1) * 10;
 
-			console.log('>>> score: ', score); 
+			console.log('>>> score: ', score);
 
 			return parseInt(score) > 55;
-			
+
 		}
 	}])
 
 	.service('uid',['$state','$cordovaDevice', 'message', '$http','CONST', function($state,$cordovaDevice,message,$http,CONST){
+<<<<<<< HEAD
 		
 		this.cadastrado = function(uid, callbackSucesso, callbackErro){
+=======
+
+		this.cadastrado = function(uid, callback){
+>>>>>>> 2dd2bcb82853968bd1ef7607178c5b7dc90b01b1
 
 			var res  = {};
 
 			// busca primeiro em titulares
 			$http.get(CONST.REST.IP+'/condominio/porEntidade/titulares/uid/'+uid).then(function(response){
-				
+
 				if (response.data[0])
 					res.titular = response.data;
 
-				// se não encontrar em "titulares" busca em "sindicos" 		
+				// se não encontrar em "titulares" busca em "sindicos"
 				$http.get(CONST.REST.IP+'/condominio/porEntidade/sindicos/uid/'+uid).then(function(response){
-					
+
 					if (response.data[0])
 						res.sindico = response.data;
 
-					// se não encontrar em "sindicos" busca em "recepcionistas" 		
+					// se não encontrar em "sindicos" busca em "recepcionistas"
 					$http.get(CONST.REST.IP+'/condominio/porEntidade/recepcionistas/uid/'+uid).then(function(response){
-						
+
 						if (response.data[0])
 							res.recepcionista = response.data;
 
 						callbackSucesso(res);
 
+<<<<<<< HEAD
 					},function(error){callbackErro(error)});
 						
 				},function(error){callbackErro(error)});
 					
 			},function(error){callbackErro(error)});
+=======
+					},function(error){callback(res)});
+
+				},function(error){callback(res)});
+
+			},function(error){callback(res)});
+>>>>>>> 2dd2bcb82853968bd1ef7607178c5b7dc90b01b1
 
 		};
 
 		this.obter = function(callback){
-			
+
 			// recebe dados construidos na primeira tela do APP (bemVindoAoAPP)
 			var dados = {
 				telefone : localStorage.getItem("telefone"),
@@ -124,12 +137,12 @@ angular.module('app.services', [])
 				callback(dados);
 			}
 
-		}		
-		
+		}
+
 	}])
 
 	.service('message',['$ionicPopup','$ionicLoading',function($ionicPopup,$ionicLoading){
-		
+
 		this.alert = {
 			show: function(title, msg, callback){
 				var alerta = $ionicPopup.alert({
@@ -139,11 +152,11 @@ angular.module('app.services', [])
 				});
 
 				alerta.then(function(){
-					
+
 					if(callback)
 						callback();
 				});
-			} 
+			}
 		}; // alert
 
 		this.loading = {
@@ -173,7 +186,7 @@ angular.module('app.services', [])
 
 			if (!valor)
 				return;
-				
+
 			var numberPattern = /\d+/g;
 			return valor.match(numberPattern).join("");
 		}
@@ -189,14 +202,14 @@ angular.module('app.services', [])
 			return lista.find(function (item) {
 				return (item[campo] == valor) ? item : false;
 			});
-		}
+		};
 
 	}])
 
 	.service('Camera', ['$cordovaCamera', function ($cordovaCamera) {
-		
+
 		this.abrir = function () {
-			
+
 			var options = {
 				quality: 90,
 				destinationType: Camera.DestinationType.DATA_URL,
@@ -211,9 +224,14 @@ angular.module('app.services', [])
 			};
 
 			return $cordovaCamera.getPicture(options);
-
-
-		}
+		};
 	}])
 
-	;
+	.service('salvarDadosNaLocalEstorage', [function (){
+		return function (telefone_contato, nome_campo, valor_campo){
+			var obj = JSON.parse(localStorage.getItem(telefone_contato)) || {};
+			obj[nome_campo] = valor_campo;
+			localStorage.setItem(telefone_contato, JSON.stringify(obj));
+		};
+
+	}]);

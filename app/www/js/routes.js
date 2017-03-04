@@ -23,6 +23,7 @@ angular.module('app.routes', [])
    * FLUXO PRINCIPAL
    * @description: utilização do APP pós cadastro (pós fluxo inicial)
    */
+
   $stateProvider
   .state('tabsController',                  { url: '/tabs',             templateUrl: 'templates/tabsController.html', abstract:true})
   .state('alterarMeusDados',                { url: '/alterarPerfil',    templateUrl: 'templates/alterarMeusDados.html',       controller: 'alterarMeusDadosCtrl',       controllerAs: 'vm' })
@@ -35,13 +36,13 @@ angular.module('app.routes', [])
   .state('validarPorteiros',                { url: '/validarRecepcao',  templateUrl: 'templates/validarPorteiros.html',       controller: 'validarPorteirosCtrl',       controllerAs: 'vm' })
   .state('trocarSindico',                   { url: '/page15',           templateUrl: 'templates/trocarSindico.html',          controller: 'trocarSindicoCtrl',          controllerAs: 'vm' })
   .state('signup',                          { url: '/page20',           templateUrl: 'templates/signup.html',                 controller: 'signupCtrl',                 controllerAs: 'vm' });
-  
+
   $stateProvider
   .state('tabsController.registrarVisita', 	{ url: '/registrarVisita',        views: { 'tab1': { templateUrl: 'templates/registrarVisita.html',  controller: 'registrarVisitaCtrl',  controllerAs: 'vm' } }, cache: false })
   .state('tabsController.tipoDeVisita',     { url: '/tipoVisita',             views: { 'tab1': { templateUrl: 'templates/tipoDeVisita.html',     controller: 'tipoDeVisitaCtrl',     controllerAs: 'vm' } } })
   .state('tabsController.codigoLiberacao',  { url: '/qrcode',                 views: { 'tab2': { templateUrl: 'templates/codigoLiberacao.html',  controller: 'codijgoLiberacaoCtrl', controllerAs: 'vm' } } })
   .state('tabsController.liberaOEnviada',   { url: '/sucesso-liberacao',      views: { 'tab1': { templateUrl: 'templates/liberaOEnviada.html',   controller: 'liberaOEnviadaCtrl',   controllerAs: 'vm' } } })
-  .state('tabsController.ticketsRecebidos', { url: '/visitante',              views: { 'tab2': { templateUrl: 'templates/ticketsRecebidos.html', controller: 'ticketsRecebidosCtrl', controllerAs: 'vm' } } })
+  .state('tabsController.ticketsRecebidos', { url: '/ticketsRecebidos',       views: { 'tab2': { templateUrl: 'templates/ticketsRecebidos.html', controller: 'ticketsRecebidosCtrl', controllerAs: 'vm' } }, cache: false })
   .state('tabsController.pessoal',          { url: '/visitaPessoal/:contato', views: { 'tab1': { templateUrl: 'templates/pessoal.html',          controller: 'pessoalCtrl',          controllerAs: 'vm' } } })
   .state('tabsController.cancelarConvite',  { url: '/cancelarConvite',        views: { 'tab1': { templateUrl: 'templates/cancelarConvite.html',  controller: 'cancelarConviteCtrl',  controllerAs: 'vm' } } })
   .state('tabsController.profissional',     { url: '/visitaProfissional',     views: { 'tab1': { templateUrl: 'templates/profissional.html',     controller: 'profissionalCtrl',     controllerAs: 'vm' } } });
@@ -53,8 +54,8 @@ angular.module('app.routes', [])
 
   var home = localStorage.home || "/home";
 
-  $urlRouterProvider.otherwise(home);
-  // $urlRouterProvider.otherwise('/tabs/registrarVisita');
+  // $urlRouterProvider.otherwise(home);
+  $urlRouterProvider.otherwise('/tabs/registrarVisita');
   // $urlRouterProvider.otherwise(localStorage.home);
   // $urlRouterProvider.otherwise('/tabsController.profissional');
 
