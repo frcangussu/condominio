@@ -65,7 +65,7 @@ angular.module('app.services', [])
 
 	.service('uid',['$state','$cordovaDevice', 'message', '$http','CONST', function($state,$cordovaDevice,message,$http,CONST){
 		
-		this.cadastrado = function(uid, callback){
+		this.cadastrado = function(uid, callbackSucesso, callbackErro){
 
 			var res  = {};
 
@@ -87,13 +87,13 @@ angular.module('app.services', [])
 						if (response.data[0])
 							res.recepcionista = response.data;
 
-						callback(res);
+						callbackSucesso(res);
 
-					},function(error){callback(res)});
+					},function(error){callbackErro(error)});
 						
-				},function(error){callback(res)});
+				},function(error){callbackErro(error)});
 					
-			},function(error){callback(res)});
+			},function(error){callbackErro(error)});
 
 		};
 

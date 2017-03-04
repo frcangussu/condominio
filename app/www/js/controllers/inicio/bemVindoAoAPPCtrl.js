@@ -7,6 +7,7 @@
 
         vm.exibir = false;
 
+        debugger;
         message.loading.show("Aguarde...");
 
         // mock
@@ -35,28 +36,38 @@
                 vm.uid = device.manufacturer+"."+device.serial+"."+device.uuid;
                 
                 // recupera o id do condominio pelo uid do dispositivo
-                uid.cadastrado(vm.uid,function(res){
-                    
-                    vm.souCadastradoComo = res;
-
-                    $rootScope.cadastro = res;
-
-                    message.loading.hide();
-
-                    // se ainda não foi cadastrado permanece nesta tela para que o usuário informe o número do telefone
-                    if (!Object.keys(vm.souCadastradoComo).length){
-                        vm.exibir=true;
-                        return;
-                    } else { // se já foi cadastrado
-                        localStorage.setItem("uid",vm.uid);
-                        localStorage.setItem("condominios",JSON.stringify(vm.souCadastradoComo));
+                uid.cadastrado(vm.uid,
+                
+                    function(res){
                         
-                        if (vm.souCadastradoComo.titular || vm.souCadastradoComo.inquilino || vm.souCadastradoComo.sindico)
-                            $state.go("tabsController.registrarVisita");
-                        else if (vm.souCadastradoComo.recepcionista)
-                            $state.go("tabsController.liberarEntrada");
-                    };
-                });
+                        console.log('>>> res: ', res);
+
+                        vm.souCadastradoComo = res;
+
+                        $rootScope.cadastro = res;
+
+                        message.loading.hide();
+
+                        // se ainda não foi cadastrado permanece nesta tela para que o usuário informe o número do telefone
+                        if (!Object.keys(vm.souCadastradoComo).length){
+                            vm.exibir=true;
+                            return;
+                        } else { // se já foi cadastrado
+                            localStorage.setItem("uid",vm.uid);
+                            localStorage.setItem("condominios",JSON.stringify(vm.souCadastradoComo));
+                            
+                            if (vm.souCadastradoComo.titular || vm.souCadastradoComo.inquilino || vm.souCadastradoComo.sindico)
+                                $state.go("tabsController.registrarVisita");
+                            else if (vm.souCadastradoComo.recepcionista)
+                                $state.go("tabsController.liberarEntrada");
+                        };
+                    },
+
+                    function(err){
+                        message.loading.hide();
+                        message.alert.show("Erro", "Serviço não localizado");
+                    }
+                );
                 
 
             }, false);

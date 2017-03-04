@@ -1,6 +1,10 @@
 var express = require('express');
-var router  = express.Router();
+var router = module.exports = express.Router();
 var mainController = require('../controllers/mainController');
+
+router.get("/aaa",function(req,res){
+	res.send("- ok -");
+});
 
 /**
  * @type: GET
@@ -131,13 +135,8 @@ router.put('/altera/condominio/:condominio',function(req,res){
 
 /**
  * @type: POST
-<<<<<<< HEAD
  * @description: insere um documento na collection de condominios já com o seu síndico
  * @param: nome  - nome do sindico
-=======
- * @description: insere um documento na collection de condominios já com o seu síndico
- * @param: nome  - nome do 'sindico'
->>>>>>> 7f19f0821c533a333efcaea2f38dc5a768e8ab58
  * @param: senha - senha do sindico
  * @param: foto  - foto do sindico em base64
  * @example: http://192.168.1.7:3000/rest/sindico/cadastra
@@ -153,8 +152,8 @@ router.post('/sindico/cadastra',function(req,res){
 		inicio:   new Date()
 	}]};
 
-	console.log('>>> params.uid: ', params.uid);
-	console.log('>>> params.telefone: ', params.telefone);
+	console.log('- params.uid: ', params.uid);
+	console.log(' params.telefone: ', params.telefone);
 
 	mainController.save("condominio",params,function(response){
 		res.json(response);
@@ -234,10 +233,6 @@ router.post('/adiciona/elemento/:collectionName/:documentId/:listName',function(
 		}
 	);
 });
-
-
-
-
 
 module.exports = router;
 

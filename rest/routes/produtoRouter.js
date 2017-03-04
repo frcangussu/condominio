@@ -3,6 +3,9 @@ var router  = express.Router();
 var produtoController = require('../controllers/produtoController');
 var mainController = require('../controllers/mainController');
 
+router.get("/aaa",function(req,res){
+	res.send(">>>> ok <<<<");
+});
 
 router.get('/',function(req,res){
 	console.log(">>>> aqui");
