@@ -14,5 +14,5 @@ var rest = require('./routes/restRouter');
  */
 // app.use('/api/condominio',condominio);
 // app.use('/api/produto', produto);
-app.use('/api/rest', rest);
+app.use('/api', rest);
 // app.use('/api/convite', convite);
