@@ -64,13 +64,8 @@ angular.module('app.services', [])
 	}])
 
 	.service('uid',['$state','$cordovaDevice', 'message', '$http','CONST', function($state,$cordovaDevice,message,$http,CONST){
-<<<<<<< HEAD
 		
 		this.cadastrado = function(uid, callbackSucesso, callbackErro){
-=======
-
-		this.cadastrado = function(uid, callback){
->>>>>>> 2dd2bcb82853968bd1ef7607178c5b7dc90b01b1
 
 			var res  = {};
 
@@ -94,19 +89,11 @@ angular.module('app.services', [])
 
 						callbackSucesso(res);
 
-<<<<<<< HEAD
 					},function(error){callbackErro(error)});
 						
 				},function(error){callbackErro(error)});
 					
 			},function(error){callbackErro(error)});
-=======
-					},function(error){callback(res)});
-
-				},function(error){callback(res)});
-
-			},function(error){callback(res)});
->>>>>>> 2dd2bcb82853968bd1ef7607178c5b7dc90b01b1
 
 		};
 

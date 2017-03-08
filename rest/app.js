@@ -7,7 +7,7 @@ var db  = require('./config/db_config');
 // var Condomino = require('.models/Condomino');
 
 var rest = require('./routes/restRouter');
-// var convite = require('./routes/conviteRouter');
+var convite = require('./routes/conviteRouter');
 
 /**
   * Definição das rotas
@@ -15,4 +15,4 @@ var rest = require('./routes/restRouter');
 // app.use('/api/condominio',condominio);
 // app.use('/api/produto', produto);
 app.use('/api', rest);
-// app.use('/api/convite', convite);
+app.use('/api/convite', convite);
